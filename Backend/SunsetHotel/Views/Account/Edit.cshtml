@@ -1,0 +1,80 @@
+﻿
+@{
+    ViewData["Title"] = "Edit";
+}
+
+<section class="section__contacts-alt" style="background-image: url(../assets/img/slide_bg_1.jpg);">
+    <div class="container">
+        <div class=" row">
+            <div style="width: 70%; margin:auto;">
+                <div class="section-contacts__form_body">
+                    <p class="section-contacts__title">Edit personal info</p>
+
+                    <!-- Alert message -->
+                    <div class="alert" id="form_message" role="alert"></div>
+
+                    <!-- Form -->
+                    <form id="formsendemail" class="contacts__form">
+
+                        <!-- Email -->
+                        <div class="form-group">
+                            <label for="username" class="sr-only">Username</label>
+                            <input type="text" name="email" class="form-control" id="username"
+                                   placeholder="Enter your username" required>
+                            <span class="help-block"></span>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="username" class="sr-only">Phone</label>
+                            <input type="" name="email" class="form-control" id="username"
+                                   placeholder="Enter your phone number" required>
+                            <span class="help-block"></span>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="username" class="sr-only">Country</label>
+                            <input type="text" name="email" class="form-control" id="username"
+                                   placeholder="Enter your country" required>
+                            <span class="help-block"></span>
+                        </div>
+                        <div class="form-group">
+                            <label for="username" class="sr-only">City</label>
+                            <input type="text" name="email" class="form-control" id="username"
+                                   placeholder="Enter your city" required>
+                            <span class="help-block"></span>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="newpass" class="sr-only">New password</label>
+                            <input type="password" name="name" class="form-control" id="newpass"
+                                   placeholder="Enter your new password" required>
+                            <span class="help-block"></span>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="repass" class="sr-only">Repeat password</label>
+                            <input type="password" name="name" class="form-control" id="repass"
+                                   placeholder="Repeat new password" required>
+                            <span class="help-block"></span>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="password" class="sr-only">Password</label>
+                            <input type="password" name="name" class="form-control" id="password"
+                                   placeholder="Enter your current password" required>
+                            <span class="help-block"></span>
+                        </div>
+
+
+                        <!-- Submit -->
+                        <button type="submit" class="btn btn-default">
+                            Save
+                        </button>
+
+                    </form> <!-- .contacts__form -->
+
+                </div> <!-- / .section-contacts__form_body -->
+            </div>
+        </div> <!-- / .row -->
+    </div> <!-- / .container -->
+</section> <!-- / .section__contacts-alt -->
