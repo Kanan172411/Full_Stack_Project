@@ -76,8 +76,8 @@
                                 kanangg <i class="icon ion-chevron-down"></i>
                             </a>
                             <ul class="dropdown-menu">
-                                <li><a href="~/edit-profile.html">My Profile</a></li>
-                                <li><a href="~/my-reservation.html">My Reservations</a></li>
+                                <li><a asp-action="edit" asp-controller="account" >My Profile</a></li>
+                                <li><a asp-action="myreservation" asp-controller="room" >My Reservations</a></li>
                                 <li><a href="~/#">Logout</a></li>
                             </ul>
                         </div>
@@ -112,7 +112,7 @@
                 </button>
 
                 <!-- Logo -->
-                <a class="navbar-brand" href="~/index.html">
+                <a class="navbar-brand" asp-action="index" asp-controller="home">
                     <h3 class="navbar-brand__logo">Sunset Hotel</h3>
                     <p class="navbar-brand__sublogo">Grand</p>
                 </a>
@@ -122,19 +122,19 @@
             <div class="collapse navbar-collapse" id="navbar__collapse">
                 <ul class="nav navbar-nav navbar-left">
                     <li class="dropdown">
-                        <a href="~/index.html" class="dropdown-toggle">Home</a>
+                        <a asp-action="index" asp-controller="home" class="dropdown-toggle">Home</a>
 
                     </li>
-                    <li><a href="~/about.html">About us</a></li>
+                    <li><a asp-action="about" asp-controller="home" >About us</a></li>
                     <li class="dropdown">
-                        <a href="~/rooms.html" class="dropdown-toggle">Rooms </a>
+                        <a asp-action="index" asp-controller="room" class="dropdown-toggle">Rooms </a>
                     </li>
                 </ul>
                 <ul class="nav navbar-nav navbar-right">
                     <li class="dropdown">
-                        <a href="~/blog.html" class="dropdown-toggle">News & Blogs</a>
+                        <a asp-action="index" asp-controller="blog" class="dropdown-toggle">News & Blogs</a>
                     </li>
-                    <li><a href="~/contacts.html">Contacts</a></li>
+                    <li><a asp-action="contact" asp-controller="home">Contacts</a></li>
                 </ul>
             </div><!-- /.navbar-collapse -->
 
@@ -175,10 +175,10 @@
                     <div class="col-xs-12 col-sm-4 col-sm-pull-4 col-md-3 col-md-pull-6">
                         <div class="footer__item">
                             <ul class="footer__links">
-                                <li><a href="~/#">About</a></li>
-                                <li><a href="~/#">Support</a></li>
-                                <li><a href="~/#">Privacy Policy</a></li>
-                                <li><a href="~/#">Terms & Conditions</a></li>
+                                <li><a asp-action="about" asp-controller="home">About</a></li>
+                                <li><a asp-action="about" asp-controller="home">Support</a></li>
+                                <li><a asp-action="about" asp-controller="home">Privacy Policy</a></li>
+                                <li><a asp-action="about" asp-controller="home">Terms & Conditions</a></li>
                             </ul> <!-- .footer__links -->
                         </div> <!-- .footer__item -->
                     </div>

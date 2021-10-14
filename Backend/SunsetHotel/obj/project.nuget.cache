@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "Di5iibNp3T9qpIPVvfRIolNdIIzPlQ5J2I1t6iAYm+R7cQu6k5vP2hX3S2pw3f/ENCO+Qv+O0ic6C7IXhwShCw==",
+  "dgSpecHash": "OtyKe+1pD+w83ISGfZp3lGIwZkyRH/Xr3wFGRXxA4YdUcpJPsRVvcsGxo5jUgwKa0sRLqW0bUbA3WJolX28C9Q==",
   "success": true,
-  "projectFilePath": "C:\\Users\\Kanan Qarazada\\Desktop\\SunsetHotel\\SunsetHotel\\SunsetHotel.csproj",
+  "projectFilePath": "C:\\Users\\Kanan Qarazada\\Desktop\\Full_Stack_Project\\Backend\\SunsetHotel\\SunsetHotel.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\Kanan Qarazada\\.nuget\\packages\\microsoft.aspnetcore.html.abstractions\\2.2.0\\microsoft.aspnetcore.html.abstractions.2.2.0.nupkg.sha512",
     "C:\\Users\\Kanan Qarazada\\.nuget\\packages\\microsoft.aspnetcore.razor\\2.2.0\\microsoft.aspnetcore.razor.2.2.0.nupkg.sha512",

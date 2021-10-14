@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\Kanan Qarazada\\Desktop\\SunsetHotel\\SunsetHotel\\SunsetHotel.csproj": {}
+    "C:\\Users\\Kanan Qarazada\\Desktop\\Full_Stack_Project\\Backend\\SunsetHotel\\SunsetHotel.csproj": {}
   },
   "projects": {
-    "C:\\Users\\Kanan Qarazada\\Desktop\\SunsetHotel\\SunsetHotel\\SunsetHotel.csproj": {
+    "C:\\Users\\Kanan Qarazada\\Desktop\\Full_Stack_Project\\Backend\\SunsetHotel\\SunsetHotel.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Kanan Qarazada\\Desktop\\SunsetHotel\\SunsetHotel\\SunsetHotel.csproj",
+        "projectUniqueName": "C:\\Users\\Kanan Qarazada\\Desktop\\Full_Stack_Project\\Backend\\SunsetHotel\\SunsetHotel.csproj",
         "projectName": "SunsetHotel",
-        "projectPath": "C:\\Users\\Kanan Qarazada\\Desktop\\SunsetHotel\\SunsetHotel\\SunsetHotel.csproj",
+        "projectPath": "C:\\Users\\Kanan Qarazada\\Desktop\\Full_Stack_Project\\Backend\\SunsetHotel\\SunsetHotel.csproj",
         "packagesPath": "C:\\Users\\Kanan Qarazada\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Kanan Qarazada\\Desktop\\SunsetHotel\\SunsetHotel\\obj\\",
+        "outputPath": "C:\\Users\\Kanan Qarazada\\Desktop\\Full_Stack_Project\\Backend\\SunsetHotel\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\Kanan Qarazada\\AppData\\Roaming\\NuGet\\NuGet.Config",

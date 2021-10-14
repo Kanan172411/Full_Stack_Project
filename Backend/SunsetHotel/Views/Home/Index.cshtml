@@ -157,7 +157,7 @@
                             separate existence is a myth. For science, music, sport, etc, Europe uses the same
                             vocabulary.
                         </h4>
-                        <a href="about.html" class="btn btn-default">Learn More</a>
+                        <a asp-action="about" asp-controller="home" class="btn btn-default">Learn More</a>
                     </div> <!-- / .about__desc -->
                 </div>
             </div> <!-- / .section_about__content -->
@@ -198,7 +198,7 @@
                                 Lorem ipsum dolor sit amet, consectetur adipisicing elit. Deleniti
                                 sit dicta quae natus quasi ratione quis id, tenetur atque blanditiis.
                             </p>
-                            <a href="reservation.html" class="btn-book">
+                            <a asp-action="reservation" asp-controller="room" class="btn-book">
                                 Book now <i class="icon ion-chevron-right"></i><i class="icon ion-chevron-right"></i>
                             </a>
                         </figcaption>
@@ -264,7 +264,7 @@
             <div class="row">
                 <div class="col-xs-12">
                     <div class="rooms__button">
-                        <a href="rooms-1.html" class="btn">See all rooms</a>
+                        <a asp-action="index" asp-controller="room" class="btn">See all rooms</a>
                     </div> <!-- / .rooms__button -->
                 </div>
             </div> <!-- / .row -->
@@ -606,7 +606,7 @@
                             Obcaecati quae.
                         </div> <!-- .events-item__text -->
                         <div class="events-item__link">
-                            <a href="blog-item.html">Read More ➔</a>
+                            <a asp-action="details" asp-controller="blog">Read More ➔</a>
                         </div> <!-- .events-item__link -->
                     </div> <!-- / .events-item__body -->
                 </div> <!-- .events__item -->

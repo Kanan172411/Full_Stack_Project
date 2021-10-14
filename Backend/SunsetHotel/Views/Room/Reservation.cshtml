@@ -15,7 +15,7 @@
 
                     <!-- Breadcrumbs -->
                     <ol class="breadcrumb">
-                        <li><a href="index.html">Home</a></li>
+                        <li><a asp-action="index" asp-controller="home">Home</a></li>
                         <li class="active">Reservation</li>
                     </ol>
 
@@ -250,10 +250,6 @@
                             </div>
                         </div>
                         <div class="col-sm-12">
-                            <p>
-                                <input type="checkbox" name="checkbox"> I have read and accept <a href="#"
-                                                                                                  class="conditions">the terms and conditions.</a>
-                            </p>
                             <button type="submit" class="btn btn-booking">Book now by email</button>
                         </div>
                     </form> <!-- .reservation__form -->

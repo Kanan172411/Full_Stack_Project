@@ -15,7 +15,7 @@
 
                     <!-- Breadcrumbs -->
                     <ol class="breadcrumb">
-                        <li><a href="index.html">Home</a></li>
+                        <li><a asp-action="index" asp-controller="home">Home</a></li>
                         <li class="active">Rooms</li>
                     </ol>
 
@@ -116,7 +116,7 @@
                                 <li><i class="icon ion-monitor"></i> LCD TV</li>
                                 <li><i class="icon ion-wifi"></i> Wi-Fi</li>
                             </ul> <!-- .rooms_desc__services -->
-                            <a href="room-detail.html" class="btn btn-rooms">View details</a>
+                            <a asp-action="detail" asp-controller="room" class="btn btn-rooms">View details</a>
                         </div> <!-- / .rooms__desc -->
                     </div> <!-- .rooms__item -->
                 </div>
