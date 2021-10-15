@@ -18,5 +18,14 @@ namespace SunsetHotel.DAL
         DbSet<Testimonial> Testimonials { get; set; }
         DbSet<Feature> Features { get; set; }
         DbSet<Gallery> Galleries { get; set; }
+        DbSet<RoomCategory> RoomCategories { get; set; }
+        DbSet<RoomFeature> RoomFeatures { get; set; }
+        DbSet<RoomImage> RoomImages { get; set; }
+        DbSet<Room> Rooms { get; set; }
+        DbSet<RoomFeatureRelation> RoomFeatureRelations { get; set; }
+        DbSet<BlogCategory> BlogCategories { get; set; }
+        DbSet<Tag> Tags { get; set; }
+        DbSet<Blog> Blogs { get; set; }
+        DbSet<BlogTag> BlogTags { get; set; }
     }
 }

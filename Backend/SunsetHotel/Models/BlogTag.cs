@@ -6,10 +6,14 @@ using System.Threading.Tasks;
 
 namespace SunsetHotel.Models
 {
-    public class Gallery
+    public class BlogTag
     {
         public int Id { get; set; }
-        [StringLength(maximumLength:70)]
-        public string ImageName { get; set; }
+        [Required]
+        public int TagId { get; set; }
+        [Required]
+        public int BlogId { get; set; }
+        public Blog Blog { get; set; }
+        public Tag Tag { get; set; }
     }
 }
