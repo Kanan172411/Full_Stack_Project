@@ -12,16 +12,19 @@ namespace SunsetHotel.Controllers
 
         public IActionResult Index()
         {
+            TempData["forSelect"] = 1;
             return View();
         }
 
         public IActionResult Contact()
         {
+            TempData["forSelect"] = 5;
             return View();
         }
         
         public IActionResult About()
         {
+            TempData["forSelect"] = 2;
             return View();
         }
         

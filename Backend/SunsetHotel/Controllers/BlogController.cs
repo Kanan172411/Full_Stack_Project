@@ -10,6 +10,7 @@ namespace SunsetHotel.Controllers
     {
         public IActionResult Index()
         {
+            TempData["forSelect"] = 4;
             return View();
         }
 

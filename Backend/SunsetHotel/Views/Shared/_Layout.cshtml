@@ -119,24 +119,47 @@
 
             </div> <!-- / .navbar-header -->
             <!-- Links -->
-            <div class="collapse navbar-collapse" id="navbar__collapse">
-                <ul class="nav navbar-nav navbar-left">
-                    <li class="dropdown">
-                        <a asp-action="index" asp-controller="home" class="dropdown-toggle">Home</a>
-
-                    </li>
-                    <li><a asp-action="about" asp-controller="home" >About us</a></li>
-                    <li class="dropdown">
-                        <a asp-action="index" asp-controller="room" class="dropdown-toggle">Rooms </a>
-                    </li>
-                </ul>
-                <ul class="nav navbar-nav navbar-right">
-                    <li class="dropdown">
-                        <a asp-action="index" asp-controller="blog" class="dropdown-toggle">News & Blogs</a>
-                    </li>
-                    <li><a asp-action="contact" asp-controller="home">Contacts</a></li>
-                </ul>
-            </div><!-- /.navbar-collapse -->
+            @{ if (TempData["forSelect"] != null)
+                {
+                    <div class="collapse navbar-collapse" id="navbar__collapse">
+                        <ul class="nav navbar-nav navbar-left">
+                            <li class="@(TempData["forSelect"].Equals(1) ? "active" : "" )">
+                                <a asp-action="index" asp-controller="home" class="dropdown-toggle">Home</a>
+                            </li>
+                            <li class="@(TempData["forSelect"].Equals(2) ? "active" : "" )"><a asp-action="about" asp-controller="home">About us</a></li>
+                            <li class="@(TempData["forSelect"].Equals(3) ? "active" : "" )">
+                                <a asp-action="index" asp-controller="room" class="dropdown-toggle">Rooms </a>
+                            </li>
+                        </ul>
+                        <ul class="nav navbar-nav navbar-right">
+                            <li class="@(TempData["forSelect"].Equals(4) ? "active" : "" )">
+                                <a asp-action="index" asp-controller="blog" class="dropdown-toggle">News & Blogs</a>
+                            </li>
+                            <li class="@(TempData["forSelect"].Equals(5) ? "active" : "" )"><a asp-action="contact" asp-controller="home">Contacts</a></li>
+                        </ul>
+                    </div><!-- /.navbar-collapse -->
+                }
+                else
+                {
+                    <div class="collapse navbar-collapse" id="navbar__collapse">
+                        <ul class="nav navbar-nav navbar-left">
+                            <li>
+                                <a asp-action="index" asp-controller="home" class="dropdown-toggle">Home</a>
+                            </li>
+                            <li><a asp-action="about" asp-controller="home">About us</a></li>
+                            <li>
+                                <a asp-action="index" asp-controller="room" class="dropdown-toggle">Rooms </a>
+                            </li>
+                        </ul>
+                        <ul class="nav navbar-nav navbar-right">
+                            <li>
+                                <a asp-action="index" asp-controller="blog" class="dropdown-toggle">News & Blogs</a>
+                            </li>
+                            <li><a asp-action="contact" asp-controller="home">Contacts</a></li>
+                        </ul>
+                    </div><!-- /.navbar-collapse -->
+                }
+            }
 
         </div><!-- /.container -->
     </nav>
