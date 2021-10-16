@@ -1,0 +1,177 @@
+﻿<!doctype html>
+<html lang="en">
+
+
+<!-- Mirrored from themesdesign.in/upzet/layouts/index.html by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 13 Oct 2021 13:28:47 GMT -->
+
+<head>
+
+    <meta charset="utf-8" />
+    <title>Dashboard | Upzet - Admin & Dashboard Template</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta content="Premium Multipurpose Admin & Dashboard Template" name="description" />
+    <meta content="Themesdesign" name="author" />
+    <!-- App favicon -->
+    <link rel="shortcut icon" href="~/assets1/images/favicon.ico">
+
+    <!-- jvectormap -->
+    <link href="~/assets1/libs/jqvmap/jqvmap.min.css" rel="stylesheet" />
+
+    <!-- Bootstrap Css -->
+    <link href="~/assets1/css/bootstrap.min.css" id="bootstrap-style" rel="stylesheet" type="text/css" />
+    <!-- Icons Css -->
+    <link href="~/assets1/css/icons.min.css" rel="stylesheet" type="text/css" />
+    <!-- App Css-->
+    <link href="~/assets1/css/app.min.css" id="app-style" rel="stylesheet" type="text/css" />
+
+</head>
+
+<body data-sidebar="dark">
+
+    <!-- <body data-layout="horizontal" data-topbar="dark"> -->
+    <!-- Begin page -->
+    <div id="layout-wrapper">
+
+
+        <header id="page-topbar">
+            <div class="navbar-header">
+                <div class="d-flex">
+                    <!-- LOGO -->
+                    <div class="navbar-brand-box text-center">
+                        <a href="~/index.html" class="logo logo-dark">
+                            <span class="logo-sm">
+                                <img src="~/assets1/images/logo-sm.png" alt="logo-sm-dark" height="22">
+                            </span>
+                            <span class="logo-lg">
+                                <img src="~/assets1/images/logo-dark.png" alt="logo-dark" height="24">
+                            </span>
+                        </a>
+
+                        <a href="~/index.html" class="logo logo-light">
+                            <span class="logo-sm">
+                                <img src="~/assets1/images/logo-sm.png" alt="logo-sm-light" height="22">
+                            </span>
+                            <span class="logo-lg">
+                                <img src="~/assets1/images/logo-light.png" alt="logo-light" height="24">
+                            </span>
+                        </a>
+                    </div>
+
+                    <button type="button" class="btn btn-sm px-3 font-size-24 header-item waves-effect"
+                            id="vertical-menu-btn">
+                        <i class="ri-menu-2-line align-middle"></i>
+                    </button>
+
+                </div>
+
+                <div class="d-flex">
+                    <div class="dropdown d-none d-lg-inline-block ms-1">
+                        <button type="button" class="btn header-item noti-icon waves-effect" data-toggle="fullscreen">
+                            <i class="ri-fullscreen-line"></i>
+                        </button>
+                    </div>
+
+
+                    <div class="dropdown d-inline-block user-dropdown">
+                        <button type="button" class="btn header-item waves-effect" id="page-header-user-dropdown"
+                                data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <span class="d-none d-xl-inline-block ms-1">Kevin</span>
+                            <i class="mdi mdi-chevron-down d-none d-xl-inline-block"></i>
+                        </button>
+                        <div class="dropdown-menu dropdown-menu-end">
+                            <!-- item-->
+                            <a class="dropdown-item" href="~/#"><i class="ri-user-line align-middle me-1"></i> Profile</a>
+                            <a class="dropdown-item text-danger" href="~/#">
+                                <i class="ri-shut-down-line align-middle me-1 text-danger"></i> Logout
+                            </a>
+                        </div>
+                    </div>
+
+
+                </div>
+            </div>
+        </header>
+
+        <!-- ========== Left Sidebar Start ========== -->
+        <div class="vertical-menu">
+
+            <div data-simplebar class="h-100">
+
+                <!--- Sidemenu -->
+                <div id="sidebar-menu">
+                    <!-- Left Menu Start -->
+                    <ul class="metismenu list-unstyled" id="side-menu">
+                        <li class="menu-title">Menu</li>
+
+                        <li>
+                            <a href="~/index.html" class="waves-effect">
+                                <i class="mdi mdi-home-variant-outline"></i><span class="badge rounded-pill bg-primary float-end">3</span>
+                                <span>Dashboard</span>
+                            </a>
+                        </li>
+
+
+                        <li>
+                            <a class="has-arrow waves-effect">
+                                <i class="ri-table-2"></i>
+                                <span>Tables</span>
+                            </a>
+                            <ul class="sub-menu" aria-expanded="false">
+                                <li><a href="~/tables-basic.html">Basic Tables</a></li>
+                                <li><a href="~/tables-datatable.html">Data Tables</a></li>
+                                <li><a href="~/tables-responsive.html">Responsive Table</a></li>
+                                <li><a href="~/tables-editable.html">Editable Table</a></li>
+                            </ul>
+                        </li>
+                    </ul>
+                </div>
+                <!-- Sidebar -->
+            </div>
+        </div>
+        <!-- Left Sidebar End -->
+        <!-- ============================================================== -->
+        <!-- Start right Content here -->
+        <!-- ============================================================== -->
+        @RenderBody();
+        <!-- ============================================================== -->
+        <!-- End of Content-->
+        <!-- ============================================================== -->
+        <footer class="footer">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-sm-6">
+                        <script>document.write(new Date().getFullYear())</script> © Upzet.
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="text-sm-end d-none d-sm-block">
+                            by Themesdesign
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </footer>
+    </div>
+
+    <!-- JAVASCRIPT -->
+    <script src="~/assets1/libs/jquery/jquery.min.js"></script>
+    <script src="~/assets1/libs/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="~/assets1/libs/metismenu/metisMenu.min.js"></script>
+    <script src="~/assets1/libs/simplebar/simplebar.min.js"></script>
+    <script src="~/assets1/libs/node-waves/waves.min.js"></script>
+
+    <!-- apexcharts js -->
+    <script src="~/assets1/libs/apexcharts/apexcharts.min.js"></script>
+
+    <!-- jquery.vectormap map -->
+    <script src="~/assets1/libs/jqvmap/jquery.vmap.min.js"></script>
+    <script src="~/assets1/libs/jqvmap/maps/jquery.vmap.usa.js"></script>
+
+    <script src="~/assets1/js/pages/dashboard.init.js"></script>
+
+    <script src="~/assets1/js/app.js"></script>
+
+</body>
+
+<!-- Mirrored from themesdesign.in/upzet/layouts/index.html by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 13 Oct 2021 13:29:02 GMT -->
+
+</html>

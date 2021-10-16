@@ -31,6 +31,11 @@ namespace SunsetHotel
             {
                 options.UseSqlServer(Configuration.GetConnectionString("default"));
             });
+            services.ConfigureApplicationCookie(opt =>
+            {
+                opt.LoginPath = "/account/login";
+                opt.AccessDeniedPath = "/account/login";
+            });
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
@@ -48,9 +53,15 @@ namespace SunsetHotel
             app.UseStaticFiles();
 
             app.UseRouting();
-
+            app.UseAuthentication();
             app.UseAuthorization();
-
+            app.UseEndpoints(endpoints =>
+            {
+                endpoints.MapControllerRoute(
+                  name: "areas",
+                  pattern: "{area:exists}/{controller=Dashboard}/{action=Index}/{id?}"
+                );
+            });
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllerRoute(
