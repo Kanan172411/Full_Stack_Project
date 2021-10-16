@@ -1,4 +1,4 @@
-﻿
+﻿@model BlogDetailViewModel
 @{
     ViewData["Title"] = "Details";
 }
@@ -11,7 +11,7 @@
         <div class="row">
             <div class="col-sm-12">
                 <div class="welcome__content">
-                    <h1 class="welcome_content__title">Blog post title here</h1>
+                    <h1 class="welcome_content__title">@Model.blog.BlogPostTitle</h1>
                     <div class="divider blog-divider">
                         <hr class="line1">
                         <hr class="line2">
@@ -29,14 +29,14 @@
             <div class="col-sm-8">
                 <div class="blog__item">
                     <div class="blog-item__img">
-                        <img src="~/assets/img/events_img6.jpg" class="img-responsive" alt="...">
+                        <img src="~/assets/img/@Model.blog.ImageName" class="img-responsive" alt="...">
                     </div>
                     <div class="blog-item__content">
                         <div class="blog-item__category">
-                            <p>/ <span>Events</span> /</p>
+                            <p>/ <span>@Model.blog.BlogCategory</span> /</p>
                         </div>
                         <div class="blog-item__title">
-                            <h3>Degustation of Spanish and French wines</h3>
+                            <h3>@Model.blog.Name</h3>
                         </div>
                         <div class="divider blog-divider">
                             <hr class="line1">
@@ -44,43 +44,23 @@
                             <hr class="line1">
                         </div> <!-- / .divider -->
                         <div class="blog-item__date">
-                            <p>March 15, 2017</p>
+                            <p>@Model.blog.Createdat.ToString("MMM,dd"), @Model.blog.Createdat.ToString("yyyy")</p>
                         </div>
                         <div class="blog-item__text">
-                            One morning, when Gregor Samsa woke from troubled dreams, he found himself transformed
-                            in his bed into a horrible vermin. He lay on his armour-like back, and if he lifted his
-                            head a little he could see his brown belly, slightly domed and divided by arches into
-                            stiff sections. The bedding was hardly able to cover it and seemed ready to slide off
-                            any moment. His many legs, pitifully thin compared with the size of the rest of him,
-                            waved about helplessly as he looked.
-                        </div> <!-- .blog-item__text -->
-                        <div class="blog-item__text">
-                            "What's happened to me?" he thought. It wasn't a dream. His room, a proper human room
-                            although a little too small, lay peacefully between its four familiar walls. A
-                            collection of textile samples lay spread out on the table - Samsa was a travelling
-                            salesman - and above it there hung a picture that he had recently cut out of an
-                            illustrated magazine and housed in a nice, gilded frame.
+                            @Model.blog.Desc1
                         </div> <!-- .blog-item__text -->
                         <h4 class="blog-item__quote">
-                            The European languages are members of the same family. Their
-                            separate existence is a myth. For science, music, sport, etc, Europe uses the same
-                            vocabulary.
+                            @Model.blog.DescHeader
                         </h4>
                         <div class="blog-item__text">
-                            Drops of rain could be heard hitting the pane, which made him feel quite sad. "How about
-                            if I sleep a little bit longer and forget all this nonsense", he thought, but that was
-                            something he was unable to do because he was used to sleeping on his right, and in his
-                            present state couldn't get into that position. However hard he threw himself onto his
-                            right, he always rolled back to where he was. He must have tried it a hundred times,
-                            shut his eyes so that he wouldn't have to look at the floundering legs, and only stopped
-                            when he began to feel a mild, dull pain there that he had never felt before. "Oh, God",
-                            he thought, "what a strenuous career it is that I've chosen!
+                            @Model.blog.Desc2
                         </div> <!-- .blog-item__text -->
                         <div class="blog-item__tags">
                             <p>Tags:</p>
-                            <a href="#">#travel</a>
-                            <a href="#">#news</a>
-                            <a href="#">#themeforest</a>
+                            @foreach (var item in Model.blog.BlogTags)
+                            {
+                                <a href="#">#@item.Tag.Name</a>
+                            }
                         </div>
                         <div class="blog-item__footer">
                             <div class="footer__item">
@@ -95,19 +75,19 @@
                                 <ul class="social__icons">
                                     <li class="social-icons__item">Share:</li>
                                     <li class="social-icons__item">
-                                        <a href="#">
+                                        <a href="https://twitter.com/">
                                             <i class="icon ion-social-twitter"
                                                aria-hidden="true"></i>
                                         </a>
                                     </li>
                                     <li class="social-icons__item">
-                                        <a href="#">
+                                        <a href="https://facebbok.com/">
                                             <i class="icon ion-social-facebook"
                                                aria-hidden="true"></i>
                                         </a>
                                     </li>
                                     <li class="social-icons__item">
-                                        <a href="#">
+                                        <a href="https://www.google.com/">
                                             <i class="icon ion-social-googleplus"
                                                aria-hidden="true"></i>
                                         </a>
@@ -217,74 +197,39 @@
                         </form> <!-- .search-form -->
                         <p class="subheading">Categories</p>
                         <ul class="categories">
-                            <li><a href="#">Accomondation</a></li>
-                            <li><a href="#">Travel</a></li>
-                            <li><a href="#">Rooms</a></li>
-                            <li><a href="#">Services</a></li>
-                            <li><a href="#">Events</a></li>
+                            @foreach (var item in Model.blogCategories)
+                            {
+                                <li><a href="#">@item.Name</a></li>
+                            }
                         </ul> <!-- .categories -->
                     </div> <!-- .sidebar__item -->
                     
                     <div class="sidebar__item">
                         <p class="subheading">Recent posts</p>
                         <ul class="recent__posts">
-                            <li>
-                                <a href="#" class="post__title">
-                                    <h5 class="post__title">Lorem ipsum dolor sit amet.</h5>
-                                    <p class="post__desc">
-                                        One morning, when Gregor Samsa woke from troubled dreams, he found...
-                                    </p>
-                                    <p class="post__info">
-                                        <i class="ion ion-android-calendar"></i> 15 March, 2017
-                                    </p>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="#">
-                                    <h5 class="post__title">Lorem ipsum dolor sit amet.</h5>
-                                    <p class="post__desc">
-                                        One morning, when Gregor Samsa woke from troubled dreams, he found...
-                                    </p>
-                                    <p class="post__info">
-                                        <i class="ion ion-android-calendar"></i> 15 March, 2017
-                                    </p>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="#" class="post__title">
-                                    <h5 class="post__title">Lorem ipsum dolor sit amet.</h5>
-                                    <p class="post__desc">
-                                        One morning, when Gregor Samsa woke from troubled dreams, he found...
-                                    </p>
-                                    <p class="post__info">
-                                        <i class="ion ion-android-calendar"></i> 15 March, 2017
-                                    </p>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="#" class="post__title">
-                                    <h5 class="post__title">Lorem ipsum dolor sit amet.</h5>
-                                    <p class="post__desc">
-                                        One morning, when Gregor Samsa woke from troubled dreams, he found...
-                                    </p>
-                                    <p class="post__info">
-                                        <i class="ion ion-android-calendar"></i> 15 March, 2017
-                                    </p>
-                                </a>
-                            </li>
+                            @foreach (var item in Model.recentPost)
+                            {
+                                <li>
+                                    <a asp-action="details" asp-controller="blog" asp-route-id="@item.Id" class="post__title">
+                                        <h5 class="post__title">@item.Name</h5>
+                                        <p class="post__desc">
+                                            @item.Desc1.Substring(0, 70)
+                                        </p>
+                                        <p class="post__info">
+                                            <i class="ion ion-android-calendar"></i> @item.Createdat.ToString("MMM,dd"), @item.Createdat.ToString("yyyy")
+                                        </p>
+                                    </a>
+                                </li>
+                            }
                         </ul>
                     </div> <!-- .sidebar__item -->
                     <div class="sidebar__item">
                         <p class="subheading">Tags</p>
                         <ul class="tags">
-                            <li><a href="#">#travel</a></li>
-                            <li><a href="#">#rooms</a></li>
-                            <li><a href="#">#services</a></li>
-                            <li><a href="#">#accomondation</a></li>
-                            <li><a href="#">#spa</a></li>
-                            <li><a href="#">#events</a></li>
-                            <li><a href="#">#news</a></li>
-                            <li><a href="#">#hotel</a></li>
+                            @foreach (var item in Model.tags)
+                            {
+                                <li><a href="#">#@item.Name</a></li>
+                            }
                         </ul>
                     </div> <!-- .sidebar__item -->
                 </div> <!-- .blog__sidebar -->
