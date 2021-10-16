@@ -1,4 +1,4 @@
-﻿
+﻿@model Room
 @{
     ViewData["Title"] = "Reservation";
 }
@@ -19,7 +19,7 @@
                         <li class="active">Reservation</li>
                     </ol>
 
-                    <p class="welcome_content__desc">Lorem ipsum dolor sit amet consectetur adipisicing elit.</p>
+                    <p class="welcome_content__desc">@ViewBag.Setting.ReservationWelcomeContent</p>
                 </div> <!-- .welcome__content -->
             </div>
         </div> <!-- / .row -->
@@ -35,48 +35,17 @@
                     <p class="subheading">Booking details</p>
                     <h2 class="section__heading">Selected room</h2>
                     <figure class="room__details">
-                        <img src="~/assets/img/gallery_img1.jpg" class="img-responsive" alt="...">
+                        <img src="~/assets/img/@Model.RoomImages[0].ImageName" class="img-responsive" alt="...">
                         <figcaption>
-                            <h3>Double room</h3>
+                            <h3>@Model.Name</h3>
                             <div class="room__price">
-                                $50 <small>/ night</small>
+                                $@Model.Price <small>/ night</small>
                             </div>
                             <p class="room__desc">
-                                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Nobis
-                                mollitia voluptas vero vel eligendi sint.
+                                @Model.Desc.Substring(0,108) ...
                             </p>
                         </figcaption>
                     </figure> <!-- / .room__details -->
-                    <ul class="details-info">
-                        <li>
-                            <label>Check in</label>
-                            <p>2017-04-09</p>
-                        </li>
-                        <li>
-                            <label>Check out</label>
-                            <p>2017-04-18</p>
-                        </li>
-                        <li>
-                            <label>Adults</label>
-                            <p>2 Person</p>
-                        </li>
-                        <li>
-                            <label>Children</label>
-                            <p>1 Chind</p>
-                        </li>
-                        <li>
-                            <label>Nights</label>
-                            <p>9 Nights</p>
-                        </li>
-                        <li>
-                            <label>Services</label>
-                            <p>$ 65</p>
-                        </li>
-                        <li class="total-price">
-                            <label>Total price</label>
-                            <p>$ 515</p>
-                        </li>
-                    </ul>
                 </div> <!-- .booking__details-body -->
                 <div class="info__body">
                     <p class="info__title">Information</p>
@@ -88,21 +57,21 @@
                             <i class="icon ion-android-pin"></i>
                             <div class="info-content">
                                 <div class="title">Address</div>
-                                <div class="description">10987 1st Avenue, Lorem City, CA</div>
+                                <div class="description">@ViewBag.Setting.Address</div>
                             </div>
                         </li>
                         <li>
                             <i class="icon ion-android-call"></i>
                             <div class="info-content">
                                 <div class="title">Phone / Fax</div>
-                                <div class="description">+45 789 123 4544 / +45 789 123 4848</div>
+                                <div class="description">@ViewBag.Setting.PhoneNumber1 / @ViewBag.Setting.PhoneNumber2</div>
                             </div>
                         </li>
                         <li>
                             <i class="icon ion-android-mail"></i>
                             <div class="info-content">
                                 <div class="title">E-mail</div>
-                                <div class="description">admin@sunsethotel.com</div>
+                                <div class="description">@ViewBag.Setting.Email</div>
                             </div>
                         </li>
                     </ul> <!-- .info__content -->
@@ -113,8 +82,7 @@
                     <p class="subheading">Booking form</p>
                     <h2 class="section__heading">Personal info</h2>
                     <p class="section__subheading">
-                        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Facere
-                        nulla ea doloremque tenetur quidem odit repellat omnis beatae obcaecati tempora.
+                        @ViewBag.Setting.ReservationTitle
                     </p>
 
                     <!-- Alert message -->
@@ -165,17 +133,9 @@
                         </div>
                         <div class="col-sm-12 col-md-6">
                             <div class="form-group">
-                                <label for="first-name" class="sr-only">First name</label>
+                                <label for="first-name" class="sr-only">Full name</label>
                                 <input type="text" name="first-name" class="form-control" id="first-name"
                                        placeholder="First Name">
-                                <span class="help-block"></span>
-                            </div>
-                        </div>
-                        <div class="col-sm-12 col-md-6">
-                            <div class="form-group">
-                                <label for="last-name" class="sr-only">Last name</label>
-                                <input type="text" name="last-name" class="form-control" id="last-name"
-                                       placeholder="Last Name">
                                 <span class="help-block"></span>
                             </div>
                         </div>
@@ -196,28 +156,13 @@
                         </div>
                         <div class="col-sm-12 col-md-6">
                             <div class="form-group">
-                                <label for="address-line1" class="sr-only">Address line 1</label>
+                                <label for="address-line1" class="sr-only">Address line </label>
                                 <input type="text" name="address-line1" class="form-control" id="address-line1"
-                                       placeholder="Address line 1">
+                                       placeholder="Address line">
                                 <span class="help-block"></span>
                             </div>
                         </div>
-                        <div class="col-sm-12 col-md-6">
-                            <div class="form-group">
-                                <label for="address-line2" class="sr-only">Address line 2</label>
-                                <input type="text" name="address-line2" class="form-control" id="address-line2"
-                                       placeholder="Address line 2">
-                                <span class="help-block"></span>
-                            </div>
-                        </div>
-                        <div class="col-sm-12 col-md-6">
-                            <div class="form-group">
-                                <label for="state" class="sr-only">State / Region</label>
-                                <input type="text" name="state" class="form-control" id="state"
-                                       placeholder="State / Region">
-                                <span class="help-block"></span>
-                            </div>
-                        </div>
+
                         <div class="col-sm-12 col-md-6">
                             <div class="form-group">
                                 <label for="city" class="sr-only">City</label>
@@ -233,14 +178,7 @@
                                 <span class="help-block"></span>
                             </div>
                         </div>
-                        <div class="col-sm-12 col-md-6">
-                            <div class="form-group">
-                                <label for="zip-code" class="sr-only">Zip Code</label>
-                                <input type="text" name="zip-code" class="form-control" id="zip-code"
-                                       placeholder="Zip code">
-                                <span class="help-block"></span>
-                            </div>
-                        </div>
+
                         <div class="col-sm-12">
                             <div class="form-group">
                                 <label for="requirements" class="sr-only">Special requirements</label>

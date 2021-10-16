@@ -1,4 +1,4 @@
-﻿
+﻿@model RoomDetailsViewModel
 @{
     ViewData["Title"] = "Details";
 }
@@ -11,7 +11,7 @@
         <div class="row">
             <div class="col-sm-12">
                 <div class="welcome__content">
-                    <h1 class="welcome_content__title">Deluxe double room</h1>
+                    <h1 class="welcome_content__title">@Model.room.Name</h1>
                     <div class="divider blog-divider">
                         <hr class="line1">
                         <hr class="line2">
@@ -29,37 +29,22 @@
             <div class="col-sm-7 col-md-8">
                 <div class="room_detail__body">
                     <div id="room-detail__carousel" class="owl-carousel owl-theme room-detail__gallery">
-                        <div class="room_gallery__item">
-                            <img src="~/assets/img/gallery_img1.jpg" class="img-responsive" alt="...">
-                        </div> <!-- .room_gallery__item -->
-                        <div class="room_gallery__item">
-                            <img src="~/assets/img/gallery_img2.jpg" class="img-responsive" alt="...">
-                        </div> <!-- .room_gallery__item -->
-                        <div class="room_gallery__item">
-                            <img src="~/assets/img/gallery_img4.jpg" class="img-responsive" alt="...">
-                        </div> <!-- .room_gallery__item -->
-                        <div class="room_gallery__item">
-                            <img src="~/assets/img/gallery_img7.jpg" class="img-responsive" alt="...">
-                        </div> <!-- .room_gallery__item -->
+                        @foreach (var item in Model.room.RoomImages)
+                        {
+                            <div class="room_gallery__item">
+                                <img src="~/assets/img/@item.ImageName" class="img-responsive" alt="...">
+                            </div> <!-- .room_gallery__item -->
+                        }
                     </div> <!-- .room-detail__gallery -->
                     <div class="room_price__body">
-                        <h2 class="room__name">Deluxe double room</h2>
-                        <p class="room__price"><span>$165</span> / night</p>
+                        <h2 class="room__name">@Model.room.Categories.Name</h2>
+                        <p class="room__price"><span>$@Model.room.Price</span> / night</p>
                     </div>
                     <p class="subheading">Room description</p>
                     <div class="room__desc">
-                        A wonderful serenity has taken possession of my entire soul, like these sweet mornings of
-                        spring which I enjoy with my whole heart. I am alone, and feel the charm of existence in
-                        this spot, which was created for the bliss of souls like mine. I am so happy, my dear
-                        friend, so absorbed in the exquisite sense of mere tranquil existence. When, while the
-                        lovely valley teems with vapour around me and the meridian.
+                        @Model.room.Desc
                     </div>
-                    <div class="room__desc">
-                        A wonderful serenity has taken possession of my entire soul, like these sweet mornings of
-                        spring which I enjoy with my whole heart. I am alone, and feel the charm of existence in
-                        this spot, which was created for the bliss of souls like mine.
-                    </div>
-                    <a asp-action="reservation" asp-controller="room" class="btn">Book this room now</a>
+                    <a asp-action="reservation" asp-controller="room" asp-route-id="@Model.room.Id" class="btn">Book this room now</a>
                 </div> <!-- .room-detail__body -->
                 <div class="room__reviews">
                     <p class="subheading">Room reviews</p>
@@ -136,113 +121,63 @@
                     <div class="room_features__body">
                         <p class="subheading">Room features</p>
                         <ul class="room__features">
-                            <li class="feature__item">
-                                <i class="icon ion-android-people"></i>
-                                <div class="feature_item__title">
-                                    Double king bed
-                                </div>
-                            </li>
-                            <li class="feature__item">
-                                <i class="icon ion-coffee"></i>
-                                <div class="feature_item__title">
-                                    Breakfast
-                                </div>
-                            </li>
-                            <li class="feature__item">
-                                <i class="icon ion-android-sunny"></i>
-                                <div class="feature_item__title">
-                                    Air conditioning
-                                </div>
-                            </li>
-                            <li class="feature__item">
-                                <i class="icon ion-wineglass"></i>
-                                <div class="feature_item__title">
-                                    Mini bar
-                                </div>
-                            </li>
-                            <li class="feature__item">
-                                <i class="icon ion-wifi"></i>
-                                <div class="feature_item__title">
-                                    Wi-Fi service
-                                </div>
-                            </li>
-                            <li class="feature__item">
-                                <i class="icon ion-model-s"></i>
-                                <div class="feature_item__title">
-                                    Free parking
-                                </div>
-                            </li>
+                            @foreach (var item in Model.room.RoomFeatureRelations)
+                            {
+                                <li class="feature__item">
+                                    @Html.Raw(item.RoomFeature.Icon)
+                                    <div class="feature_item__title">
+                                        @item.RoomFeature.Name
+                                    </div>
+                                </li>
+                            }
                         </ul> <!-- .room__features -->
                     </div> <!-- .room_features__body -->
                     <div class="similar__rooms">
                         <p class="subheading">Similar rooms</p>
                         <ul class="similar-rooms__list">
-                            <li class="list__item">
-                                <a href="#">
-                                    <figure class="list_item__body">
-                                        <img src="~/assets/img/single_room.jpg" class="img-responsive" alt="...">
-                                        <figcaption>
-                                            <h3>Double room</h3>
-                                            <div class="item__price">
-                                                $120 <small>/ night</small>
-                                            </div>
-                                        </figcaption>
-                                    </figure> <!-- / .list_item__body -->
-                                </a>
-                            </li> <!-- .list__item -->
-                            <li class="list__item">
-                                <a href="#">
-                                    <figure class="list_item__body">
-                                        <img src="~/assets/img/double_room.jpg" class="img-responsive" alt="...">
-                                        <figcaption>
-                                            <h3>Double room</h3>
-                                            <div class="item__price">
-                                                $98 <small>/ night</small>
-                                            </div>
-                                        </figcaption>
-                                    </figure> <!-- / .list_item__body -->
-                                </a>
-                            </li> <!-- .list__item -->
-                            <li class="list__item">
-                                <a href="#">
-                                    <figure class="list_item__body">
-                                        <img src="~/assets/img/royal_room.jpg" class="img-responsive" alt="...">
-                                        <figcaption>
-                                            <h3>Family room</h3>
-                                            <div class="item__price">
-                                                $135 <small>/ night</small>
-                                            </div>
-                                        </figcaption>
-                                    </figure> <!-- / .list_item__body -->
-                                </a>
-                            </li> <!-- .list__item -->
+                            @foreach (var item in Model.similiarRooms)
+                            {
+                                <li class="list__item">
+                                    <a asp-action="details" asp-controller="room" asp-route-id="@item.Id">
+                                        <figure class="list_item__body">
+                                            <img src="~/assets/img/@item.RoomImages[0].ImageName" class="img-responsive" alt="...">
+                                            <figcaption>
+                                                <h3>@item.Name</h3>
+                                                <div class="item__price">
+                                                    $@item.Price <small>/ night</small>
+                                                </div>
+                                            </figcaption>
+                                        </figure> <!-- / .list_item__body -->
+                                    </a>
+                                </li> <!-- .list__item -->
+                            }
                         </ul> <!-- .similar-rooms__list -->
                     </div> <!-- .similar__rooms -->
                     <div class="info__body">
                         <p class="info__title">Information</p>
                         <ul class="info__content">
                             <li>
-                                <p class="info-text">For more information about rooms please contact us.</p>
+                                <p class="info-text">@Model.setting.InfoTitle</p>
                             </li>
                             <li>
                                 <i class="icon ion-android-pin"></i>
                                 <div class="info-content">
                                     <div class="title">Address</div>
-                                    <div class="description">10987 1st Avenue, Lorem City, CA</div>
+                                    <div class="description">@Model.setting.Address</div>
                                 </div>
                             </li>
                             <li>
                                 <i class="icon ion-android-call"></i>
                                 <div class="info-content">
                                     <div class="title">Phone / Fax</div>
-                                    <div class="description">+45 789 123 4544 / +45 789 123 4848</div>
+                                    <div class="description">@Model.setting.PhoneNumber1 / @Model.setting.PhoneNumber1</div>
                                 </div>
                             </li>
                             <li>
                                 <i class="icon ion-android-mail"></i>
                                 <div class="info-content">
                                     <div class="title">E-mail</div>
-                                    <div class="description">admin@sunsethotel.com</div>
+                                    <div class="description">@Model.setting.Email</div>
                                 </div>
                             </li>
                         </ul> <!-- .info__content -->

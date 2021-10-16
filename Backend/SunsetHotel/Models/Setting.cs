@@ -82,7 +82,13 @@ namespace SunsetHotel.Models
         public string BlogWelcomeContent { get; set; }
         [Required]
         [StringLength(maximumLength: 150)]
-        public string ContactUsWelcomeContent { get; set; }
+        public string ContactUsWelcomeContent { get; set; } 
+        [Required]
+        [StringLength(maximumLength: 150)]
+        public string ReservationWelcomeContent { get; set; }
+        [Required]
+        [StringLength(maximumLength: 150)]
+        public string ReservationTitle { get; set; }
         [Required]
         [StringLength(maximumLength:150)]
         public string InfoTitle { get; set; }

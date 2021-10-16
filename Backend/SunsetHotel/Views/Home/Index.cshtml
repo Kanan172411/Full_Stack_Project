@@ -191,7 +191,7 @@
                                 <p class="item__desc">
                                     @item.Desc.Substring(0,140) ...
                                 </p>
-                                <a asp-action="reservation" asp-controller="room" class="btn-book">
+                                <a asp-action="reservation" asp-controller="room" asp-route-id="@item.Id" class="btn-book">
                                     Book now <i class="icon ion-chevron-right"></i><i class="icon ion-chevron-right"></i>
                                 </a>
                             </figcaption>

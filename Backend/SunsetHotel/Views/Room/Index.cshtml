@@ -1,8 +1,7 @@
-﻿
+﻿@model RoomViewModel
 @{
     ViewData["Title"] = "Index";
 }
-
 <!-- CONTENT
   ================================================== -->
 <!-- section header -->
@@ -19,7 +18,7 @@
                         <li class="active">Rooms</li>
                     </ol>
 
-                    <p class="welcome_content__desc">Lorem ipsum dolor sit amet consectetur adipisicing elit.</p>
+                    <p class="welcome_content__desc">@ViewBag.WelcomeContent</p>
                 </div> <!-- .welcome__content -->
             </div>
         </div> <!-- / .row -->
@@ -47,11 +46,10 @@
 
                             <p class="subheading">Categories</p>
                             <ul class="categories">
-                                <li><a href="#">Accomondation</a></li>
-                                <li><a href="#">Travel</a></li>
-                                <li><a href="#">Rooms</a></li>
-                                <li><a href="#">Services</a></li>
-                                <li><a href="#">Events</a></li>
+                                @foreach (var item in ViewBag.Categories)
+                                {
+                                    <li><a href="#">@item.Name</a></li>
+                                }
                             </ul> <!-- .categories -->
                         </div> <!-- .sidebar__item -->
 
@@ -93,183 +91,49 @@
         </div>
         <div class="second-inner-container">
             <div class="row">
-                <div class="col-md-6 col-sm-6">
-                    <div class="rooms__item">
-                        <div class="rooms__pic">
-                            <img src="~/assets/img/single_room.jpg" class="img-responsive" alt="...">
-                        </div> <!-- / .about__pic -->
-                        <div class="rooms__desc">
-                            <div class="rooms_desc__header">
-                                <h2 class="rooms_desc__title">Single room</h2>
-                                <p class="rooms_desc__price"><span>$50</span> / night</p>
-                            </div> <!-- .rooms_desc__header -->
-                            <p class="rooms_desc__desc">
-                                Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-                                Nihil dolorem
-                                illum vitae facere doloremque quas voluptates dolore.
-                            </p>
-                            <ul class="rooms_desc__services">
-                                <li><i class="icon ion-android-person"></i> One king bed</li>
-                                <li><i class="icon ion-coffee"></i> Breakfast</li>
-                                <li><i class="icon ion-android-sunny"></i> Air conditioning</li>
-                                <li><i class="icon ion-wineglass"></i> Mini bar</li>
-                                <li><i class="icon ion-monitor"></i> LCD TV</li>
-                                <li><i class="icon ion-wifi"></i> Wi-Fi</li>
-                            </ul> <!-- .rooms_desc__services -->
-                            <a asp-action="detail" asp-controller="room" class="btn btn-rooms">View details</a>
-                        </div> <!-- / .rooms__desc -->
-                    </div> <!-- .rooms__item -->
-                </div>
-                <div class="col-md-6 col-sm-6">
-                    <div class="rooms__item">
-                        <div class="rooms__pic">
-                            <img src="~/assets/img/double_room.jpg" class="img-responsive" alt="...">
-                        </div> <!-- / .about__pic -->
-                        <div class="rooms__desc">
-                            <div class="rooms_desc__header">
-                                <h2 class="rooms_desc__title">Double room</h2>
-                                <p class="rooms_desc__price"><span>$135</span> / night</p>
-                            </div> <!-- .rooms_desc__header -->
-                            <p class="rooms_desc__desc">
-                                Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-                                Nihil dolorem
-                                illum vitae facere doloremque quas voluptates dolore.
-                            </p>
-                            <ul class="rooms_desc__services">
-                                <li><i class="icon ion-android-people"></i> Double king bed</li>
-                                <li><i class="icon ion-coffee"></i> Breakfast</li>
-                                <li><i class="icon ion-android-sunny"></i> Air conditioning</li>
-                                <li><i class="icon ion-wineglass"></i> Mini bar</li>
-                                <li><i class="icon ion-monitor"></i> LCD TV</li>
-                                <li><i class="icon ion-wifi"></i> Wi-Fi</li>
-                            </ul> <!-- .rooms_desc__services -->
-                            <a href="room-detail.html" class="btn btn-rooms">View details</a>
-                        </div> <!-- / .rooms__desc -->
-                    </div> <!-- .rooms__item -->
-                </div>
-                <div class="col-md-6 col-sm-6">
-                    <div class="rooms__item">
-                        <div class="rooms__pic">
-                            <img src="~/assets/img/deluxe_room.jpg" class="img-responsive" alt="...">
-                        </div> <!-- / .about__pic -->
-                        <div class="rooms__desc">
-                            <div class="rooms_desc__header">
-                                <h2 class="rooms_desc__title">Deluxe room</h2>
-                                <p class="rooms_desc__price"><span>$240</span> / night</p>
-                            </div> <!-- .rooms_desc__header -->
-                            <p class="rooms_desc__desc">
-                                Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-                                Nihil dolorem
-                                illum vitae facere doloremque quas voluptates dolore.
-                            </p>
-                            <ul class="rooms_desc__services">
-                                <li><i class="icon ion-android-people"></i> Double king bed</li>
-                                <li><i class="icon ion-coffee"></i> Breakfast</li>
-                                <li><i class="icon ion-android-sunny"></i> Air conditioning</li>
-                                <li><i class="icon ion-wineglass"></i> Mini bar</li>
-                                <li><i class="icon ion-monitor"></i> LCD TV</li>
-                                <li><i class="icon ion-wifi"></i> Wi-Fi</li>
-                            </ul> <!-- .rooms_desc__services -->
-                            <a href="room-detail.html" class="btn btn-rooms">View details</a>
-                        </div> <!-- / .rooms__desc -->
-                    </div> <!-- .rooms__item -->
-                </div>
-                <div class="col-md-6 col-sm-6">
-                    <div class="rooms__item">
-                        <div class="rooms__pic">
-                            <img src="~/assets/img/royal_room.jpg" class="img-responsive" alt="...">
-                        </div> <!-- / .about__pic -->
-                        <div class="rooms__desc">
-                            <div class="rooms_desc__header">
-                                <h2 class="rooms_desc__title">Royal room</h2>
-                                <p class="rooms_desc__price"><span>$320</span> / night</p>
-                            </div> <!-- .rooms_desc__header -->
-                            <p class="rooms_desc__desc">
-                                Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-                                Nihil dolorem
-                                illum vitae facere doloremque quas voluptates dolore.
-                            </p>
-                            <ul class="rooms_desc__services">
-                                <li><i class="icon ion-android-people"></i> Double king bed</li>
-                                <li><i class="icon ion-coffee"></i> Breakfast</li>
-                                <li><i class="icon ion-android-sunny"></i> Air conditioning</li>
-                                <li><i class="icon ion-wineglass"></i> Mini bar</li>
-                                <li><i class="icon ion-monitor"></i> LCD TV</li>
-                                <li><i class="icon ion-wifi"></i> Wi-Fi</li>
-                            </ul> <!-- .rooms_desc__services -->
-                            <a href="room-detail.html" class="btn btn-rooms">View details</a>
-                        </div> <!-- / .rooms__desc -->
-                    </div> <!-- .rooms__item -->
-                </div>
-                <div class="col-md-6 col-sm-6">
-                    <div class="rooms__item">
-                        <div class="rooms__pic">
-                            <img src="~/assets/img/single_room.jpg" class="img-responsive" alt="...">
-                        </div> <!-- / .about__pic -->
-                        <div class="rooms__desc">
-                            <div class="rooms_desc__header">
-                                <h2 class="rooms_desc__title">Single room</h2>
-                                <p class="rooms_desc__price"><span>$50</span> / night</p>
-                            </div> <!-- .rooms_desc__header -->
-                            <p class="rooms_desc__desc">
-                                Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-                                Nihil dolorem
-                                illum vitae facere doloremque quas voluptates dolore.
-                            </p>
-                            <ul class="rooms_desc__services">
-                                <li><i class="icon ion-android-person"></i> One king bed</li>
-                                <li><i class="icon ion-coffee"></i> Breakfast</li>
-                                <li><i class="icon ion-android-sunny"></i> Air conditioning</li>
-                                <li><i class="icon ion-wineglass"></i> Mini bar</li>
-                                <li><i class="icon ion-monitor"></i> LCD TV</li>
-                                <li><i class="icon ion-wifi"></i> Wi-Fi</li>
-                            </ul> <!-- .rooms_desc__services -->
-                            <a href="room-detail.html" class="btn btn-rooms">View details</a>
-                        </div> <!-- / .rooms__desc -->
-                    </div> <!-- .rooms__item -->
-                </div>
-                <div class="col-md-6 col-sm-6">
-                    <div class="rooms__item">
-                        <div class="rooms__pic">
-                            <img src="~/assets/img/double_room.jpg" class="img-responsive" alt="...">
-                        </div> <!-- / .about__pic -->
-                        <div class="rooms__desc">
-                            <div class="rooms_desc__header">
-                                <h2 class="rooms_desc__title">Double room</h2>
-                                <p class="rooms_desc__price"><span>$135</span> / night</p>
-                            </div> <!-- .rooms_desc__header -->
-                            <p class="rooms_desc__desc">
-                                Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-                                Nihil dolorem
-                                illum vitae facere doloremque quas voluptates dolore.
-                            </p>
-                            <ul class="rooms_desc__services">
-                                <li><i class="icon ion-android-people"></i> Double king bed</li>
-                                <li><i class="icon ion-coffee"></i> Breakfast</li>
-                                <li><i class="icon ion-android-sunny"></i> Air conditioning</li>
-                                <li><i class="icon ion-wineglass"></i> Mini bar</li>
-                                <li><i class="icon ion-monitor"></i> LCD TV</li>
-                                <li><i class="icon ion-wifi"></i> Wi-Fi</li>
-                            </ul> <!-- .rooms_desc__services -->
-                            <a href="room-detail.html" class="btn btn-rooms">View details</a>
-                        </div> <!-- / .rooms__desc -->
-                    </div> <!-- .rooms__item -->
+                @foreach (var item in Model.rooms)
+                {
+                    <div class="col-md-6 col-sm-6">
+                        <div class="rooms__item">
+                            <div class="rooms__pic">
+                                <img src="~/assets/img/@item.RoomImages[0].ImageName" class="img-responsive" alt="...">
+                            </div> <!-- / .about__pic -->
+                            <div class="rooms__desc">
+                                <div class="rooms_desc__header">
+                                    <h2 class="rooms_desc__title">@item.Name</h2>
+                                    <p class="rooms_desc__price"><span>$@item.Price</span> / night</p>
+                                </div> <!-- .rooms_desc__header -->
+                                <p class="rooms_desc__desc">
+                                    @item.Desc.Substring(0, 120) ...
+                                </p>
+                                <ul class="rooms_desc__services">
+                                    @foreach (var item1 in item.RoomFeatureRelations)
+                                    {
+                                        <li>@Html.Raw(item1.RoomFeature.Icon) @item1.RoomFeature.Name</li>
+                                    }
+                                </ul> <!-- .rooms_desc__services -->
+                                <a asp-action="details" asp-controller="room" asp-route-id="@item.Id" class="btn btn-rooms">View details</a>
+                            </div> <!-- / .rooms__desc -->
+                        </div> <!-- .rooms__item -->
+                    </div>
+                }
+                @if (ViewBag.TotalPage > 1)
+                {
                     <div class="row">
-                        <div class="col-sm-12 pagination-part">
-
+                        <div class="col-sm-12 pagination-part" style="margin-left: -15px;">
                             <nav aria-label="Page navigation">
                                 <ul class="pagination">
-                                    <li>
-                                        <a href="#" aria-label="Previous">
+                                    <li class="@(ViewBag.SelectedPage==1 ? "disabled":"")">
+                                        <a asp-action="index" asp-controller="room" asp-route-page="@(ViewBag.SelectedPage==1 ? 1:ViewBag.SelectedPage-1)">
                                             <span aria-hidden="true">&laquo;</span>
                                         </a>
                                     </li>
-                                    <li><a href="#">1</a></li>
-                                    <li class="active"><a href="#">2</a></li>
-                                    <li><a href="#">3</a></li>
-                                    <li><a href="#">4</a></li>
-                                    <li>
-                                        <a href="#" aria-label="Next">
+                                    @for (int i = 1; i <= ViewBag.TotalPage; i++)
+                                    {
+                                        <li class="@(i==ViewBag.SelectedPage?"active":"")"><a asp-action="index" asp-controller="room" asp-route-page="@i">@i</a></li>
+                                    }
+                                    <li class="@(ViewBag.SelectedPage==ViewBag.TotalPage ? "disabled" : "")">
+                                        <a asp-action="index" asp-controller="room" asp-route-page="@(ViewBag.SelectedPage==ViewBag.TotalPage ? ViewBag.TotalPage:ViewBag.SelectedPage+1)">
                                             <span aria-hidden="true">&raquo;</span>
                                         </a>
                                     </li>
@@ -278,7 +142,7 @@
 
                         </div>
                     </div> <!-- / .row -->
-                </div>
+                }
             </div> <!-- .row -->
         </div>
     </div>
