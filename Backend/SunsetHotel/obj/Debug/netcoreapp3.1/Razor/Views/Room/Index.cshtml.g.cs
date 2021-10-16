@@ -26,8 +26,15 @@ using SunsetHotel.Models;
 #line default
 #line hidden
 #nullable disable
+#nullable restore
+#line 3 "C:\Users\Kanan Qarazada\Desktop\Full_Stack_Project\Backend\SunsetHotel\Views\_ViewImports.cshtml"
+using SunsetHotel.ViewModels;
+
+#line default
+#line hidden
+#nullable disable
     [global::Microsoft.AspNetCore.Razor.Hosting.RazorSourceChecksumAttribute(@"SHA1", @"1459d0b8af85cca12751a59bd54e2f7e1034578b", @"/Views/Room/Index.cshtml")]
-    [global::Microsoft.AspNetCore.Razor.Hosting.RazorSourceChecksumAttribute(@"SHA1", @"9a622585cf7ecbce53f75889924c2e9ff52a938f", @"/Views/_ViewImports.cshtml")]
+    [global::Microsoft.AspNetCore.Razor.Hosting.RazorSourceChecksumAttribute(@"SHA1", @"bc1cc186ba708d6887277c50d45e312042de428b", @"/Views/_ViewImports.cshtml")]
     public class Views_Room_Index : global::Microsoft.AspNetCore.Mvc.Razor.RazorPage<dynamic>
     {
         private static readonly global::Microsoft.AspNetCore.Razor.TagHelpers.TagHelperAttribute __tagHelperAttribute_0 = new global::Microsoft.AspNetCore.Razor.TagHelpers.TagHelperAttribute("asp-action", "index", global::Microsoft.AspNetCore.Razor.TagHelpers.HtmlAttributeValueStyle.DoubleQuotes);
@@ -94,7 +101,7 @@ using SunsetHotel.Models;
                     <!-- Breadcrumbs -->
                     <ol class=""breadcrumb"">
                         <li>");
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "1459d0b8af85cca12751a59bd54e2f7e1034578b9078", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "1459d0b8af85cca12751a59bd54e2f7e1034578b9286", async() => {
                 WriteLiteral("Home");
             }
             );
@@ -128,7 +135,7 @@ using SunsetHotel.Models;
     <div class=""container"" style=""position: relative;"">
         <p class=""subheading hidden-xs"">Search</p>
         ");
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("form", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "1459d0b8af85cca12751a59bd54e2f7e1034578b11056", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("form", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "1459d0b8af85cca12751a59bd54e2f7e1034578b11264", async() => {
                 WriteLiteral(@"
             <div class=""form-group"">
                 <input type=""text"" class=""form-control searching"" placeholder=""Search"">
@@ -179,7 +186,7 @@ using SunsetHotel.Models;
 
                             <div class=""date-range"">
                                 ");
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("form", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "1459d0b8af85cca12751a59bd54e2f7e1034578b14128", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("form", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "1459d0b8af85cca12751a59bd54e2f7e1034578b14336", async() => {
                 WriteLiteral(@"
                                     <div class=""col-sm-12 col-md-12 date"">
                                         <div class=""form-group"">
@@ -230,7 +237,7 @@ using SunsetHotel.Models;
                     <div class=""rooms__item"">
                         <div class=""rooms__pic"">
                             ");
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("img", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagOnly, "1459d0b8af85cca12751a59bd54e2f7e1034578b17377", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("img", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagOnly, "1459d0b8af85cca12751a59bd54e2f7e1034578b17585", async() => {
             }
             );
             __Microsoft_AspNetCore_Mvc_Razor_TagHelpers_UrlResolutionTagHelper = CreateTagHelper<global::Microsoft.AspNetCore.Mvc.Razor.TagHelpers.UrlResolutionTagHelper>();
@@ -267,7 +274,7 @@ using SunsetHotel.Models;
                                 <li><i class=""icon ion-wifi""></i> Wi-Fi</li>
                             </ul> <!-- .rooms_desc__services -->
                             ");
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "1459d0b8af85cca12751a59bd54e2f7e1034578b20031", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "1459d0b8af85cca12751a59bd54e2f7e1034578b20239", async() => {
                 WriteLiteral("View details");
             }
             );
@@ -293,7 +300,7 @@ using SunsetHotel.Models;
                     <div class=""rooms__item"">
                         <div class=""rooms__pic"">
                             ");
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("img", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagOnly, "1459d0b8af85cca12751a59bd54e2f7e1034578b21792", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("img", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagOnly, "1459d0b8af85cca12751a59bd54e2f7e1034578b22000", async() => {
             }
             );
             __Microsoft_AspNetCore_Mvc_Razor_TagHelpers_UrlResolutionTagHelper = CreateTagHelper<global::Microsoft.AspNetCore.Mvc.Razor.TagHelpers.UrlResolutionTagHelper>();
@@ -337,7 +344,7 @@ using SunsetHotel.Models;
                     <div class=""rooms__item"">
                         <div class=""rooms__pic"">
                             ");
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("img", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagOnly, "1459d0b8af85cca12751a59bd54e2f7e1034578b24832", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("img", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagOnly, "1459d0b8af85cca12751a59bd54e2f7e1034578b25040", async() => {
             }
             );
             __Microsoft_AspNetCore_Mvc_Razor_TagHelpers_UrlResolutionTagHelper = CreateTagHelper<global::Microsoft.AspNetCore.Mvc.Razor.TagHelpers.UrlResolutionTagHelper>();
@@ -381,7 +388,7 @@ using SunsetHotel.Models;
                     <div class=""rooms__item"">
                         <div class=""rooms__pic"">
                             ");
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("img", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagOnly, "1459d0b8af85cca12751a59bd54e2f7e1034578b27872", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("img", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagOnly, "1459d0b8af85cca12751a59bd54e2f7e1034578b28080", async() => {
             }
             );
             __Microsoft_AspNetCore_Mvc_Razor_TagHelpers_UrlResolutionTagHelper = CreateTagHelper<global::Microsoft.AspNetCore.Mvc.Razor.TagHelpers.UrlResolutionTagHelper>();
@@ -425,7 +432,7 @@ using SunsetHotel.Models;
                     <div class=""rooms__item"">
                         <div class=""rooms__pic"">
                             ");
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("img", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagOnly, "1459d0b8af85cca12751a59bd54e2f7e1034578b30911", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("img", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagOnly, "1459d0b8af85cca12751a59bd54e2f7e1034578b31119", async() => {
             }
             );
             __Microsoft_AspNetCore_Mvc_Razor_TagHelpers_UrlResolutionTagHelper = CreateTagHelper<global::Microsoft.AspNetCore.Mvc.Razor.TagHelpers.UrlResolutionTagHelper>();
@@ -469,7 +476,7 @@ using SunsetHotel.Models;
                     <div class=""rooms__item"">
                         <div class=""rooms__pic"">
                             ");
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("img", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagOnly, "1459d0b8af85cca12751a59bd54e2f7e1034578b33946", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("img", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagOnly, "1459d0b8af85cca12751a59bd54e2f7e1034578b34154", async() => {
             }
             );
             __Microsoft_AspNetCore_Mvc_Razor_TagHelpers_UrlResolutionTagHelper = CreateTagHelper<global::Microsoft.AspNetCore.Mvc.Razor.TagHelpers.UrlResolutionTagHelper>();

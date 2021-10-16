@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using SunsetHotel.DAL;
 
 namespace SunsetHotel.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    partial class AppDbContextModelSnapshot : ModelSnapshot
+    [Migration("20211016135825_SettingTablEdited")]
+    partial class SettingTablEdited
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -402,7 +404,6 @@ namespace SunsetHotel.Migrations
                         .HasColumnType("int");
 
                     b.Property<string>("InfoTitle")
-                        .IsRequired()
                         .HasColumnType("nvarchar(150)")
                         .HasMaxLength(150);
 

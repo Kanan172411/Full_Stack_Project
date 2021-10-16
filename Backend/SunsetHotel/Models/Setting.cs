@@ -83,5 +83,8 @@ namespace SunsetHotel.Models
         [Required]
         [StringLength(maximumLength: 150)]
         public string ContactUsWelcomeContent { get; set; }
+        [Required]
+        [StringLength(maximumLength:150)]
+        public string InfoTitle { get; set; }
     }
 }

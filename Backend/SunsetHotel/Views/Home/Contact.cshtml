@@ -1,4 +1,4 @@
-﻿
+﻿@model Setting
 @{
     ViewData["Title"] = "Contact";
 }
@@ -19,7 +19,7 @@
                         <li class="active">Contact</li>
                     </ol>
 
-                    <p class="welcome_content__desc">Lorem ipsum dolor sit amet consectetur adipisicing elit.</p>
+                    <p class="welcome_content__desc">@Model.ContactUsWelcomeContent</p>
                 </div> <!-- .welcome__content -->
             </div>
         </div> <!-- / .row -->
@@ -91,29 +91,28 @@
                     <ul class="contacts_info__content">
                         <li>
                             <p class="contact-info-text">
-                                Lorem ipsum dolor sit amet, consectetur adipisicing elit
-                                eveniet repellat possimus.
+                                @Model.InfoTitle
                             </p>
                         </li>
                         <li>
                             <i class="icon ion-android-pin"></i>
                             <div class="contact-info-content">
                                 <div class="title">Address</div>
-                                <div class="description">10987 1st Avenue, Lorem City, CA</div>
+                                <div class="description">@Model.Address</div>
                             </div>
                         </li>
                         <li>
                             <i class="icon ion-android-call"></i>
                             <div class="contact-info-content">
                                 <div class="title">Phone / Fax</div>
-                                <div class="description">+45 789 123 4544 / +45 789 123 4848</div>
+                                <div class="description">@Model.PhoneNumber1 / @Model.PhoneNumber2</div>
                             </div>
                         </li>
                         <li>
                             <i class="icon ion-android-mail"></i>
                             <div class="contact-info-content">
                                 <div class="title">E-mail</div>
-                                <div class="description">admin@sunsethotel.com</div>
+                                <div class="description">@Model.Email</div>
                             </div>
                         </li>
                     </ul>
