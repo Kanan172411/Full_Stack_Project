@@ -15,17 +15,20 @@ namespace SunsetHotel.DAL
 
         }
 
-        DbSet<Testimonial> Testimonials { get; set; }
-        DbSet<Feature> Features { get; set; }
-        DbSet<Gallery> Galleries { get; set; }
-        DbSet<RoomCategory> RoomCategories { get; set; }
-        DbSet<RoomFeature> RoomFeatures { get; set; }
-        DbSet<RoomImage> RoomImages { get; set; }
-        DbSet<Room> Rooms { get; set; }
-        DbSet<RoomFeatureRelation> RoomFeatureRelations { get; set; }
-        DbSet<BlogCategory> BlogCategories { get; set; }
-        DbSet<Tag> Tags { get; set; }
-        DbSet<Blog> Blogs { get; set; }
-        DbSet<BlogTag> BlogTags { get; set; }
+        public DbSet<Testimonial> Testimonials { get; set; }
+        public DbSet<Feature> Features { get; set; }
+        public DbSet<Gallery> Galleries { get; set; }
+        public DbSet<RoomCategory> RoomCategories { get; set; }
+        public DbSet<RoomFeature> RoomFeatures { get; set; }
+        public DbSet<RoomImage> RoomImages { get; set; }
+        public DbSet<Room> Rooms { get; set; }
+        public DbSet<RoomFeatureRelation> RoomFeatureRelations { get; set; }
+        public DbSet<BlogCategory> BlogCategories { get; set; }
+        public DbSet<Tag> Tags { get; set; }
+        public DbSet<Blog> Blogs { get; set; }
+        public DbSet<BlogTag> BlogTags { get; set; }
+        public DbSet<OurService> OurServices { get; set; }
+        public DbSet<HeaderFooterData> HeaderFooterDatas { get; set; }
+        public DbSet<Setting> Settings { get; set; }
     }
 }

@@ -6,19 +6,17 @@ using System.Threading.Tasks;
 
 namespace SunsetHotel.Models
 {
-    public class Testimonial
+    public class OurService
     {
         public int Id { get; set; }
         [Required]
         [StringLength(maximumLength:50)]
-        public string FullName { get; set; }
+        public string Name { get; set; }
         [Required]
-        [StringLength(maximumLength: 30)]
-        public string Profession { get; set; }
+        [StringLength(maximumLength: 70)]
+        public string Icon { get; set; }
         [Required]
-        [StringLength(maximumLength:500)]
+        [StringLength(maximumLength: 150)]
         public string Desc { get; set; }
-        [StringLength(maximumLength:500)]
-        public string ImageName { get; set; }
     }
 }

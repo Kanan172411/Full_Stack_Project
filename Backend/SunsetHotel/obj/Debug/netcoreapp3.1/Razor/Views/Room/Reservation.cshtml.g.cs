@@ -19,8 +19,15 @@ using SunsetHotel;
 #line default
 #line hidden
 #nullable disable
+#nullable restore
+#line 2 "C:\Users\Kanan Qarazada\Desktop\Full_Stack_Project\Backend\SunsetHotel\Views\_ViewImports.cshtml"
+using SunsetHotel.Models;
+
+#line default
+#line hidden
+#nullable disable
     [global::Microsoft.AspNetCore.Razor.Hosting.RazorSourceChecksumAttribute(@"SHA1", @"c7abcd203c54bd134f2daa733fc3f61cfae7f348", @"/Views/Room/Reservation.cshtml")]
-    [global::Microsoft.AspNetCore.Razor.Hosting.RazorSourceChecksumAttribute(@"SHA1", @"14189537d00d9e46897aa2ebcdf268809c9bf631", @"/Views/_ViewImports.cshtml")]
+    [global::Microsoft.AspNetCore.Razor.Hosting.RazorSourceChecksumAttribute(@"SHA1", @"9a622585cf7ecbce53f75889924c2e9ff52a938f", @"/Views/_ViewImports.cshtml")]
     public class Views_Room_Reservation : global::Microsoft.AspNetCore.Mvc.Razor.RazorPage<dynamic>
     {
         private static readonly global::Microsoft.AspNetCore.Razor.TagHelpers.TagHelperAttribute __tagHelperAttribute_0 = new global::Microsoft.AspNetCore.Razor.TagHelpers.TagHelperAttribute("asp-action", "index", global::Microsoft.AspNetCore.Razor.TagHelpers.HtmlAttributeValueStyle.DoubleQuotes);
@@ -87,7 +94,7 @@ using SunsetHotel;
                     <!-- Breadcrumbs -->
                     <ol class=""breadcrumb"">
                         <li>");
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "c7abcd203c54bd134f2daa733fc3f61cfae7f3488502", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "c7abcd203c54bd134f2daa733fc3f61cfae7f3488706", async() => {
                 WriteLiteral("Home");
             }
             );
@@ -125,7 +132,7 @@ using SunsetHotel;
                     <h2 class=""section__heading"">Selected room</h2>
                     <figure class=""room__details"">
                         ");
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("img", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagOnly, "c7abcd203c54bd134f2daa733fc3f61cfae7f34810778", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("img", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagOnly, "c7abcd203c54bd134f2daa733fc3f61cfae7f34810982", async() => {
             }
             );
             __Microsoft_AspNetCore_Mvc_Razor_TagHelpers_UrlResolutionTagHelper = CreateTagHelper<global::Microsoft.AspNetCore.Mvc.Razor.TagHelpers.UrlResolutionTagHelper>();
@@ -228,7 +235,7 @@ using SunsetHotel;
                     <!-- Alert message -->
                     <div class=""alert"" id=""form_reservation"" role=""alert""></div>");
             WriteLiteral("\r\n\r\n                    <!-- Please carefully read the README.pdf file in order to setup the PHP reservation form properly -->\r\n\r\n                    ");
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("form", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "c7abcd203c54bd134f2daa733fc3f61cfae7f34816410", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("form", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "c7abcd203c54bd134f2daa733fc3f61cfae7f34816614", async() => {
                 WriteLiteral(@"
                         <div class=""col-sm-12 col-md-6"">
                             <div class=""form-group"">
@@ -252,7 +259,7 @@ using SunsetHotel;
                                 <label for=""form-adults"" class=""sr-only"">Adults</label>
                                 <select class=""form-control"" name=""form-adults"" id=""form-adults"">
                                     ");
-                __tagHelperExecutionContext = __tagHelperScopeManager.Begin("option", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "c7abcd203c54bd134f2daa733fc3f61cfae7f34818101", async() => {
+                __tagHelperExecutionContext = __tagHelperScopeManager.Begin("option", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "c7abcd203c54bd134f2daa733fc3f61cfae7f34818305", async() => {
                     WriteLiteral("Adults");
                 }
                 );
@@ -269,7 +276,7 @@ using SunsetHotel;
                 Write(__tagHelperExecutionContext.Output);
                 __tagHelperExecutionContext = __tagHelperScopeManager.End();
                 WriteLiteral("\r\n                                    ");
-                __tagHelperExecutionContext = __tagHelperScopeManager.Begin("option", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "c7abcd203c54bd134f2daa733fc3f61cfae7f34819448", async() => {
+                __tagHelperExecutionContext = __tagHelperScopeManager.Begin("option", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "c7abcd203c54bd134f2daa733fc3f61cfae7f34819652", async() => {
                     WriteLiteral("1 Adult");
                 }
                 );
@@ -285,7 +292,7 @@ using SunsetHotel;
                 Write(__tagHelperExecutionContext.Output);
                 __tagHelperExecutionContext = __tagHelperScopeManager.End();
                 WriteLiteral("\r\n                                    ");
-                __tagHelperExecutionContext = __tagHelperScopeManager.Begin("option", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "c7abcd203c54bd134f2daa733fc3f61cfae7f34820709", async() => {
+                __tagHelperExecutionContext = __tagHelperScopeManager.Begin("option", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "c7abcd203c54bd134f2daa733fc3f61cfae7f34820913", async() => {
                     WriteLiteral("2 Adults");
                 }
                 );
@@ -301,7 +308,7 @@ using SunsetHotel;
                 Write(__tagHelperExecutionContext.Output);
                 __tagHelperExecutionContext = __tagHelperScopeManager.End();
                 WriteLiteral("\r\n                                    ");
-                __tagHelperExecutionContext = __tagHelperScopeManager.Begin("option", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "c7abcd203c54bd134f2daa733fc3f61cfae7f34821971", async() => {
+                __tagHelperExecutionContext = __tagHelperScopeManager.Begin("option", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "c7abcd203c54bd134f2daa733fc3f61cfae7f34822175", async() => {
                     WriteLiteral("3 Adults");
                 }
                 );
@@ -326,7 +333,7 @@ using SunsetHotel;
                                 <label for=""form-children"" class=""sr-only"">Children</label>
                                 <select class=""form-control"" name=""form-children"" id=""form-children"">
                                     ");
-                __tagHelperExecutionContext = __tagHelperScopeManager.Begin("option", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "c7abcd203c54bd134f2daa733fc3f61cfae7f34823733", async() => {
+                __tagHelperExecutionContext = __tagHelperScopeManager.Begin("option", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "c7abcd203c54bd134f2daa733fc3f61cfae7f34823937", async() => {
                     WriteLiteral("Children");
                 }
                 );
@@ -343,7 +350,7 @@ using SunsetHotel;
                 Write(__tagHelperExecutionContext.Output);
                 __tagHelperExecutionContext = __tagHelperScopeManager.End();
                 WriteLiteral("\r\n                                    ");
-                __tagHelperExecutionContext = __tagHelperScopeManager.Begin("option", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "c7abcd203c54bd134f2daa733fc3f61cfae7f34825082", async() => {
+                __tagHelperExecutionContext = __tagHelperScopeManager.Begin("option", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "c7abcd203c54bd134f2daa733fc3f61cfae7f34825286", async() => {
                     WriteLiteral("1 Child");
                 }
                 );
@@ -359,7 +366,7 @@ using SunsetHotel;
                 Write(__tagHelperExecutionContext.Output);
                 __tagHelperExecutionContext = __tagHelperScopeManager.End();
                 WriteLiteral("\r\n                                    ");
-                __tagHelperExecutionContext = __tagHelperScopeManager.Begin("option", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "c7abcd203c54bd134f2daa733fc3f61cfae7f34826343", async() => {
+                __tagHelperExecutionContext = __tagHelperScopeManager.Begin("option", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "c7abcd203c54bd134f2daa733fc3f61cfae7f34826547", async() => {
                     WriteLiteral("2 Children");
                 }
                 );
@@ -375,7 +382,7 @@ using SunsetHotel;
                 Write(__tagHelperExecutionContext.Output);
                 __tagHelperExecutionContext = __tagHelperScopeManager.End();
                 WriteLiteral("\r\n                                    ");
-                __tagHelperExecutionContext = __tagHelperScopeManager.Begin("option", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "c7abcd203c54bd134f2daa733fc3f61cfae7f34827607", async() => {
+                __tagHelperExecutionContext = __tagHelperScopeManager.Begin("option", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "c7abcd203c54bd134f2daa733fc3f61cfae7f34827811", async() => {
                     WriteLiteral("3 Children");
                 }
                 );

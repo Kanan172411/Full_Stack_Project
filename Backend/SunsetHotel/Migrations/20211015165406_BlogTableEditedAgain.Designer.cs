@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using SunsetHotel.DAL;
 
 namespace SunsetHotel.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    partial class AppDbContextModelSnapshot : ModelSnapshot
+    [Migration("20211015165406_BlogTableEditedAgain")]
+    partial class BlogTableEditedAgain
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -39,13 +41,13 @@ namespace SunsetHotel.Migrations
 
                     b.Property<string>("Desc1")
                         .IsRequired()
-                        .HasColumnType("nvarchar(1000)")
-                        .HasMaxLength(1000);
+                        .HasColumnType("nvarchar(800)")
+                        .HasMaxLength(800);
 
                     b.Property<string>("Desc2")
                         .IsRequired()
-                        .HasColumnType("nvarchar(1000)")
-                        .HasMaxLength(1000);
+                        .HasColumnType("nvarchar(800)")
+                        .HasMaxLength(800);
 
                     b.Property<string>("DescHeader")
                         .IsRequired()
@@ -229,6 +231,12 @@ namespace SunsetHotel.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
+                    b.Property<int?>("CategoriesId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("CategoryId")
+                        .HasColumnType("int");
+
                     b.Property<string>("Desc")
                         .IsRequired()
                         .HasColumnType("nvarchar(800)")
@@ -242,12 +250,9 @@ namespace SunsetHotel.Migrations
                     b.Property<int>("Price")
                         .HasColumnType("int");
 
-                    b.Property<int>("RoomCategoryId")
-                        .HasColumnType("int");
-
                     b.HasKey("Id");
 
-                    b.HasIndex("RoomCategoryId");
+                    b.HasIndex("CategoriesId");
 
                     b.ToTable("Rooms");
                 });
@@ -538,9 +543,7 @@ namespace SunsetHotel.Migrations
                 {
                     b.HasOne("SunsetHotel.Models.RoomCategory", "Categories")
                         .WithMany("Rooms")
-                        .HasForeignKey("RoomCategoryId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("CategoriesId");
                 });
 
             modelBuilder.Entity("SunsetHotel.Models.RoomFeatureRelation", b =>

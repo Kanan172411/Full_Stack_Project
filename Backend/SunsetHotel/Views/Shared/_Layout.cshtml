@@ -1,4 +1,9 @@
-﻿<!DOCTYPE html>
+﻿@inject SunsetHotel.Services.LayoutService layoutService
+@{ 
+    HeaderFooterData headerFooterData = layoutService.GetHeaderFooterDatas();
+}
+
+<!DOCTYPE html>
 <html lang="en">
 
 
@@ -38,12 +43,12 @@
                 <div class="info__column-left">
                     <div class="section_info__contact hidden-xs">
                         <p>
-                            <i class="icon ion-android-pin"></i> 29 Land St, Lorem City, CA
+                            <i class="icon ion-android-pin"></i>@headerFooterData.Location
                         </p>
                     </div> <!-- .section_info__contact -->
                     <div class="section_info__contact hidden-xs">
                         <p>
-                            <i class="icon ion-android-call"></i> +96 885 1247
+                            <i class="icon ion-android-call"></i> @headerFooterData.Number
                         </p>
                     </div> <!-- .section_info__contact -->
                 </div> <!-- .info__column-left -->
@@ -51,19 +56,19 @@
                     <ul class="social__icons">
 
                         <li class="social-icons__item">
-                            <a href="~/#">
+                            <a href="@headerFooterData.Twitter">
                                 <i class="icon ion-social-twitter"
                                    aria-hidden="true"></i>
                             </a>
                         </li>
                         <li class="social-icons__item">
-                            <a href="~/#">
+                            <a href="@headerFooterData.Facebook">
                                 <i class="icon ion-social-facebook"
                                    aria-hidden="true"></i>
                             </a>
                         </li>
                         <li class="social-icons__item">
-                            <a href="~/#">
+                            <a href="@headerFooterData.Google"
                                 <i class="icon ion-social-googleplus"
                                    aria-hidden="true"></i>
                             </a>
@@ -113,8 +118,8 @@
 
                 <!-- Logo -->
                 <a class="navbar-brand" asp-action="index" asp-controller="home">
-                    <h3 class="navbar-brand__logo">Sunset Hotel</h3>
-                    <p class="navbar-brand__sublogo">Grand</p>
+                    <h3 class="navbar-brand__logo">@headerFooterData.LogoPart1</h3>
+                    <p class="navbar-brand__sublogo">@headerFooterData.LogoPart2</p>
                 </a>
 
             </div> <!-- / .navbar-header -->
@@ -135,7 +140,7 @@
                             <li class="@(TempData["forSelect"].Equals(4) ? "active" : "" )">
                                 <a asp-action="index" asp-controller="blog" class="dropdown-toggle">News & Blogs</a>
                             </li>
-                            <li class="@(TempData["forSelect"].Equals(5) ? "active" : "" )"><a asp-action="contact" asp-controller="home">Contacts</a></li>
+                            <li class="@(TempData["forSelect"].Equals(5) ? "active" : "" )"><a asp-action="contact" asp-controller="home">Contact Us</a></li>
                         </ul>
                     </div><!-- /.navbar-collapse -->
                 }
@@ -155,7 +160,7 @@
                             <li>
                                 <a asp-action="index" asp-controller="blog" class="dropdown-toggle">News & Blogs</a>
                             </li>
-                            <li><a asp-action="contact" asp-controller="home">Contacts</a></li>
+                            <li><a asp-action="contact" asp-controller="home">Contact us</a></li>
                         </ul>
                     </div><!-- /.navbar-collapse -->
                 }
@@ -171,23 +176,23 @@
                 <div class="row">
                     <div class="col-xs-12 col-sm-4 col-sm-push-4 col-md-6 col-md-push-3">
                         <div class="footer__item">
-                            <h2 class="brand__logo">Sunset Hotel</h2>
-                            <p class="brand__sublogo">Grand</p>
+                            <h2 class="brand__logo">@headerFooterData.LogoPart1</h2>
+                            <p class="brand__sublogo">@headerFooterData.LogoPart2</p>
                             <ul class="social__icons">
                                 <li class="social-icons__item">
-                                    <a href="~/#">
+                                    <a href="@headerFooterData.Twitter">
                                         <i class="icon ion-social-twitter"
                                            aria-hidden="true"></i>
                                     </a>
                                 </li>
                                 <li class="social-icons__item">
-                                    <a href="~/#">
+                                    <a href="@headerFooterData.Facebook">
                                         <i class="icon ion-social-facebook"
                                            aria-hidden="true"></i>
                                     </a>
                                 </li>
                                 <li class="social-icons__item">
-                                    <a href="~/#">
+                                    <a href="@headerFooterData.Google">
                                         <i class="icon ion-social-googleplus"
                                            aria-hidden="true"></i>
                                     </a>
@@ -247,7 +252,7 @@
                 <div class="row">
                     <div class="col-xs-12">
                         <hr>
-                        <p class="footer_copyright__text">&#169; 2017 Sunset Grand Hotel. All rights reserved.</p>
+                        <p class="footer_copyright__text">&#169; 2021 Sunset Grand Hotel. All rights reserved.</p>
                     </div>
                 </div> <!-- / .row -->
             </div> <!-- / .footer__copyright -->

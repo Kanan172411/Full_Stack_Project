@@ -11,6 +11,8 @@
     <Compile Remove="Migrations\20211015113331_FeaturesTableEdited.Designer.cs" />
     <Compile Remove="Migrations\20211015113702_FeaturesTableEdited.cs" />
     <Compile Remove="Migrations\20211015113702_FeaturesTableEdited.Designer.cs" />
+    <Compile Remove="Migrations\20211015164722_SettingTableEdited.cs" />
+    <Compile Remove="Migrations\20211015164722_SettingTableEdited.Designer.cs" />
   </ItemGroup>
 
   <ItemGroup>

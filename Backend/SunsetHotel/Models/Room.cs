@@ -18,9 +18,8 @@ namespace SunsetHotel.Models
         [Required]
         [Range(5,1000)]
         public int Price { get; set; }
-        public int CategoryId { get; set; }
+        public int RoomCategoryId { get; set; }
         public RoomCategory Categories { get; set; }
-        public List<Feature> RoomFeatures { get; set; }
         public List<RoomImage> RoomImages { get; set; }
         public List<RoomFeatureRelation> RoomFeatureRelations { get; set; }
     }

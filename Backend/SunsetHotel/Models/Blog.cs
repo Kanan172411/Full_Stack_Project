@@ -17,15 +17,19 @@ namespace SunsetHotel.Models
         [Required]
         public DateTime Createdat { get; set; }
         [Required]
-        [StringLength(maximumLength: 800)]
+        [StringLength(maximumLength: 1000)]
         public string Desc1 { get; set; }
         [Required]
         [StringLength(maximumLength: 200)]
         public string DescHeader { get; set; }
         [Required]
-        [StringLength(maximumLength: 800)]
+        [StringLength(maximumLength: 1000)]
         public string Desc2 { get; set; }
+        [Required]
         public int BlogCategoryId { get; set; }
+        [Required]
+        [StringLength(maximumLength: 80)]
+        public string BlogPostTitle { get; set; }
         public BlogCategory BlogCategory { get; set; }
         public List<BlogTag> BlogTags { get; set; }
     }
