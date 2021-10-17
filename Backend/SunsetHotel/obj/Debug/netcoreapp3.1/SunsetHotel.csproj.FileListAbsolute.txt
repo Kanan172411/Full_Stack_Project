@@ -402,3 +402,6 @@ C:\Users\Kanan Qarazada\Desktop\Full_Stack_Project\Backend\SunsetHotel\obj\Debug
 C:\Users\Kanan Qarazada\Desktop\Full_Stack_Project\Backend\SunsetHotel\obj\Debug\netcoreapp3.1\Razor\Areas\Manage\Views\Testimonial\Edit.cshtml.g.cs
 C:\Users\Kanan Qarazada\Desktop\Full_Stack_Project\Backend\SunsetHotel\obj\Debug\netcoreapp3.1\Razor\Areas\Manage\Views\Gallery\Index.cshtml.g.cs
 C:\Users\Kanan Qarazada\Desktop\Full_Stack_Project\Backend\SunsetHotel\obj\Debug\netcoreapp3.1\Razor\Areas\Manage\Views\Gallery\Create.cshtml.g.cs
+C:\Users\Kanan Qarazada\Desktop\Full_Stack_Project\Backend\SunsetHotel\obj\Debug\netcoreapp3.1\Razor\Areas\Manage\Views\BlogCategory\Index.cshtml.g.cs
+C:\Users\Kanan Qarazada\Desktop\Full_Stack_Project\Backend\SunsetHotel\obj\Debug\netcoreapp3.1\Razor\Areas\Manage\Views\BlogCategory\Create.cshtml.g.cs
+C:\Users\Kanan Qarazada\Desktop\Full_Stack_Project\Backend\SunsetHotel\obj\Debug\netcoreapp3.1\Razor\Areas\Manage\Views\BlogCategory\Edit.cshtml.g.cs

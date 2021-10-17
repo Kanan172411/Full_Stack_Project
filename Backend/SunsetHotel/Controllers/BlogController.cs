@@ -52,7 +52,7 @@ namespace SunsetHotel.Controllers
                 tags = _context.Tags.ToList(),
                 blogCategories = _context.BlogCategories.ToList(),
                 recentPost = _context.Blogs.OrderByDescending(x => x.Createdat).Take(4).ToList(),
-                blog = _context.Blogs.Where(x=>x.Id==id).Include(x=>x.BlogCategory).Include(x=>x.BlogTags).ThenInclude(x=>x.Tag).FirstOrDefault()
+                blog = _context.Blogs.Where(x => x.Id == id).Include(x => x.BlogCategory).Include(x => x.BlogTags).ThenInclude(x => x.Tag).FirstOrDefault()
             };
             return View(blogVM);
         }

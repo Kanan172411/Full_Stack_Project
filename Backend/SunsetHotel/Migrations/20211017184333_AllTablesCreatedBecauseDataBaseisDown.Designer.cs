@@ -10,8 +10,8 @@ using SunsetHotel.DAL;
 namespace SunsetHotel.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20211015150001_BlogTableCreated")]
-    partial class BlogTableCreated
+    [Migration("20211017184333_AllTablesCreatedBecauseDataBaseisDown")]
+    partial class AllTablesCreatedBecauseDataBaseisDown
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -31,18 +31,23 @@ namespace SunsetHotel.Migrations
                     b.Property<int>("BlogCategoryId")
                         .HasColumnType("int");
 
+                    b.Property<string>("BlogPostTitle")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(80)")
+                        .HasMaxLength(80);
+
                     b.Property<DateTime>("Createdat")
                         .HasColumnType("datetime2");
 
                     b.Property<string>("Desc1")
                         .IsRequired()
-                        .HasColumnType("nvarchar(800)")
-                        .HasMaxLength(800);
+                        .HasColumnType("nvarchar(1000)")
+                        .HasMaxLength(1000);
 
                     b.Property<string>("Desc2")
                         .IsRequired()
-                        .HasColumnType("nvarchar(800)")
-                        .HasMaxLength(800);
+                        .HasColumnType("nvarchar(1000)")
+                        .HasMaxLength(1000);
 
                     b.Property<string>("DescHeader")
                         .IsRequired()
@@ -121,15 +126,10 @@ namespace SunsetHotel.Migrations
                         .HasColumnType("nvarchar(30)")
                         .HasMaxLength(30);
 
-                    b.Property<int?>("RoomId")
-                        .HasColumnType("int");
-
                     b.Property<int>("StarCount")
                         .HasColumnType("int");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("RoomId");
 
                     b.ToTable("Features");
                 });
@@ -150,18 +150,86 @@ namespace SunsetHotel.Migrations
                     b.ToTable("Galleries");
                 });
 
-            modelBuilder.Entity("SunsetHotel.Models.Room", b =>
+            modelBuilder.Entity("SunsetHotel.Models.HeaderFooterData", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<int?>("CategoriesId")
-                        .HasColumnType("int");
+                    b.Property<string>("Facebook")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(100)")
+                        .HasMaxLength(100);
 
-                    b.Property<int>("CategoryId")
-                        .HasColumnType("int");
+                    b.Property<string>("Google")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(100)")
+                        .HasMaxLength(100);
+
+                    b.Property<string>("Location")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(100)")
+                        .HasMaxLength(100);
+
+                    b.Property<string>("LogoPart1")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(50)")
+                        .HasMaxLength(50);
+
+                    b.Property<string>("LogoPart2")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(50)")
+                        .HasMaxLength(50);
+
+                    b.Property<string>("Number")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(70)")
+                        .HasMaxLength(70);
+
+                    b.Property<string>("Twitter")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(100)")
+                        .HasMaxLength(100);
+
+                    b.HasKey("Id");
+
+                    b.ToTable("HeaderFooterDatas");
+                });
+
+            modelBuilder.Entity("SunsetHotel.Models.OurService", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("Desc")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(150)")
+                        .HasMaxLength(150);
+
+                    b.Property<string>("Icon")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(70)")
+                        .HasMaxLength(70);
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(50)")
+                        .HasMaxLength(50);
+
+                    b.HasKey("Id");
+
+                    b.ToTable("OurServices");
+                });
+
+            modelBuilder.Entity("SunsetHotel.Models.Room", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.Property<string>("Desc")
                         .IsRequired()
@@ -176,9 +244,12 @@ namespace SunsetHotel.Migrations
                     b.Property<int>("Price")
                         .HasColumnType("int");
 
+                    b.Property<int>("RoomCategoryId")
+                        .HasColumnType("int");
+
                     b.HasKey("Id");
 
-                    b.HasIndex("CategoriesId");
+                    b.HasIndex("RoomCategoryId");
 
                     b.ToTable("Rooms");
                 });
@@ -265,6 +336,149 @@ namespace SunsetHotel.Migrations
                     b.ToTable("RoomImages");
                 });
 
+            modelBuilder.Entity("SunsetHotel.Models.Setting", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("AboutBannerImage")
+                        .HasColumnType("nvarchar(80)")
+                        .HasMaxLength(80);
+
+                    b.Property<string>("AboutDesc1")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(1000)")
+                        .HasMaxLength(1000);
+
+                    b.Property<string>("AboutDesc2")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(300)")
+                        .HasMaxLength(300);
+
+                    b.Property<string>("AboutEndBannerText")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(500)")
+                        .HasMaxLength(500);
+
+                    b.Property<string>("AboutTitle")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(200)")
+                        .HasMaxLength(200);
+
+                    b.Property<string>("AboutWelcomeContent")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(150)")
+                        .HasMaxLength(150);
+
+                    b.Property<string>("Address")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(150)")
+                        .HasMaxLength(150);
+
+                    b.Property<int>("Awards")
+                        .HasColumnType("int");
+
+                    b.Property<string>("BlogWelcomeContent")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(150)")
+                        .HasMaxLength(150);
+
+                    b.Property<string>("ByWho")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(70)")
+                        .HasMaxLength(70);
+
+                    b.Property<string>("ContactUsWelcomeContent")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(150)")
+                        .HasMaxLength(150);
+
+                    b.Property<string>("Email")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(70)")
+                        .HasMaxLength(70);
+
+                    b.Property<int>("GuestsStay")
+                        .HasColumnType("int");
+
+                    b.Property<string>("InfoTitle")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(150)")
+                        .HasMaxLength(150);
+
+                    b.Property<string>("LogoPart1")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(50)")
+                        .HasMaxLength(50);
+
+                    b.Property<string>("LogoPart2")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(50)")
+                        .HasMaxLength(50);
+
+                    b.Property<int>("MealServed")
+                        .HasColumnType("int");
+
+                    b.Property<string>("OurGalleryTitle")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(300)")
+                        .HasMaxLength(300);
+
+                    b.Property<string>("OurServicesTitle")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(150)")
+                        .HasMaxLength(150);
+
+                    b.Property<string>("OurbestRoomsTitle")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(300)")
+                        .HasMaxLength(300);
+
+                    b.Property<string>("PhoneNumber1")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(60)")
+                        .HasMaxLength(60);
+
+                    b.Property<string>("PhoneNumber2")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(60)")
+                        .HasMaxLength(60);
+
+                    b.Property<string>("ReservationTitle")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(150)")
+                        .HasMaxLength(150);
+
+                    b.Property<string>("ReservationWelcomeContent")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(150)")
+                        .HasMaxLength(150);
+
+                    b.Property<string>("RoomWelcomeContent")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(150)")
+                        .HasMaxLength(150);
+
+                    b.Property<int>("RoomsCount")
+                        .HasColumnType("int");
+
+                    b.Property<string>("TestimonialsTitle")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(300)")
+                        .HasMaxLength(300);
+
+                    b.Property<string>("WelcomeContent")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(150)")
+                        .HasMaxLength(150);
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Settings");
+                });
+
             modelBuilder.Entity("SunsetHotel.Models.Tag", b =>
                 {
                     b.Property<int>("Id")
@@ -298,6 +512,10 @@ namespace SunsetHotel.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(50)")
                         .HasMaxLength(50);
+
+                    b.Property<string>("ImageName")
+                        .HasColumnType("nvarchar(500)")
+                        .HasMaxLength(500);
 
                     b.Property<string>("Profession")
                         .IsRequired()
@@ -333,18 +551,13 @@ namespace SunsetHotel.Migrations
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("SunsetHotel.Models.Feature", b =>
-                {
-                    b.HasOne("SunsetHotel.Models.Room", null)
-                        .WithMany("RoomFeatures")
-                        .HasForeignKey("RoomId");
-                });
-
             modelBuilder.Entity("SunsetHotel.Models.Room", b =>
                 {
                     b.HasOne("SunsetHotel.Models.RoomCategory", "Categories")
                         .WithMany("Rooms")
-                        .HasForeignKey("CategoriesId");
+                        .HasForeignKey("RoomCategoryId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
                 });
 
             modelBuilder.Entity("SunsetHotel.Models.RoomFeatureRelation", b =>
