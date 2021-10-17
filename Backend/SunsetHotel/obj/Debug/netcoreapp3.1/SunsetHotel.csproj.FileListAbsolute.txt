@@ -420,3 +420,5 @@ C:\Users\Kanan Qarazada\Desktop\Full_Stack_Project\Backend\SunsetHotel\obj\Debug
 C:\Users\Kanan Qarazada\Desktop\Full_Stack_Project\Backend\SunsetHotel\obj\Debug\netcoreapp3.1\Razor\Areas\Manage\Views\RoomFeature\Index.cshtml.g.cs
 C:\Users\Kanan Qarazada\Desktop\Full_Stack_Project\Backend\SunsetHotel\obj\Debug\netcoreapp3.1\Razor\Areas\Manage\Views\RoomFeature\Create.cshtml.g.cs
 C:\Users\Kanan Qarazada\Desktop\Full_Stack_Project\Backend\SunsetHotel\obj\Debug\netcoreapp3.1\Razor\Areas\Manage\Views\RoomFeature\Edit.cshtml.g.cs
+C:\Users\Kanan Qarazada\Desktop\Full_Stack_Project\Backend\SunsetHotel\obj\Debug\netcoreapp3.1\Razor\Areas\Manage\Views\HeaderFooterDatas\Index.cshtml.g.cs
+C:\Users\Kanan Qarazada\Desktop\Full_Stack_Project\Backend\SunsetHotel\obj\Debug\netcoreapp3.1\Razor\Areas\Manage\Views\HeaderFooterDatas\Edit.cshtml.g.cs

@@ -1,0 +1,76 @@
+﻿@model HeaderFooterData
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Areas/Manage/Views/Shared/_Layout.cshtml";
+}
+
+<div class="main-content">
+
+    <div class="page-content">
+        <div class="container-fluid">
+
+            <!-- start page title -->
+            <div class="row">
+                <div class="col-12">
+                    <div class="page-title-box d-sm-flex align-items-center justify-content-between">
+                        <h4 class="mb-sm-0">Header and Footer Datas</h4>
+                        <a asp-action="edit" asp-route-id="@Model.Id" asp-controller="HeaderFooterDatas" class="btn btn-info waves-effect waves-light">Edit</a>
+                        <div class="page-title-right">
+                            <ol class="breadcrumb m-0">
+                                <li class="breadcrumb-item"><a href="javascript: void(0);">Tables</a></li>
+                                <li class="breadcrumb-item active">Header and Footer Datas</li>
+                            </ol>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+            <!-- end page title -->
+
+            <div class="row">
+                <div class="col-12">
+                    <div class="card">
+                        <div class="card-body">
+                            <div class="table-responsive">
+                                <table class="table table-editable table-nowrap align-middle table-edits">
+                                    <tbody>
+                                        <tr>
+                                            <td data-field="Location" style="width: 50%">Location:</td>
+                                            <td data-field="@Model.Location">@Model.Location</td>
+                                        </tr>
+                                        <tr>
+                                            <td data-field="Phone Number" style="width: 50%">Phone Number:</td>
+                                            <td data-field="@Model.Number">@Model.Number</td>
+                                        </tr>
+                                        <tr>
+                                            <td data-field="Logo Part 1" style="width: 50%">Logo Part 1:</td>
+                                            <td data-field="@Model.LogoPart1">@Model.LogoPart1</td>
+                                        </tr>
+                                        <tr>
+                                            <td data-field="Logo Part 2" style="width: 50%">Logo Part 2:</td>
+                                            <td data-field="@Model.LogoPart2">@Model.LogoPart2</td>
+                                        </tr>
+                                        <tr>
+                                            <td data-field="Twitter Url" style="width: 50%">Twitter Url:</td>
+                                            <td data-field="@Model.Twitter">@Model.Twitter</td>
+                                        </tr>
+                                        <tr>
+                                            <td data-field="Facebook Url" style="width: 50%">Facebook Url:</td>
+                                            <td data-field="@Model.Facebook">@Model.Facebook</td>
+                                        </tr>
+                                        <tr>
+                                            <td data-field="Google Url" style="width: 50%">Google Url:</td>
+                                            <td data-field="@Model.Google">@Model.Google</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div> <!-- end col -->
+            </div> <!-- end row -->
+        </div> <!-- container-fluid -->
+    </div>
+    <!-- End Page-content -->
+</div>
+

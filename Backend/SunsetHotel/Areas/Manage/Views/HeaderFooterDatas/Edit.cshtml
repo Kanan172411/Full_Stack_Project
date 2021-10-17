@@ -1,0 +1,68 @@
+﻿@model HeaderFooterData
+@{
+    ViewData["Title"] = "Edit";
+    Layout = "~/Areas/Manage/Views/Shared/_Layout.cshtml";
+}
+
+<div class="main-content">
+
+    <div class="page-content">
+        <div class="container-fluid">
+
+            <div class="row">
+                <div class="col-12">
+                    <div class="page-title-box d-sm-flex align-items-center justify-content-between">
+                        <h4 class="mb-sm-0">Header Footer Datas Edit</h4>
+                        <div class="page-title-right">
+                            <ol class="breadcrumb m-0">
+                                <li class="breadcrumb-item"><a href="javascript: void(0);">Tables</a></li>
+                                <li class="breadcrumb-item active">Header Footer Datas Edit</li>
+                            </ol>
+                        </div>
+                    </div>
+                    <form method="post" enctype="multipart/form-data">
+                        <div class="form-group">
+                            <label asp-for="Location">Location</label>
+                            <input type="text" asp-for="Location" class="form-control">
+                            <span class="text-danger" asp-validation-for="Location"></span>
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="Number">Phone Number</label>
+                            <input type="text" asp-for="Number" class="form-control">
+                            <span class="text-danger" asp-validation-for="Number"></span>
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="LogoPart1">Logo Part 1</label>
+                            <input type="text" asp-for="LogoPart1" class="form-control">
+                            <span class="text-danger" asp-validation-for="LogoPart1"></span>
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="LogoPart2">Logo Part 2</label>
+                            <input type="text" asp-for="LogoPart2" class="form-control">
+                            <span class="text-danger" asp-validation-for="LogoPart2"></span>
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="Twitter">Twitter Url</label>
+                            <input type="text" asp-for="Twitter" class="form-control">
+                            <span class="text-danger" asp-validation-for="Twitter"></span>
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="Facebook">Facebook Url</label>
+                            <input type="text" asp-for="Facebook" class="form-control">
+                            <span class="text-danger" asp-validation-for="Facebook"></span>
+                        </div>
+
+                        <div class="form-group">
+                            <label asp-for="Google">Google Url</label>
+                            <input type="text" asp-for="Google" class="form-control">
+                            <span class="text-danger" asp-validation-for="Google"></span>
+                        </div>
+
+                        <button style="margin-top:20px" type="submit" class="btn btn-primary">Submit</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
