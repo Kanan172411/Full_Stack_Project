@@ -24,6 +24,7 @@
     <!-- App Css-->
     <link href="~/assets1/css/app.min.css" id="app-style" rel="stylesheet" type="text/css" />
 
+
 </head>
 
 <body data-sidebar="dark">
@@ -38,7 +39,7 @@
                 <div class="d-flex">
                     <!-- LOGO -->
                     <div class="navbar-brand-box text-center">
-                        <a href="~/index.html" class="logo logo-dark">
+                        <a asp-action="index" class="logo logo-dark">
                             <span class="logo-sm">
                                 <img src="~/assets1/images/logo-sm.png" alt="logo-sm-dark" height="22">
                             </span>
@@ -47,7 +48,7 @@
                             </span>
                         </a>
 
-                        <a href="~/index.html" class="logo logo-light">
+                        <a asp-action="index" class="logo logo-light">
                             <span class="logo-sm">
                                 <img src="~/assets1/images/logo-sm.png" alt="logo-sm-light" height="22">
                             </span>
@@ -80,8 +81,8 @@
                         </button>
                         <div class="dropdown-menu dropdown-menu-end">
                             <!-- item-->
-                            <a class="dropdown-item" href="~/#"><i class="ri-user-line align-middle me-1"></i> Profile</a>
-                            <a class="dropdown-item text-danger" href="~/#">
+                            <a class="dropdown-item"><i class="ri-user-line align-middle me-1"></i> Profile</a>
+                            <a class="dropdown-item text-danger">
                                 <i class="ri-shut-down-line align-middle me-1 text-danger"></i> Logout
                             </a>
                         </div>
@@ -104,8 +105,8 @@
                         <li class="menu-title">Menu</li>
 
                         <li>
-                            <a href="~/index.html" class="waves-effect">
-                                <i class="mdi mdi-home-variant-outline"></i><span class="badge rounded-pill bg-primary float-end">3</span>
+                            <a asp-action="index" class="waves-effect">
+                                <i class="mdi mdi-home-variant-outline"></i>
                                 <span>Dashboard</span>
                             </a>
                         </li>
@@ -117,7 +118,7 @@
                                 <span>Tables</span>
                             </a>
                             <ul class="sub-menu" aria-expanded="false">
-                                <li><a href="~/tables-basic.html">Basic Tables</a></li>
+                                <li><a asp-action="index" asp-controller="testimonial">Testimonials</a></li>
                                 <li><a href="~/tables-datatable.html">Data Tables</a></li>
                                 <li><a href="~/tables-responsive.html">Responsive Table</a></li>
                                 <li><a href="~/tables-editable.html">Editable Table</a></li>
@@ -160,15 +161,27 @@
     <script src="~/assets1/libs/node-waves/waves.min.js"></script>
 
     <!-- apexcharts js -->
-    <script src="~/assets1/libs/apexcharts/apexcharts.min.js"></script>
-
     <!-- jquery.vectormap map -->
     <script src="~/assets1/libs/jqvmap/jquery.vmap.min.js"></script>
     <script src="~/assets1/libs/jqvmap/maps/jquery.vmap.usa.js"></script>
 
-    <script src="~/assets1/js/pages/dashboard.init.js"></script>
+
+    <script src="~/assets1/libs/sweetalert2/sweetalert2.min.js"></script>
+
+    <!-- Sweet alert init js-->
+    <script src="~/assets1/js/pages/sweet-alerts.init.js"></script>
+    <script src="~/assets1/libs/simplebar/simplebar.min.js"></script>
+    <script src="~/assets1/libs/node-waves/waves.min.js"></script>
 
     <script src="~/assets1/js/app.js"></script>
+    <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/2.1.2/sweetalert.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.3/jquery.validate.min.js" integrity="sha512-37T7leoNS06R80c8Ulq7cdCDU5MNQBwlYoy1TX/WUsLFC2eYNqtKlV0QjH7r8JpG/S0GUMZwebnVFLPd6SU5yg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validation-unobtrusive/3.2.12/jquery.validate.unobtrusive.min.js" integrity="sha512-o6XqxgrUsKmchwy9G5VRNWSSxTS4Urr4loO6/0hYdpWmFUfHqGzawGxeQGMDqYzxjY9sbktPbNlkIQJWagVZQg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/11.0.19/sweetalert2.min.js" integrity="sha512-jfVndX8aB+LSJHnrd4BY42vPo2J6NjccZclbhoXEvP8sFnZrj4umbXNHtdoYvacUAN+4X5su5wXjDGAuz5ceog==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.2/Chart.bundle.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+    @RenderSection("Scripts", required: false)
 
 </body>
 
