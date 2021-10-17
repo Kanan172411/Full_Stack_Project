@@ -1,0 +1,47 @@
+﻿@model OurService
+@{
+    ViewData["Title"] = "Edit";
+    Layout = "~/Areas/Manage/Views/Shared/_Layout.cshtml";
+}
+<div class="main-content">
+
+    <div class="page-content">
+        <div class="container-fluid">
+
+            <div class="row">
+                <div class="col-12">
+                    <div class="page-title-box d-sm-flex align-items-center justify-content-between">
+                        <h4 class="mb-sm-0">Our Service Edit</h4>
+                        <div class="page-title-right">
+                            <ol class="breadcrumb m-0">
+                                <li class="breadcrumb-item"><a href="javascript: void(0);">Tables</a></li>
+                                <li class="breadcrumb-item active">Our Service Edit</li>
+                            </ol>
+                        </div>
+                    </div>
+                    <form method="post" enctype="multipart/form-data">
+                        <div class="form-group">
+                            <label asp-for="Name">Name</label>
+                            <input type="text" asp-for="Name" class="form-control">
+                            <span class="text-danger" asp-validation-for="Name"></span>
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="Desc">Description</label>
+                            <input type="text" asp-for="Desc" class="form-control">
+                            <span class="text-danger" asp-validation-for="Desc"></span>
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="Icon">Icon</label>
+                            <input type="text" asp-for="Icon" class="form-control">
+                            <span class="text-danger" asp-validation-for="Icon"></span>
+                        </div>
+
+                        <button style="margin-top:20px" type="submit" class="btn btn-primary">Submit</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+

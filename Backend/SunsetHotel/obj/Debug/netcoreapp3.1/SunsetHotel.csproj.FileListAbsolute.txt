@@ -405,3 +405,9 @@ C:\Users\Kanan Qarazada\Desktop\Full_Stack_Project\Backend\SunsetHotel\obj\Debug
 C:\Users\Kanan Qarazada\Desktop\Full_Stack_Project\Backend\SunsetHotel\obj\Debug\netcoreapp3.1\Razor\Areas\Manage\Views\BlogCategory\Index.cshtml.g.cs
 C:\Users\Kanan Qarazada\Desktop\Full_Stack_Project\Backend\SunsetHotel\obj\Debug\netcoreapp3.1\Razor\Areas\Manage\Views\BlogCategory\Create.cshtml.g.cs
 C:\Users\Kanan Qarazada\Desktop\Full_Stack_Project\Backend\SunsetHotel\obj\Debug\netcoreapp3.1\Razor\Areas\Manage\Views\BlogCategory\Edit.cshtml.g.cs
+C:\Users\Kanan Qarazada\Desktop\Full_Stack_Project\Backend\SunsetHotel\obj\Debug\netcoreapp3.1\Razor\Areas\Manage\Views\OurService\Index.cshtml.g.cs
+C:\Users\Kanan Qarazada\Desktop\Full_Stack_Project\Backend\SunsetHotel\obj\Debug\netcoreapp3.1\Razor\Areas\Manage\Views\OurService\Create.cshtml.g.cs
+C:\Users\Kanan Qarazada\Desktop\Full_Stack_Project\Backend\SunsetHotel\obj\Debug\netcoreapp3.1\Razor\Areas\Manage\Views\OurService\Edit.cshtml.g.cs
+C:\Users\Kanan Qarazada\Desktop\Full_Stack_Project\Backend\SunsetHotel\obj\Debug\netcoreapp3.1\Razor\Areas\Manage\Views\Tag\Index.cshtml.g.cs
+C:\Users\Kanan Qarazada\Desktop\Full_Stack_Project\Backend\SunsetHotel\obj\Debug\netcoreapp3.1\Razor\Areas\Manage\Views\Tag\Create.cshtml.g.cs
+C:\Users\Kanan Qarazada\Desktop\Full_Stack_Project\Backend\SunsetHotel\obj\Debug\netcoreapp3.1\Razor\Areas\Manage\Views\Tag\Edit.cshtml.g.cs
