@@ -89,7 +89,6 @@
     <None Include="wwwroot\assets1\libs\datatables.net-responsive-bs4\js\responsive.bootstrap4.min.js" />
     <None Include="wwwroot\assets1\libs\datatables.net-responsive\js\dataTables.responsive.min.js" />
     <None Include="wwwroot\assets1\libs\datatables.net\js\jquery.dataTables.min.js" />
-    <None Include="wwwroot\assets1\libs\dropzone\min\dropzone.min.js" />
     <None Include="wwwroot\assets1\libs\flot-charts\jquery.flot.crosshair.js" />
     <None Include="wwwroot\assets1\libs\flot-charts\jquery.flot.js" />
     <None Include="wwwroot\assets1\libs\flot-charts\jquery.flot.pie.js" />

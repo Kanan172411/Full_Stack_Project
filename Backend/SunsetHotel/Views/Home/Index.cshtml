@@ -188,9 +188,18 @@
                                 <div class="item__price">
                                     $@item.Price <small>/ night</small>
                                 </div>
-                                <p class="item__desc">
-                                    @item.Desc.Substring(0,140) ...
-                                </p>
+                                @if (item.Desc.Length > 140)
+                                {
+                                    <p class="item__desc">
+                                        @item.Desc.Substring(0, 140) ...
+                                    </p>
+                                }
+                                else
+                                {
+                                    <p class="item__desc">
+                                        @item.Desc
+                                    </p>
+                                }
                                 <a asp-action="reservation" asp-controller="room" asp-route-id="@item.Id" class="btn-book">
                                     Book now <i class="icon ion-chevron-right"></i><i class="icon ion-chevron-right"></i>
                                 </a>
@@ -211,9 +220,18 @@
                                 <div class="item__price">
                                     $@item.Price <small>/ night</small>
                                 </div>
-                                <p class="item__desc">
-                                    @item.Desc.Substring(0,140) ...
-                                </p>
+                                @if (item.Desc.Length > 140)
+                                {
+                                    <p class="item__desc">
+                                        @item.Desc.Substring(0, 140) ...
+                                    </p>
+                                }
+                                else
+                                {
+                                    <p class="item__desc">
+                                        @item.Desc
+                                    </p>
+                                }
                                 <a asp-action="reservation" asp-controller="room" class="btn-book">
                                     Book now <i class="icon ion-chevron-right"></i><i class="icon ion-chevron-right"></i>
                                 </a>
@@ -383,9 +401,18 @@
                                     </div> <!-- .events-item__info -->
                                 </div> <!-- .events-item__content -->
                             </div> <!-- .events-item__header -->
-                            <div class="events-item__text">
-                                @item.Desc1.Substring(0,190) ...
-                            </div> <!-- .events-item__text -->
+                            @if (item.Desc1.Length > 190)
+                            {
+                                <div class="events-item__text">
+                                    @item.Desc1.Substring(0, 190) ...
+                                </div> <!-- .events-item__text -->
+                            }
+                            else
+                            {
+                                <div class="events-item__text">
+                                    @item.Desc1
+                                </div> <!-- .events-item__text -->
+                            }
                             <div class="events-item__link">
                                 <a asp-action="details" asp-controller="blog">Read More ➔</a>
                             </div> <!-- .events-item__link -->
@@ -428,9 +455,18 @@
                                     </div> <!-- .events-item__info -->
                                 </div> <!-- .events-item__content -->
                             </div> <!-- .events-item__header -->
-                            <div class="events-item__text">
-                                @item.Desc1.Substring(0,190) ...
-                            </div> <!-- .events-item__text -->
+                            @if (item.Desc1.Length > 190)
+                            {
+                                <div class="events-item__text">
+                                    @item.Desc1.Substring(0, 190) ...
+                                </div> <!-- .events-item__text -->
+                            }
+                            else
+                            {
+                                <div class="events-item__text">
+                                    @item.Desc1
+                                </div> <!-- .events-item__text -->
+                            }
                             <div class="events-item__link">
                                 <a asp-action="details" asp-controller="blog">Read More ➔</a>
                             </div> <!-- .events-item__link -->

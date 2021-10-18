@@ -52,7 +52,7 @@ namespace SunsetHotel.Areas.Manage.Controllers
             }
             if (!_context.BlogCategories.Any(x => x.Id == blog.BlogCategoryId))
             {
-                ModelState.AddModelError("CourseCategoryId", "Cateqoriya mövcud deyil!");
+                ModelState.AddModelError("BlogCategoryId", "Cateqoriya mövcud deyil!");
                 return View();
             }
             if (blog.ImageFile != null)
@@ -117,7 +117,7 @@ namespace SunsetHotel.Areas.Manage.Controllers
             if (existBlog == null) return RedirectToAction("error", "dashboard");
             if (!_context.BlogCategories.Any(x => x.Id == blog.BlogCategoryId))
             {
-                ModelState.AddModelError("CourseCategoryId", "Cateqoriya mövcud deyil!");
+                ModelState.AddModelError("BlogCAtegoryId", "Cateqoriya mövcud deyil!");
                 return View();
             }
 

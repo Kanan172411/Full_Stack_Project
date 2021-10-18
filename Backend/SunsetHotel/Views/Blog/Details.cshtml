@@ -212,9 +212,18 @@
                                 <li>
                                     <a asp-action="details" asp-controller="blog" asp-route-id="@item.Id" class="post__title">
                                         <h5 class="post__title">@item.Name</h5>
-                                        <p class="post__desc">
-                                            @item.Desc1.Substring(0, 70)
-                                        </p>
+                                        @if (item.Desc1.Length > 70)
+                                        {
+                                            <p class="post__desc">
+                                                @item.Desc1.Substring(0, 70)
+                                            </p>
+                                        }
+                                        else
+                                        {
+                                            <p class="post__desc">
+                                                @item.Desc1
+                                            </p>
+                                        }
                                         <p class="post__info">
                                             <i class="ion ion-android-calendar"></i> @item.Createdat.ToString("MMM,dd"), @item.Createdat.ToString("yyyy")
                                         </p>

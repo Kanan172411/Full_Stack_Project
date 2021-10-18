@@ -41,9 +41,18 @@
                             <div class="room__price">
                                 $@Model.Price <small>/ night</small>
                             </div>
-                            <p class="room__desc">
-                                @Model.Desc.Substring(0,108) ...
-                            </p>
+                            @if (Model.Desc.Length > 108)
+                            {
+                                <p class="room__desc">
+                                    @Model.Desc.Substring(0, 108) ...
+                                </p>
+                            }
+                            else
+                            {
+                                <p class="room__desc">
+                                    @Model.Desc
+                                </p>
+                            }
                         </figcaption>
                     </figure> <!-- / .room__details -->
                 </div> <!-- .booking__details-body -->

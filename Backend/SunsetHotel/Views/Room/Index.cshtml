@@ -103,9 +103,18 @@
                                     <h2 class="rooms_desc__title">@item.Name</h2>
                                     <p class="rooms_desc__price"><span>$@item.Price</span> / night</p>
                                 </div> <!-- .rooms_desc__header -->
-                                <p class="rooms_desc__desc">
-                                    @item.Desc.Substring(0, 120) ...
-                                </p>
+                                @if (item.Desc.Length > 120)
+                                {
+                                    <p class="rooms_desc__desc">
+                                        @item.Desc.Substring(0, 120) ...
+                                    </p>
+                                }
+                                else
+                                {                                        
+                                    <p class="rooms_desc__desc">
+                                        @item.Desc
+                                    </p>
+                                }
                                 <ul class="rooms_desc__services">
                                     @foreach (var item1 in item.RoomFeatureRelations)
                                     {

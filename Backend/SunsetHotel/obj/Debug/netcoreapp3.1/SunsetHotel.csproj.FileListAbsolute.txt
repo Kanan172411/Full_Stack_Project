@@ -428,3 +428,5 @@ C:\Users\Kanan Qarazada\Desktop\Full_Stack_Project\Backend\SunsetHotel\obj\Debug
 C:\Users\Kanan Qarazada\Desktop\Full_Stack_Project\Backend\SunsetHotel\obj\Debug\netcoreapp3.1\Razor\Areas\Manage\Views\Blog\Create.cshtml.g.cs
 C:\Users\Kanan Qarazada\Desktop\Full_Stack_Project\Backend\SunsetHotel\obj\Debug\netcoreapp3.1\Razor\Areas\Manage\Views\Blog\Edit.cshtml.g.cs
 C:\Users\Kanan Qarazada\Desktop\Full_Stack_Project\Backend\SunsetHotel\obj\Debug\netcoreapp3.1\Razor\Areas\Manage\Views\Room\Index.cshtml.g.cs
+C:\Users\Kanan Qarazada\Desktop\Full_Stack_Project\Backend\SunsetHotel\obj\Debug\netcoreapp3.1\Razor\Areas\Manage\Views\Room\Create.cshtml.g.cs
+C:\Users\Kanan Qarazada\Desktop\Full_Stack_Project\Backend\SunsetHotel\obj\Debug\netcoreapp3.1\Razor\Areas\Manage\Views\Room\Edit.cshtml.g.cs

@@ -52,9 +52,18 @@
                             <div class="blog-item__date">
                                 <p>@item.Createdat.ToString("MMM,dd"), @item.Createdat.ToString("yyyy")</p>
                             </div>
-                            <div class="blog-item__text">
-                                @item.Desc1.Substring(0,390)
-                            </div> <!-- .blog-item__text -->
+                            @if (item.Desc1.Length > 390)
+                            {
+                                <div class="blog-item__text">
+                                    @item.Desc1.Substring(0, 390) ...
+                                </div> <!-- .blog-item__text -->
+                            }
+                            else
+                            {
+                                <div class="blog-item__text">
+                                    @item.Desc1
+                                </div> <!-- .blog-item__text -->
+                            }
                             <div class="blog-item__footer">
                                 <div class="footer__item">
                                     <ul class="item-info__list">
@@ -124,9 +133,18 @@
                                 <li>
                                     <a asp-action="details" asp-controller="blog" asp-route-id="@item.Id" class="post__title">
                                         <h5 class="post__title">@item.Name</h5>
-                                        <p class="post__desc">
-                                            @item.Desc1.Substring(0,70)
-                                        </p>
+                                        @if (item.Desc1.Length > 70)
+                                        {
+                                            <p class="post__desc">
+                                                @item.Desc1.Substring(0, 70)
+                                            </p>
+                                        }
+                                        else
+                                        {
+                                            <p class="post__desc">
+                                                @item.Desc1
+                                            </p>
+                                        }
                                         <p class="post__info">
                                             <i class="ion ion-android-calendar"></i> @item.Createdat.ToString("MMM,dd"), @item.Createdat.ToString("yyyy")
                                         </p>
