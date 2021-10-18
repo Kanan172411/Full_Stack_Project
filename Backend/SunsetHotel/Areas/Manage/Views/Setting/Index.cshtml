@@ -1,0 +1,232 @@
+﻿@model Setting 
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Areas/Manage/Views/Shared/_Layout.cshtml";
+}
+<div class="main-content">
+
+    <div class="page-content">
+        <div class="container-fluid">
+
+            <!-- start page title -->
+            <div class="row">
+                <div class="col-12">
+                    <div class="page-title-box d-sm-flex align-items-center justify-content-between">
+                        <h4 class="mb-sm-0">Setting Datas</h4>
+                        <a asp-action="edit" asp-route-id="@Model.Id" asp-controller="Setting" class="btn btn-info waves-effect waves-light">Edit</a>
+                        <div class="page-title-right">
+                            <ol class="breadcrumb m-0">
+                                <li class="breadcrumb-item"><a href="javascript: void(0);">Tables</a></li>
+                                <li class="breadcrumb-item active">Setting Datas</li>
+                            </ol>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+            <!-- end page title -->
+
+            <div class="row">
+                <div class="col-12">
+                    <div class="card">
+                        <div class="card-body">
+                            <div class="table-responsive">
+                                <table class="table table-editable table-nowrap align-middle table-edits">
+                                    <tbody>
+
+                                        <tr>
+                                            <td data-field="Logo Part 1" style="width: 50%">Logo Part 1:</td>
+                                            <td data-field="@Model.LogoPart1">@Model.LogoPart1</td>
+                                        </tr>
+                                        <tr>
+                                            <td data-field="Logo Part 2" style="width: 50%">Logo Part 2:</td>
+                                            <td data-field="@Model.LogoPart2">@Model.LogoPart2</td>
+                                        </tr>
+                                        <tr>
+                                            <td data-field="Welcome Content" style="width: 50%">Welcome Content:</td>
+                                            <td data-field="@Model.WelcomeContent">@Model.WelcomeContent</td>
+                                        </tr>
+                                        <tr>
+                                            <td data-field="About Title" style="width: 50%">About Title:</td>
+                                            <td data-field="@Model.AboutTitle">@Model.AboutTitle</td>
+                                        </tr>
+                                        <tr>
+                                            <td data-field="About Description Part 1" style="width: 50%">About Description Part 1:</td>
+                                            @if (Model.AboutDesc1.Length > 70)
+                                            {
+                                                <td data-field="Description" data-bs-toggle="tooltip" data-bs-placement="bottom" title="@Model.AboutDesc1">@Model.AboutDesc1.Substring(0, 70)...</td>
+                                            }
+                                            else
+                                            {
+                                                <td data-field="Description" data-bs-toggle="tooltip" data-bs-placement="bottom" title="@Model.AboutDesc1">@Model.AboutDesc1</td>
+
+                                            }
+                                        </tr>
+                                        <tr>
+                                            <td data-field="About Description Part 2" style="width: 50%">About Description Part 2:</td>
+                                            @if (Model.AboutDesc2.Length > 70)
+                                            {
+                                                <td data-field="Description" data-bs-toggle="tooltip" data-bs-placement="bottom" title="@Model.AboutDesc2">@Model.AboutDesc2.Substring(0, 70)...</td>
+                                            }
+                                            else
+                                            {
+                                                <td data-field="Description" data-bs-toggle="tooltip" data-bs-placement="bottom" title="@Model.AboutDesc2">@Model.AboutDesc2</td>
+
+                                            }
+                                        </tr>
+                                        <tr>
+                                            <td data-field="Our Best Rooms Title" style="width: 50%">Our Best Rooms Title:</td>
+                                            @if (Model.OurbestRoomsTitle.Length > 70)
+                                            {
+                                                <td data-field="Description" data-bs-toggle="tooltip" data-bs-placement="bottom" title="@Model.OurbestRoomsTitle">@Model.OurbestRoomsTitle.Substring(0, 70)...</td>
+                                            }
+                                            else
+                                            {
+                                                <td data-field="Description" data-bs-toggle="tooltip" data-bs-placement="bottom" title="@Model.OurbestRoomsTitle">@Model.OurbestRoomsTitle</td>
+
+                                            }
+                                        </tr>
+                                        <tr>
+                                            <td data-field="Our Gallery Title" style="width: 50%">Our Gallery Title:</td>
+                                            @if (Model.OurGalleryTitle.Length > 70)
+                                            {
+                                                <td data-field="Description" data-bs-toggle="tooltip" data-bs-placement="bottom" title="@Model.OurGalleryTitle">@Model.OurGalleryTitle.Substring(0, 70)...</td>
+                                            }
+                                            else
+                                            {
+                                                <td data-field="Description" data-bs-toggle="tooltip" data-bs-placement="bottom" title="@Model.OurGalleryTitle">@Model.OurGalleryTitle</td>
+
+                                            }
+                                        </tr>
+                                        <tr>
+                                            <td data-field="Testimonials Title" style="width: 50%">Testimonials Title:</td>
+                                            @if (Model.TestimonialsTitle.Length > 70)
+                                            {
+                                                <td data-field="Description" data-bs-toggle="tooltip" data-bs-placement="bottom" title="@Model.TestimonialsTitle">@Model.TestimonialsTitle.Substring(0, 70)...</td>
+                                            }
+                                            else
+                                            {
+                                                <td data-field="Description" data-bs-toggle="tooltip" data-bs-placement="bottom" title="@Model.TestimonialsTitle">@Model.TestimonialsTitle</td>
+
+                                            }
+                                        </tr>
+                                        <tr>
+                                            <td data-field="Address" style="width: 50%">Address:</td>
+                                            <td data-field="@Model.Address">@Model.Address</td>
+                                        </tr>
+                                        <tr>
+                                            <td data-field="Phone Number 1" style="width: 50%">Phone Number 1:</td>
+                                            <td data-field="@Model.PhoneNumber1">@Model.PhoneNumber1</td>
+                                        </tr>
+                                        <tr>
+                                            <td data-field="Phone Number 2" style="width: 50%">Phone Number 2:</td>
+                                            <td data-field="@Model.PhoneNumber2">@Model.PhoneNumber2</td>
+                                        </tr>
+                                        <tr>
+                                            <td data-field="Email" style="width: 50%">Email:</td>
+                                            <td data-field="@Model.Email">@Model.Email</td>
+                                        </tr>
+                                        <tr>
+                                            <td data-field="About Welcome Content" style="width: 50%">About Welcome Content:</td>
+                                            <td data-field="@Model.AboutWelcomeContent">@Model.AboutWelcomeContent</td>
+                                        </tr>
+                                        <tr>
+                                            <td data-field="Guests Stay" style="width: 50%">Guests Stay:</td>
+                                            <td data-field="@Model.GuestsStay">@Model.GuestsStay</td>
+                                        </tr>
+                                        <tr>
+                                            <td data-field="Rooms Count" style="width: 50%">Rooms Count:</td>
+                                            <td data-field="@Model.RoomsCount">@Model.RoomsCount</td>
+                                        </tr>
+                                        <tr>
+                                            <td data-field="Meal Served" style="width: 50%">Meal Served:</td>
+                                            <td data-field="@Model.MealServed">@Model.MealServed</td>
+                                        </tr>
+                                        <tr>
+                                            <td data-field="Awards" style="width: 50%">Awards:</td>
+                                            <td data-field="@Model.Awards">@Model.Awards</td>
+                                        </tr>
+                                        <tr>
+                                            <td data-field="Our Services Title" style="width: 50%">Our Services Title:</td>
+                                            @if (Model.OurServicesTitle.Length > 70)
+                                            {
+                                                <td data-field="Description" data-bs-toggle="tooltip" data-bs-placement="bottom" title="@Model.OurServicesTitle">@Model.OurServicesTitle.Substring(0, 70)...</td>
+                                            }
+                                            else
+                                            {
+                                                <td data-field="Description" data-bs-toggle="tooltip" data-bs-placement="bottom" title="@Model.OurServicesTitle">@Model.OurServicesTitle</td>
+
+                                            }
+                                        </tr>
+                                        <tr>
+                                            <td data-field="About End Banner Text" style="width: 50%">About End Banner Text:</td>
+                                            @if (Model.AboutEndBannerText.Length > 70)
+                                            {
+                                                <td data-field="Description" data-bs-toggle="tooltip" data-bs-placement="bottom" title="@Model.AboutEndBannerText">@Model.AboutEndBannerText.Substring(0, 70)...</td>
+                                            }
+                                            else
+                                            {
+                                                <td data-field="Description" data-bs-toggle="tooltip" data-bs-placement="bottom" title="@Model.AboutEndBannerText">@Model.AboutEndBannerText</td>
+
+                                            }
+                                        </tr>
+                                        <tr>
+                                            <td data-field="By Who" style="width: 50%">By Who:</td>
+                                            <td data-field="@Model.ByWho">@Model.ByWho</td>
+                                        </tr>
+                                        <tr>
+                                            <td data-field="Room Welcome Content" style="width: 50%">Room Welcome Content:</td>
+                                            <td data-field="@Model.RoomWelcomeContent">@Model.RoomWelcomeContent</td>
+                                        </tr>
+                                        <tr>
+                                            <td data-field="Blog Welcome Content" style="width: 50%">Blog Welcome Content:</td>
+                                            <td data-field="@Model.BlogWelcomeContent">@Model.BlogWelcomeContent</td>
+                                        </tr>
+                                        <tr>
+                                            <td data-field="Contact Us Welcome Content" style="width: 50%">Contact Us Welcome Content:</td>
+                                            <td data-field="@Model.ContactUsWelcomeContent">@Model.ContactUsWelcomeContent</td>
+                                        </tr>
+                                        <tr>
+                                            <td data-field="Reservation Welcome Content" style="width: 50%">Reservation Welcome Content:</td>
+                                            <td data-field="@Model.ReservationWelcomeContent">@Model.ReservationWelcomeContent</td>
+                                        </tr>
+                                        <tr>
+                                            <td data-field="ReservationTitle" style="width: 50%">Reservation Title:</td>
+                                            @if (Model.ReservationTitle.Length > 70)
+                                            {
+                                                <td data-field="Description" data-bs-toggle="tooltip" data-bs-placement="bottom" title="@Model.ReservationTitle">@Model.ReservationTitle.Substring(0, 70)...</td>
+                                            }
+                                            else
+                                            {
+                                                <td data-field="Description" data-bs-toggle="tooltip" data-bs-placement="bottom" title="@Model.ReservationTitle">@Model.ReservationTitle</td>
+
+                                            }
+                                        </tr>
+                                        <tr>
+                                            <td data-field="Info Title" style="width: 50%">Info Title:</td>
+                                            <td data-field="@Model.InfoTitle">@Model.InfoTitle</td>
+                                        </tr>
+                                        <tr>
+                                            <td data-field="About Banner Image" style="width: 50%">About Banner Image:</td>
+                                            <td data-field="@Model.AboutBannerImage">
+                                                <div class="col-md-6 col-xl-3" style="width:250px">
+                                                    <!-- Simple card -->
+                                                    <div class="card">
+                                                        <img class="card-img-top img-fluid" src="~/assets/img/@Model.AboutBannerImage" alt="Card image cap">
+                                                    </div>
+
+                                                </div><!-- end col -->
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div> <!-- end col -->
+            </div> <!-- end row -->
+        </div> <!-- container-fluid -->
+    </div>
+    <!-- End Page-content -->
+</div>
+

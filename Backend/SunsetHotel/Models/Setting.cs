@@ -1,6 +1,8 @@
-﻿using System;
+﻿using Microsoft.AspNetCore.Http;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -92,5 +94,7 @@ namespace SunsetHotel.Models
         [Required]
         [StringLength(maximumLength:150)]
         public string InfoTitle { get; set; }
+        [NotMapped]
+        public IFormFile AboutBannerImageFile { get; set; }
     }
 }

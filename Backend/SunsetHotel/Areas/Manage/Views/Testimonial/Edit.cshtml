@@ -43,9 +43,13 @@
                         <div class="form-group" style="margin: 20px 0px 20px 0px;">
                             @if (Model.ImageName != null)
                             {
-                                <div class="img-box d-inline-block" style="position:relative">
-                                    <img src="~/assets/img/@Model.ImageName" alt="Alternate Text" style="width:250px" />
-                                </div>
+                                <div class="col-md-6 col-xl-3" style="width:250px">
+                                    <!-- Simple card -->
+                                    <div class="card">
+                                        <img class="card-img-top img-fluid" src="~/assets/img/@Model.ImageName" alt="Card image cap">
+                                    </div>
+
+                                </div><!-- end col -->
 
                             }
                             <input asp-for="ImageFile" value="" />

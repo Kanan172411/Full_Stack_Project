@@ -1,0 +1,187 @@
+﻿@model Setting
+@{
+    ViewData["Title"] = "Edit";
+    Layout = "~/Areas/Manage/Views/Shared/_Layout.cshtml";
+}
+
+<div class="main-content">
+
+    <div class="page-content">
+        <div class="container-fluid">
+
+            <div class="row">
+                <div class="col-12">
+                    <div class="page-title-box d-sm-flex align-items-center justify-content-between">
+                        <h4 class="mb-sm-0">Settting Datas Edit</h4>
+                        <div class="page-title-right">
+                            <ol class="breadcrumb m-0">
+                                <li class="breadcrumb-item"><a href="javascript: void(0);">Tables</a></li>
+                                <li class="breadcrumb-item active">Setting Datas Edit</li>
+                            </ol>
+                        </div>
+                    </div>
+                    <form method="post" enctype="multipart/form-data">
+                        <div class="form-group">
+                            <label asp-for="LogoPart1">Logo Part 1</label>
+                            <input type="text" asp-for="LogoPart1" class="form-control">
+                            <span class="text-danger" asp-validation-for="LogoPart1"></span>
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="LogoPart2">Logo Part 2</label>
+                            <input type="text" asp-for="LogoPart2" class="form-control">
+                            <span class="text-danger" asp-validation-for="LogoPart2"></span>
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="WelcomeContent">Welcome Content</label>
+                            <input type="text" asp-for="WelcomeContent" class="form-control">
+                            <span class="text-danger" asp-validation-for="WelcomeContent"></span>
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="AboutTitle">About Title</label>
+                            <input type="text" asp-for="AboutTitle" class="form-control">
+                            <span class="text-danger" asp-validation-for="AboutTitle"></span>
+                        </div>
+
+                        <div class="form-group">
+                            <label asp-for="AboutDesc1">About Description Part 1</label>
+                            <textarea type="text" asp-for="AboutDesc1" class="form-control"></textarea>
+                            <span class="text-danger" asp-validation-for="AboutDesc1"></span>
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="AboutDesc2">About Description Part 2</label>
+                            <textarea type="text" asp-for="AboutDesc2" class="form-control"></textarea>
+                            <span class="text-danger" asp-validation-for="AboutDesc2"></span>
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="OurbestRoomsTitle">Ourbest Rooms Title</label>
+                            <input type="text" asp-for="OurbestRoomsTitle" class="form-control">
+                            <span class="text-danger" asp-validation-for="OurbestRoomsTitle"></span>
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="OurGalleryTitle">Our Gallery Title</label>
+                            <input type="text" asp-for="OurGalleryTitle" class="form-control">
+                            <span class="text-danger" asp-validation-for="OurGalleryTitle"></span>
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="TestimonialsTitle">Testimonials Title</label>
+                            <input type="text" asp-for="TestimonialsTitle" class="form-control">
+                            <span class="text-danger" asp-validation-for="TestimonialsTitle"></span>
+                        </div>
+
+                        <div class="form-group">
+                            <label asp-for="Address">Address</label>
+                            <input type="text" asp-for="Address" class="form-control">
+                            <span class="text-danger" asp-validation-for="Address"></span>
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="PhoneNumber1">Phone Number 1</label>
+                            <input type="text" asp-for="PhoneNumber1" class="form-control">
+                            <span class="text-danger" asp-validation-for="PhoneNumber1"></span>
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="PhoneNumber2">Phone Number 2</label>
+                            <input type="text" asp-for="PhoneNumber2" class="form-control">
+                            <span class="text-danger" asp-validation-for="PhoneNumber2"></span>
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="Email">Email</label>
+                            <input type="text" asp-for="Email" class="form-control">
+                            <span class="text-danger" asp-validation-for="Email"></span>
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="AboutWelcomeContent">About Welcome Content</label>
+                            <input type="text" asp-for="AboutWelcomeContent" class="form-control">
+                            <span class="text-danger" asp-validation-for="AboutWelcomeContent"></span>
+                        </div>
+
+                        <div class="form-group">
+                            <label asp-for="GuestsStay">Guests Stay</label>
+                            <input type="number" asp-for="GuestsStay" class="form-control">
+                            <span class="text-danger" asp-validation-for="GuestsStay"></span>
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="RoomsCount">Rooms Count</label>
+                            <input type="number" asp-for="RoomsCount" class="form-control">
+                            <span class="text-danger" asp-validation-for="RoomsCount"></span>
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="Awards">Awards</label>
+                            <input type="number" asp-for="Awards" class="form-control">
+                            <span class="text-danger" asp-validation-for="Awards"></span>
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="MealServed">MealServed</label>
+                            <input type="number" asp-for="MealServed" class="form-control">
+                            <span class="text-danger" asp-validation-for="MealServed"></span>
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="AboutEndBannerText">About End Banner Text</label>
+                            <textarea type="text" asp-for="AboutEndBannerText" class="form-control"></textarea>
+                            <span class="text-danger" asp-validation-for="AboutEndBannerText"></span>
+                        </div>
+
+                        <div class="form-group">
+                            <label asp-for="OurServicesTitle">Our Services Title</label>
+                            <input type="text" asp-for="OurServicesTitle" class="form-control">
+                            <span class="text-danger" asp-validation-for="OurServicesTitle"></span>
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="ByWho">ByWho</label>
+                            <input type="text" asp-for="ByWho" class="form-control">
+                            <span class="text-danger" asp-validation-for="ByWho"></span>
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="RoomWelcomeContent">Room Welcome Content</label>
+                            <input type="text" asp-for="RoomWelcomeContent" class="form-control">
+                            <span class="text-danger" asp-validation-for="RoomWelcomeContent"></span>
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="ContactUsWelcomeContent">Contact Us Welcome Content</label>
+                            <input type="text" asp-for="ContactUsWelcomeContent" class="form-control">
+                            <span class="text-danger" asp-validation-for="ContactUsWelcomeContent"></span>
+                        </div>
+
+                        <div class="form-group">
+                            <label asp-for="BlogWelcomeContent">Blog Welcome Content</label>
+                            <input type="text" asp-for="BlogWelcomeContent" class="form-control">
+                            <span class="text-danger" asp-validation-for="BlogWelcomeContent"></span>
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="ReservationWelcomeContent">Reservation Welcome Content</label>
+                            <input type="text" asp-for="ReservationWelcomeContent" class="form-control">
+                            <span class="text-danger" asp-validation-for="ReservationWelcomeContent"></span>
+                        </div>
+
+                        <div class="form-group">
+                            <label asp-for="ReservationTitle">Reservation Title</label>
+                            <input type="text" asp-for="ReservationTitle" class="form-control">
+                            <span class="text-danger" asp-validation-for="ReservationTitle"></span>
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="InfoTitle">Info Title</label>
+                            <input type="text" asp-for="InfoTitle" class="form-control">
+                            <span class="text-danger" asp-validation-for="InfoTitle"></span>
+                        </div>
+                        <div class="form-group" style="margin: 20px 0px 20px 0px;">
+                            @if (Model.AboutBannerImage != null)
+                            {
+                                <div class="col-md-6 col-xl-3" style="width:250px">
+                                    <!-- Simple card -->
+                                    <div class="card">
+                                        <img class="card-img-top img-fluid" src="~/assets/img/@Model.AboutBannerImage" alt="Card image cap">
+                                    </div>
+
+                                </div><!-- end col -->
+
+                            }
+                            <input asp-for="AboutBannerImageFile" value="" />
+                            <span class="text-danger" asp-validation-for="AboutBannerImageFile"></span>
+                        </div>
+                        <button style="margin-top:20px" type="submit" class="btn btn-primary">Submit</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
