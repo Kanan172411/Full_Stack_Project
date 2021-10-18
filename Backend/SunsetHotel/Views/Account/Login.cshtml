@@ -1,4 +1,4 @@
-﻿
+﻿@model UserLoginViewModel
 @{
     ViewData["Title"] = "Login";
 }
@@ -14,22 +14,22 @@
                     <div class="alert" id="form_message" role="alert"></div>
 
                     <!-- Form -->
-                    <form id="formsendemail" class="contacts__form">
-
+                    <form method="post" id="formsendemail" class="contacts__form">
+                        <div class="text-danger" asp-validation-summary="ModelOnly"></div>
                         <!-- Email -->
                         <div class="form-group">
-                            <label for="username" class="sr-only">Username</label>
-                            <input type="text" name="email" class="form-control" id="username"
+                            <label asp-for="Username" class="sr-only">Username</label>
+                            <input asp-for="Username" type="text" name="username" class="form-control" id="username"
                                    placeholder="Enter your username" required>
-                            <span class="help-block"></span>
+                            <span asp-validation-for="Username" class="text-danger"></span>
                         </div>
 
                         <!-- Name -->
                         <div class="form-group">
-                            <label for="name" class="sr-only">Password</label>
-                            <input type="password" name="name" class="form-control" id="name"
+                            <label asp-for="Password" class="sr-only">Password</label>
+                            <input asp-for="Password" type="password" name="password" class="form-control" id="password"
                                    placeholder="Enter your password" required>
-                            <span class="help-block"></span>
+                            <span asp-validation-for="Password" class="text-danger"></span>
                         </div>
 
                         <!-- Note -->

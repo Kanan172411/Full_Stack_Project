@@ -6,29 +6,21 @@ using System.Threading.Tasks;
 
 namespace SunsetHotel.ViewModels
 {
-    public class UserRegisterViewModel
+    public class UserUpdateViewModel
     {
         [Required]
         [StringLength(maximumLength: 25)]
         public string UserName { get; set; }
-        [Required]
-        [StringLength(maximumLength: 100)]
-        public string FullName { get; set; }
 
         [Required]
         [StringLength(maximumLength: 100)]
         [DataType(DataType.EmailAddress)]
         public string Email { get; set; }
-
-        [StringLength(maximumLength: 20)]
-        [DataType(DataType.Password)]
         [Required]
-        public string Password { get; set; }
-
-        [StringLength(maximumLength: 20)]
-        [DataType(DataType.Password)]
-        [Required]
-        [Compare(nameof(Password))]
-        public string ConfirmPassword { get; set; }
+        [StringLength(maximumLength: 100)]
+        public string FullName { get; set; }
+        public string City { get; set; }
+        public string Country { get; set; }
+        public string PhoneNumber { get; set; }
     }
 }

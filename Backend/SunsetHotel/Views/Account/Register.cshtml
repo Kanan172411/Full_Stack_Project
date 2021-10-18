@@ -1,4 +1,4 @@
-﻿
+﻿@model UserRegisterViewModel
 @{
     ViewData["Title"] = "Register";
 }
@@ -14,36 +14,43 @@
                     <div class="alert" id="form_message" role="alert"></div>
 
                     <!-- Form -->
-                    <form id="formsendemail" class="contacts__form">
-
+                    <form method="post" id="formsendemail" class="contacts__form">
+                        <div class="text-danger" asp-validation-summary="ModelOnly"></div>
                         <!-- Email -->
                         <div class="form-group">
-                            <label for="username" class="sr-only">Username</label>
-                            <input type="text" name="email" class="form-control" id="username"
+                            <label asp-for="UserName" class="sr-only">Username</label>
+                            <input asp-for="UserName" type="text" name="username" class="form-control" id="username"
                                    placeholder="Enter your username" required>
-                            <span class="help-block"></span>
+                            <span asp-validation-for="UserName" class="text-danger"></span>
                         </div>
 
                         <!-- Name -->
                         <div class="form-group">
-                            <label for="fullname" class="sr-only">Fullname</label>
-                            <input type="text" name="fullname" class="form-control" id="fullname"
+                            <label asp-for="FullName" class="sr-only">Fullname</label>
+                            <input asp-for="FullName" type="text" name="fullname" class="form-control" id="fullname"
                                    placeholder="Enter your fullname" required>
-                            <span class="help-block"></span>
+                            <span asp-validation-for="FullName" class="text-danger"></span>
                         </div>
 
                         <div class="form-group">
-                            <label for="email" class="sr-only">Email</label>
-                            <input type="email" name="email" class="form-control" id="email"
+                            <label asp-for="Email" class="sr-only">Email</label>
+                            <input asp-for="Email" type="email" name="email" class="form-control" id="email"
                                    placeholder="Enter your email" required>
-                            <span class="help-block"></span>
+                            <span asp-validation-for="Email" class="text-danger"></span>
                         </div>
 
                         <div class="form-group">
-                            <label for="name" class="sr-only">Password</label>
-                            <input type="password" name="name" class="form-control" id="name"
+                            <label asp-for="Password" class="sr-only">Password</label>
+                            <input asp-for="Password" type="password" name="password" class="form-control" id="password"
                                    placeholder="Enter your password" required>
-                            <span class="help-block"></span>
+                            <span asp-validation-for="Password" class="text-danger"></span>
+                        </div>
+
+                        <div class="form-group">
+                            <label asp-for="ConfirmPassword" class="sr-only">ConfirmPassword</label>
+                            <input asp-for="ConfirmPassword" type="password" name="confirmpassword" class="form-control" id="confirmpassword"
+                                   placeholder="Repeat password" required>
+                            <span asp-validation-for="ConfirmPassword" class="text-danger"></span>
                         </div>
 
                         <!-- Note -->

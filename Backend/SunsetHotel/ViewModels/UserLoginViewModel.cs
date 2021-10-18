@@ -10,7 +10,7 @@ namespace SunsetHotel.ViewModels
     {
         [Required]
         [StringLength(maximumLength: 25)]
-        public string UserName { get; set; }
+        public string Username { get; set; }
 
         [Required]
         [StringLength(maximumLength: 20)]

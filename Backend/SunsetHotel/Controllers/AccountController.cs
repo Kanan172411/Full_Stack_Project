@@ -55,7 +55,8 @@ namespace SunsetHotel.Controllers
             {
                 UserName = registerVM.UserName,
                 Email = registerVM.Email,
-                FullName = registerVM.FullName
+                FullName = registerVM.FullName,
+                IsAdmin = false
             };
 
             IdentityResult result = await _userManager.CreateAsync(appUser, registerVM.Password);
@@ -79,13 +80,115 @@ namespace SunsetHotel.Controllers
             return View();
         }
 
-        public IActionResult Edit()
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Login(UserLoginViewModel loginVM)
         {
-            return View();
+            if (!ModelState.IsValid) return View();
+
+            AppUser user = await _userManager.FindByNameAsync(loginVM.Username);
+
+            if (user == null || user.IsAdmin)
+            {
+                ModelState.AddModelError("", "UserName ve ya Sifre yanlisdir!");
+                return View();
+            }
+
+            var result = await _signInManager.PasswordSignInAsync(user, loginVM.Password, true, false);
+
+            if (!result.Succeeded)
+            {
+                ModelState.AddModelError("", "UserName ve ya Sifre yanlisdir!");
+                return View();
+            }
+
+            return RedirectToAction("index", "home");
         }
+
+        public async Task<IActionResult> Logout()
+        {
+            await _signInManager.SignOutAsync();
+            return RedirectToAction("Index", "Home");
+        }
+        public async Task<IActionResult> Edit()
+        {
+            AppUser user = await _userManager.FindByNameAsync(User.Identity.Name);
+            UserUpdateViewModel updateModel = new UserUpdateViewModel
+            {
+                Email = user.Email,
+                UserName = user.UserName,
+            };
+            return View(updateModel);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Edit(UserUpdateViewModel updateVM)
+        {
+            if (!ModelState.IsValid) return View();
+
+            AppUser user = await _userManager.FindByNameAsync(User.Identity.Name);
+
+            if (user.UserName != updateVM.UserName && _userManager.Users.Any(x => x.NormalizedUserName == updateVM.UserName.ToUpper()))
+            {
+                ModelState.AddModelError("UserName", "UserName already taken");
+                return View();
+            }
+
+            if (user.Email != updateVM.Email && _userManager.Users.Any(x => x.NormalizedEmail == updateVM.Email.ToUpper()))
+            {
+                ModelState.AddModelError("Email", "Email already taken");
+                return View();
+            }
+
+            user.UserName = updateVM.UserName;
+            user.Email = updateVM.Email;
+            user.FullName = updateVM.FullName;
+            user.City = updateVM.City;
+            user.Country = updateVM.Country;
+            user.PhoneNumber = updateVM.PhoneNumber;
+
+            await _userManager.UpdateAsync(user);
+            await _signInManager.SignInAsync(user, true);
+
+
+            return RedirectToAction("index", "home");
+        }
+
+
         public IActionResult ChangePassword()
         {
             return View();
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> ChangePassword(ChangePasswordViewModel changePasswordVM)
+        {
+            if (!ModelState.IsValid) return View();
+
+            AppUser user = await _userManager.FindByNameAsync(User.Identity.Name);
+            if (!string.IsNullOrWhiteSpace(changePasswordVM.Password))
+            {
+                if (changePasswordVM.Password != changePasswordVM.ConfirmPassowrd)
+                {
+                    ModelState.AddModelError("ConfirmPassowrd", "Password ve Confirm password eyni olmalidir!");
+                    return View();
+                }
+
+                var result = await _userManager.ChangePasswordAsync(user, changePasswordVM.CurrentPassowrd, changePasswordVM.Password);
+
+                if (!result.Succeeded)
+                {
+                    foreach (var item in result.Errors)
+                    {
+                        ModelState.AddModelError("", item.Description);
+                    }
+                    return View();
+                }
+
+            }
+            return RedirectToAction("index", "home");
         }
 
 

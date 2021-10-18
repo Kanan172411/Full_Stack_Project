@@ -1,6 +1,12 @@
 ﻿@inject SunsetHotel.Services.LayoutService layoutService
-@{ 
+@inject Microsoft.AspNetCore.Identity.UserManager<AppUser> userManager
+@{
     HeaderFooterData headerFooterData = layoutService.GetHeaderFooterDatas();
+    AppUser appUser = null;
+    if (User.Identity.IsAuthenticated)
+    {
+        appUser = userManager.FindByNameAsync(User.Identity.Name).Result;
+    }
 }
 
 <!DOCTYPE html>
@@ -76,15 +82,24 @@
                     </ul> <!-- .social__icons -->
                     <div class="dropdown lang-menu">
                         <div class="dropdown">
-                            <a href="~/#" class="dropdown-toggle" data-toggle="dropdown" role="button"
-                               aria-haspopup="true" aria-expanded="false">
-                                kanangg <i class="icon ion-chevron-down"></i>
-                            </a>
-                            <ul class="dropdown-menu">
-                                <li><a asp-action="edit" asp-controller="account" >My Profile</a></li>
-                                <li><a asp-action="myreservation" asp-controller="room" >My Reservations</a></li>
-                                <li><a href="~/#">Logout</a></li>
-                            </ul>
+                            @if (appUser != null && !appUser.IsAdmin)
+                            {
+                                <a href="~/#" class="dropdown-toggle" data-toggle="dropdown" role="button"
+                                   aria-haspopup="true" aria-expanded="false">
+                                    @appUser.UserName <i class="icon ion-chevron-down"></i>
+                                </a>
+                                <ul class="dropdown-menu">
+                                    <li><a asp-action="edit" asp-controller="account">My Profile</a></li>
+                                    <li><a asp-action="myreservation" asp-controller="room">My Reservations</a></li>
+                                    <li><a asp-action="logout" asp-controller="account">Logout</a></li>
+                                </ul>
+                            }
+                            else
+                            {
+                                <a asp-action="Login" asp-controller="account" role="button">
+                                    Login
+                                </a>
+                            }
                         </div>
                     </div> <!-- .lang-menu -->
                     <form class="search-form hidden-xs" role="search">
@@ -262,6 +277,10 @@
     <!--
     ================================================== -->
     <!-- JS Global -->
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.3/jquery.validate.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validation-unobtrusive/3.2.12/jquery.validate.unobtrusive.min.js"></script>
+
     <script src="~/assets/plugins/jquery/jquery-1.12.4.min.js"></script>
     <script src="~/assets/bootstrap/js/bootstrap.min.js"></script>
 
@@ -273,17 +292,12 @@
     <script src="~/assets/plugins/owl-carousel/dist/owl.carousel.min.js"></script>
     <script src="~/assets/plugins/countTo/jquery.countTo.js"></script>
     <script src="~/assets/plugins/contact/contact.js"></script>
-
     <!-- JS Custom -->
     <!--build:js assets/js/theme.min.js -->
     <script src="~/assets/js/theme.js"></script>
     <!-- endbuild -->
     <script src="~/assets/js/google_maps.js"></script>
-
-    <!-- Google Maps -->
-    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCfwXIv2vgXzFDZRzzRH2VpbvgSzhqCCuU&amp;callback=initMap"
-            async defer></script>
-
+    @RenderSection("Scripts", required: false)
 </body>
 
 
