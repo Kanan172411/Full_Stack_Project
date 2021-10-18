@@ -1,11 +1,13 @@
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using SunsetHotel.DAL;
+using SunsetHotel.Models;
 using SunsetHotel.Services;
 using System;
 using System.Collections.Generic;
@@ -31,6 +33,15 @@ namespace SunsetHotel
             {
                 options.UseSqlServer(Configuration.GetConnectionString("default"));
             });
+            services.AddIdentity<AppUser, IdentityRole>(options =>
+            {
+                options.Password.RequireDigit = true;
+                options.Password.RequireLowercase = false;
+                options.Password.RequireUppercase = false;
+                options.Password.RequireNonAlphanumeric = false;
+                options.Password.RequiredLength = 8;
+            }).AddDefaultTokenProviders().AddEntityFrameworkStores<AppDbContext>();
+
             services.ConfigureApplicationCookie(opt =>
             {
                 opt.LoginPath = "/account/login";

@@ -5,6 +5,13 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Migrations\20211018192024_UserTableCreated.cs" />
+    <Compile Remove="Migrations\20211018192024_UserTableCreated.Designer.cs" />
+    <Compile Remove="Migrations\20211018192729_UserTableEdited.cs" />
+    <Compile Remove="Migrations\20211018192729_UserTableEdited.Designer.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="3.1.20" />
     <PackageReference Include="Microsoft.EntityFrameworkCore" Version="3.1.20" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="3.1.20" />

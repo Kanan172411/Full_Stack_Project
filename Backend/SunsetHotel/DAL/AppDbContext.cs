@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace SunsetHotel.DAL
 {
-    public class AppDbContext: DbContext
+    public class AppDbContext: IdentityDbContext
     {
         public AppDbContext(DbContextOptions<AppDbContext> options) : base(options)
         {
@@ -30,5 +30,6 @@ namespace SunsetHotel.DAL
         public DbSet<OurService> OurServices { get; set; }
         public DbSet<HeaderFooterData> HeaderFooterDatas { get; set; }
         public DbSet<Setting> Settings { get; set; }
+        public DbSet<AppUser> AppUsers { get; set; }
     }
 }
