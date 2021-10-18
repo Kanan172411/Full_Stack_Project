@@ -1,6 +1,8 @@
-﻿using System;
+﻿using Microsoft.AspNetCore.Http;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -32,5 +34,9 @@ namespace SunsetHotel.Models
         public string BlogPostTitle { get; set; }
         public BlogCategory BlogCategory { get; set; }
         public List<BlogTag> BlogTags { get; set; }
+        [NotMapped]
+        public IFormFile ImageFile { get; set; }
+        [NotMapped]
+        public List<int> TagId { get; set; }
     }
 }

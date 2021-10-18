@@ -1,28 +1,25 @@
-﻿@model List<Testimonial>
+﻿@model List<Blog>
 @{
     ViewData["Title"] = "Index";
     Layout = "~/Areas/Manage/Views/Shared/_Layout.cshtml";
     int order = (ViewBag.SelectedPage - 1) * 6 + 1;
 }
 
-<!-- ============================================================== -->
-<!-- Start right Content here -->
-<!-- ============================================================== -->
 <div class="main-content">
 
     <div class="page-content">
-        <div class="container-fluid" style="text-align:center">
+        <div class="container-fluid">
 
             <!-- start page title -->
             <div class="row">
                 <div class="col-12">
                     <div class="page-title-box d-sm-flex align-items-center justify-content-between">
-                        <h4 class="mb-sm-0">Testimonials</h4>
+                        <h4 class="mb-sm-0">Blogs</h4>
                         <a asp-action="create" class="btn btn-info waves-effect waves-light">Add new</a>
                         <div class="page-title-right">
                             <ol class="breadcrumb m-0">
                                 <li class="breadcrumb-item"><a href="javascript: void(0);">Tables</a></li>
-                                <li class="breadcrumb-item active">Testimonials Table</li>
+                                <li class="breadcrumb-item active">Blogs Table</li>
                             </ol>
                         </div>
 
@@ -41,9 +38,10 @@
                                         <tr>
                                             <th></th>
                                             <th>Name</th>
-                                            <th>Profession</th>
+                                            <th>Category</th>
                                             <th>Description</th>
-                                            <th>Edit</th>
+                                            <th>Post Title</th>
+                                            <th style="width:0%">Edit</th>
                                             <th>Delete</th>
                                         </tr>
                                     </thead>
@@ -52,17 +50,18 @@
                                         {
                                             <tr>
                                                 <td>@order</td>
-                                                <td data-field="FullName" style="width: 80px">@item.FullName</td>
-                                                <td data-field="Profession">@item.Profession</td>
-                                                @if (item.Desc.Length > 80)
+                                                <td data-field="Name" style="width: 80px">@item.Name</td>
+                                                <td data-field="Category">@item.BlogCategory.Name</td>
+                                                @if (item.Desc1.Length > 40)
                                                 {
-                                                    <td data-field="Description" data-bs-toggle="tooltip" data-bs-placement="bottom" title="@item.Desc">@item.Desc.Substring(0, 80)...</td>
+                                                    <td data-field="Description" data-bs-toggle="tooltip" data-bs-placement="bottom" title="@item.Desc1">@item.Desc1.Substring(0, 40)...</td>
                                                 }
                                                 else
                                                 {
-                                                    <td data-field="Description" data-bs-toggle="tooltip" data-bs-placement="bottom" title="@item.Desc">@item.Desc</td>
+                                                    <td data-field="Description" data-bs-toggle="tooltip" data-bs-placement="bottom" title="@item.Desc1">@item.Desc1</td>
 
                                                 }
+                                                <td data-field="Post Title">@item.BlogPostTitle</td>
                                                 <td style="width: 100px">
                                                     <a asp-action="Edit" asp-route-id="@item.Id" class="btn btn-outline-secondary btn-sm edit" title="Edit">
                                                         <i class="fas fa-pencil-alt"></i>
@@ -88,16 +87,16 @@
                 <div class="d-inline-block ">
                     <ul class="pagination pagination-rounded mb-0">
                         <li class="page-item @(ViewBag.SelectedPage==1 ? "disabled":"")">
-                            <a class="page-link" asp-action="index" asp-controller="testimonial" asp-route-page="@(ViewBag.SelectedPage==1 ? 1:ViewBag.SelectedPage-1)">
+                            <a class="page-link" asp-action="index" asp-controller="Blog" asp-route-page="@(ViewBag.SelectedPage==1 ? 1:ViewBag.SelectedPage-1)">
                                 <i class="mdi mdi-chevron-left"></i>
                             </a>
                         </li>
                         @for (int i = 1; i <= ViewBag.TotalPage; i++)
                         {
-                            <li class="page-item @(i==ViewBag.SelectedPage?"active":"")"><a class="page-link" asp-action="index" asp-controller="testimonial" asp-route-page="@i">@i</a></li>
+                            <li class="page-item @(i==ViewBag.SelectedPage?"active":"")"><a class="page-link" asp-action="index" asp-controller="Blog" asp-route-page="@i">@i</a></li>
                         }
                         <li class="page-item @(ViewBag.SelectedPage==ViewBag.TotalPage ? "disabled" : "")">
-                            <a class="page-link" asp-action="index" asp-controller="testimonial" asp-route-page="@(ViewBag.SelectedPage==ViewBag.TotalPage ? ViewBag.TotalPage:ViewBag.SelectedPage+1)">
+                            <a class="page-link" asp-action="index" asp-controller="Blog" asp-route-page="@(ViewBag.SelectedPage==ViewBag.TotalPage ? ViewBag.TotalPage:ViewBag.SelectedPage+1)">
                                 <i class="mdi mdi-chevron-right"></i>
                             </a>
                         </li>
@@ -111,7 +110,7 @@
 </div>
 @section Scripts
 {
-        <script>
+    <script>
 
             $(document).ready(function () {
                 $(document).on("click", ".item-delete", function (e) {
@@ -133,7 +132,7 @@
                                 .then(response => response.json())
                                 .then(data => {
                                     if (data.status == 200) {
-                                        window.location="Testimonial"
+                                        window.location="Blog"
                                     }
                                     else {
                                         Swal.fire(
@@ -151,5 +150,6 @@
             })
 
 
-        </script>
+    </script>
 }
+
