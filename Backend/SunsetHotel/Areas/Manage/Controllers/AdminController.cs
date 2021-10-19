@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Identity;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using SunsetHotel.Areas.Manage.ViewModels;
@@ -12,6 +13,7 @@ using System.Threading.Tasks;
 namespace SunsetHotel.Areas.Manage.Controllers
 {
     [Area("Manage")]
+    [Authorize(Roles = "SuperAdmin")]
     public class AdminController : Controller
     {
         private readonly AppDbContext _context;

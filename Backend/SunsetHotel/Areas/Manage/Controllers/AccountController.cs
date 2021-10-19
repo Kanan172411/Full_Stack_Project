@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Identity;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using SunsetHotel.Areas.Manage.ViewModels;
 using SunsetHotel.Models;
@@ -50,12 +51,14 @@ namespace SunsetHotel.Areas.Manage.Controllers
 
             return RedirectToAction("index", "dashboard");
         }
+        [Authorize(Roles = "SuperAdmin, Admin, Editor")]
         public async Task<IActionResult> Logout()
         {
             await _signInManager.SignOutAsync();
 
             return RedirectToAction("login", "account");
         }
+        [Authorize(Roles = "SuperAdmin, Admin, Editor")]
         public async Task<IActionResult> Edit()
         {
             AppUser user = await _userManager.FindByNameAsync(User.Identity.Name);
@@ -68,6 +71,7 @@ namespace SunsetHotel.Areas.Manage.Controllers
         }
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = "SuperAdmin, Admin, Editor")]
         public async Task<IActionResult> Edit(AdminUpdateViewModel updateVM)
         {
             if (!ModelState.IsValid) return View();

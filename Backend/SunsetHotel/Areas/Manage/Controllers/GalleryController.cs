@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Hosting;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
 using SunsetHotel.DAL;
 using SunsetHotel.Helpers;
@@ -11,6 +12,7 @@ using System.Threading.Tasks;
 namespace SunsetHotel.Areas.Manage.Controllers
 {
     [Area("Manage")]
+    [Authorize(Roles = "SuperAdmin, Admin, Editor")]
     public class GalleryController : Controller
     {
         private readonly AppDbContext _context;
