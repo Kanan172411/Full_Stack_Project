@@ -117,6 +117,10 @@ namespace SunsetHotel.Controllers
             {
                 Email = user.Email,
                 UserName = user.UserName,
+                Country = user.Country,
+                City = user.City,
+                PhoneNumber = user.PhoneNumber,
+                FullName = user.FullName
             };
             return View(updateModel);
         }
@@ -170,13 +174,13 @@ namespace SunsetHotel.Controllers
             AppUser user = await _userManager.FindByNameAsync(User.Identity.Name);
             if (!string.IsNullOrWhiteSpace(changePasswordVM.Password))
             {
-                if (changePasswordVM.Password != changePasswordVM.ConfirmPassowrd)
+                if (changePasswordVM.Password != changePasswordVM.ConfirmPassword)
                 {
                     ModelState.AddModelError("ConfirmPassowrd", "Password ve Confirm password eyni olmalidir!");
                     return View();
                 }
 
-                var result = await _userManager.ChangePasswordAsync(user, changePasswordVM.CurrentPassowrd, changePasswordVM.Password);
+                var result = await _userManager.ChangePasswordAsync(user, changePasswordVM.CurrentPassword, changePasswordVM.Password);
 
                 if (!result.Succeeded)
                 {

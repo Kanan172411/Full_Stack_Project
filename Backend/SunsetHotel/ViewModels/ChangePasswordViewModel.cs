@@ -15,10 +15,10 @@ namespace SunsetHotel.ViewModels
         [StringLength(maximumLength: 20)]
         [DataType(DataType.Password)]
         [Compare(nameof(Password))]
-        public string ConfirmPassowrd { get; set; }
+        public string ConfirmPassword { get; set; }
 
         [StringLength(maximumLength: 20)]
         [DataType(DataType.Password)]
-        public string CurrentPassowrd { get; set; }
+        public string CurrentPassword { get; set; }
     }
 }
