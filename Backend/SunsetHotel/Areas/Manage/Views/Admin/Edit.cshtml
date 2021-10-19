@@ -1,0 +1,50 @@
+﻿@model AddAdminUpdateViewModel
+@{
+    ViewData["Title"] = "Edit";
+    Layout = "~/Areas/Manage/Views/Shared/_Layout.cshtml";
+}
+<div class="main-content">
+
+    <div class="page-content">
+        <div class="container-fluid">
+
+            <!-- start page title -->
+            <div class="row">
+                <div class="col-12">
+                    <div class="page-title-box d-sm-flex align-items-center justify-content-between">
+                        <h4 class="mb-sm-0">Admin Edit</h4>
+                        <div class="page-title-right">
+                            <ol class="breadcrumb m-0">
+                                <li class="breadcrumb-item"><a href="javascript: void(0);">Tables</a></li>
+                                <li class="breadcrumb-item active">Admin Edit</li>
+                            </ol>
+                        </div>
+                    </div>
+                    <form method="post" enctype="multipart/form-data">
+                        <div class="form-group">
+                            <label asp-for="UserName">UserName</label>
+                            <input type="text" asp-for="UserName" class="form-control" />
+                            <span class="text-danger" asp-validation-for="UserName"></span>
+                        </div>
+                        <input name="UserId" value="@Model.UserId" type="hidden" />
+                        <div class="form-group">
+                            <label asp-for="Password">Password</label>
+                            <input asp-for="Password" class="form-control" />
+                            <span class="text-danger" asp-validation-for="Password"></span>
+                        </div>
+
+                        <div class="form-group col-md-12">
+                            <label for="exampleFormControlSelect1">Category</label>
+                            <select class="form-control" asp-for="Role" asp-items="@(new SelectList(ViewBag.Roles,"Name","Name"))">
+                            </select>
+                            <span class="text-danger" asp-validation-for="Role"></span>
+                        </div>
+
+                        <button style="margin-top:20px" type="submit" class="btn btn-primary">Submit</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
