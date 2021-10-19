@@ -26,8 +26,15 @@ using SunsetHotel.Models;
 #line default
 #line hidden
 #nullable disable
+#nullable restore
+#line 3 "C:\Users\Kanan Qarazada\Desktop\Full_Stack_Project\Backend\SunsetHotel\Areas\Manage\Views\_ViewImports.cshtml"
+using SunsetHotel.Areas.Manage.ViewModels;
+
+#line default
+#line hidden
+#nullable disable
     [global::Microsoft.AspNetCore.Razor.Hosting.RazorSourceChecksumAttribute(@"SHA1", @"a2f930bc2913e06e6017edf0b7794b087c8bd46e", @"/Areas/Manage/Views/Tag/Index.cshtml")]
-    [global::Microsoft.AspNetCore.Razor.Hosting.RazorSourceChecksumAttribute(@"SHA1", @"bb5e2e31ad32144356e36cb143ac6a46232777cd", @"/Areas/Manage/Views/_ViewImports.cshtml")]
+    [global::Microsoft.AspNetCore.Razor.Hosting.RazorSourceChecksumAttribute(@"SHA1", @"f093b1a0b311fac9cc4e22a09fcc54b45452af94", @"/Areas/Manage/Views/_ViewImports.cshtml")]
     public class Areas_Manage_Views_Tag_Index : global::Microsoft.AspNetCore.Mvc.Razor.RazorPage<List<Tag>>
     {
         private static readonly global::Microsoft.AspNetCore.Razor.TagHelpers.TagHelperAttribute __tagHelperAttribute_0 = new global::Microsoft.AspNetCore.Razor.TagHelpers.TagHelperAttribute("asp-action", "create", global::Microsoft.AspNetCore.Razor.TagHelpers.HtmlAttributeValueStyle.DoubleQuotes);
@@ -87,7 +94,7 @@ using SunsetHotel.Models;
                     <div class=""page-title-box d-sm-flex align-items-center justify-content-between"">
                         <h4 class=""mb-sm-0"">Tags</h4>
                         ");
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "a2f930bc2913e06e6017edf0b7794b087c8bd46e7673", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "a2f930bc2913e06e6017edf0b7794b087c8bd46e7907", async() => {
                 WriteLiteral("Add new");
             }
             );
@@ -158,7 +165,7 @@ using SunsetHotel.Models;
 #line hidden
 #nullable disable
             WriteLiteral("</td>\r\n                                                <td style=\"width: 100px\">\r\n                                                    ");
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "a2f930bc2913e06e6017edf0b7794b087c8bd46e11619", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "a2f930bc2913e06e6017edf0b7794b087c8bd46e11853", async() => {
                 WriteLiteral("\r\n                                                        <i class=\"fas fa-pencil-alt\"></i>\r\n                                                    ");
             }
             );
@@ -191,7 +198,7 @@ using SunsetHotel.Models;
             Write(__tagHelperExecutionContext.Output);
             __tagHelperExecutionContext = __tagHelperScopeManager.End();
             WriteLiteral("\r\n                                                </td>\r\n                                                <td>\r\n                                                    ");
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "a2f930bc2913e06e6017edf0b7794b087c8bd46e14308", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "a2f930bc2913e06e6017edf0b7794b087c8bd46e14542", async() => {
                 WriteLiteral("\r\n                                                        <i class=\"ri-delete-bin-line\"></i>\r\n                                                    ");
             }
             );
@@ -260,7 +267,7 @@ WriteAttributeValue(" ", 3865, ViewBag.SelectedPage==1 ? "disabled":"", 3866, 42
 #nullable disable
             EndWriteAttribute();
             WriteLiteral(">\r\n                            ");
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "a2f930bc2913e06e6017edf0b7794b087c8bd46e18534", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "a2f930bc2913e06e6017edf0b7794b087c8bd46e18768", async() => {
                 WriteLiteral("\r\n                                <i class=\"mdi mdi-chevron-left\"></i>\r\n                            ");
             }
             );
@@ -314,7 +321,7 @@ WriteAttributeValue(" ", 4355, i==ViewBag.SelectedPage?"active":"", 4356, 38, fa
 #nullable disable
             EndWriteAttribute();
             WriteLiteral(">");
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "a2f930bc2913e06e6017edf0b7794b087c8bd46e22079", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "a2f930bc2913e06e6017edf0b7794b087c8bd46e22313", async() => {
 #nullable restore
 #line 82 "C:\Users\Kanan Qarazada\Desktop\Full_Stack_Project\Backend\SunsetHotel\Areas\Manage\Views\Tag\Index.cshtml"
                                                                                                                                                                      Write(i);
@@ -373,7 +380,7 @@ WriteAttributeValue(" ", 4561, ViewBag.SelectedPage==ViewBag.TotalPage ? "disabl
 #nullable disable
             EndWriteAttribute();
             WriteLiteral(">\r\n                            ");
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "a2f930bc2913e06e6017edf0b7794b087c8bd46e25809", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "a2f930bc2913e06e6017edf0b7794b087c8bd46e26043", async() => {
                 WriteLiteral("\r\n                                <i class=\"mdi mdi-chevron-right\"></i>\r\n                            ");
             }
             );

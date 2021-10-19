@@ -1,6 +1,6 @@
-﻿@model AdminLoginViewModel
+﻿@model AdminUpdateViewModel
 @{
-    ViewData["Title"] = "Login";
+    ViewData["Title"] = "Edit";
     Layout = null;
 }
 
@@ -48,7 +48,7 @@
                                 </div>
                                 <!-- end row -->
                                 <h4 class="font-size-18 text-muted mt-2 text-center">Welcome Back !</h4>
-                                <p class="mb-5 text-center">Sign in to continue to Upzet.</p>
+                                <p class="mb-5 text-center">Edit Account Info</p>
                                 <form method="post" class="form-horizontal">
                                     <div asp-validation-summary="ModelOnly" class="text-danger"></div>
                                     <div class="row">
@@ -64,11 +64,23 @@
                                                 <input required asp-for="Password" type="password" class="form-control" id="userpassword"
                                                        placeholder="Enter password">
                                                 <span asp-validation-for="Password" class="text-danger"></span>
+                                            </div>                                            
+                                            <div class="mb-4">
+                                                <label asp-for="ConfirmPassword" class="form-label" for="userpassword">Repead Password</label>
+                                                <input required asp-for="ConfirmPassword" type="password" class="form-control" id="ConfirmPassword"
+                                                       placeholder="Enter password">
+                                                <span asp-validation-for="ConfirmPassword" class="text-danger"></span>
+                                            </div>                                            
+                                            <div class="mb-4">
+                                                <label asp-for="CurrentPassword" class="form-label" for="userpassword">Current Password</label>
+                                                <input required asp-for="CurrentPassword" type="password" class="form-control" id="CurrentPassword"
+                                                       placeholder="Enter password">
+                                                <span asp-validation-for="CurrentPassword" class="text-danger"></span>
                                             </div>
                                             <div class="d-grid mt-4">
                                                 <button class="btn btn-primary waves-effect waves-light"
                                                         type="submit">
-                                                    Log In
+                                                    Save
                                                 </button>
                                             </div>
                                         </div>

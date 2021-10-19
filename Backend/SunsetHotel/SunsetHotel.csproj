@@ -24,10 +24,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Areas\Manage\ViewModels\" />
-  </ItemGroup>
-
-  <ItemGroup>
     <None Include="wwwroot\assets1\fonts\dripicons-v2.svg" />
     <None Include="wwwroot\assets1\fonts\fa-brands-400.svg" />
     <None Include="wwwroot\assets1\fonts\fa-regular-400.svg" />
