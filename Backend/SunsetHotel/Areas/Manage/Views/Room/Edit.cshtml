@@ -40,6 +40,17 @@
                             <span class="text-danger" asp-validation-for="Price"></span>
                         </div>
 
+                        <div class="form-group">
+                            <label asp-for="MaxAdult">Max Adult Count</label>
+                            <input asp-for="MaxAdult" class="form-control" type="number">
+                            <span class="text-danger" asp-validation-for="MaxAdult"></span>
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="MaxChild">Max Child Count </label>
+                            <input asp-for="MaxChild" class="form-control" type="number">
+                            <span class="text-danger" asp-validation-for="MaxChild"></span>
+                        </div>
+
                         <div class="form-group col-md-12">
                             <label for="exampleFormControlSelect1">Category</label>
                             <select class="form-control" asp-for="RoomCategoryId" asp-items="@(new SelectList(ViewBag.Categories,"Id","Name"))">

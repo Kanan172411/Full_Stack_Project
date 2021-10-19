@@ -120,7 +120,8 @@ namespace SunsetHotel.Controllers
                 Country = user.Country,
                 City = user.City,
                 PhoneNumber = user.PhoneNumber,
-                FullName = user.FullName
+                FullName = user.FullName,
+                Address = user.Address
             };
             return View(updateModel);
         }
@@ -151,6 +152,7 @@ namespace SunsetHotel.Controllers
             user.City = updateVM.City;
             user.Country = updateVM.Country;
             user.PhoneNumber = updateVM.PhoneNumber;
+            user.Address = updateVM.Address;
 
             await _userManager.UpdateAsync(user);
             await _signInManager.SignInAsync(user, true);

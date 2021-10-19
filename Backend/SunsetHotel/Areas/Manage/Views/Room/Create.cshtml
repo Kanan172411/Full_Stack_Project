@@ -39,6 +39,16 @@
                             <input asp-for="Price" class="form-control" type="number">
                             <span class="text-danger" asp-validation-for="Price"></span>
                         </div>
+                        <div class="form-group">
+                            <label asp-for="MaxAdult">Max Adult Count</label>
+                            <input asp-for="MaxAdult" class="form-control" type="number">
+                            <span class="text-danger" asp-validation-for="MaxAdult"></span>
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="MaxChild">Max Child Count </label>
+                            <input asp-for="MaxChild" class="form-control" type="number">
+                            <span class="text-danger" asp-validation-for="MaxChild"></span>
+                        </div>
 
                         <div class="form-group col-md-12">
                             <label for="exampleFormControlSelect1">Category</label>
@@ -55,7 +65,7 @@
                         </div>
 
                         <div class="form-group">
-                            <input asp-for="Images" value="" style="margin: 20px 0px;"/>
+                            <input asp-for="Images" value="" style="margin: 20px 0px;" />
                             <span class="text-danger" asp-validation-for="Images"></span>
                         </div>
 

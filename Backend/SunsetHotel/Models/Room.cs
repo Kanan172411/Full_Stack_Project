@@ -30,5 +30,12 @@ namespace SunsetHotel.Models
         public List<int> FeatureId { get; set; }
         [NotMapped]
         public List<int> ImageIds { get; set; }
+        [Range(1,5)]
+        [Required]
+        public int MaxChild { get; set; }
+        [Range(1, 5)]
+        [Required]
+        public int MaxAdult { get; set; }
+        public List<Reservation> reservations { get; set; }
     }
 }

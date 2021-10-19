@@ -150,6 +150,8 @@ namespace SunsetHotel.Areas.Manage.Controllers
             existRoom.Price = room.Price;
             existRoom.Desc = room.Desc;
             existRoom.RoomCategoryId = room.RoomCategoryId;
+            existRoom.MaxAdult = room.MaxAdult;
+            existRoom.MaxChild = room.MaxChild;
 
             if (room.FeatureId != null)
             {

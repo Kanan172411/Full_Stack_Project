@@ -1,4 +1,4 @@
-﻿@model Room
+﻿@model ReservationViewModel
 @{
     ViewData["Title"] = "Reservation";
 }
@@ -35,22 +35,22 @@
                     <p class="subheading">Booking details</p>
                     <h2 class="section__heading">Selected room</h2>
                     <figure class="room__details">
-                        <img src="~/assets/img/@Model.RoomImages[0].ImageName" class="img-responsive" alt="...">
+                        <img src="~/assets/img/@Model.room.RoomImages[0].ImageName" class="img-responsive" alt="...">
                         <figcaption>
-                            <h3>@Model.Name</h3>
+                            <h3>@Model.room.Name</h3>
                             <div class="room__price">
-                                $@Model.Price <small>/ night</small>
+                                $@Model.room.Price <small>/ night</small>
                             </div>
-                            @if (Model.Desc.Length > 108)
+                            @if (Model.room.Desc.Length > 108)
                             {
                                 <p class="room__desc">
-                                    @Model.Desc.Substring(0, 108) ...
+                                    @Model.room.Desc.Substring(0, 108) ...
                                 </p>
                             }
                             else
                             {
                                 <p class="room__desc">
-                                    @Model.Desc
+                                    @Model.room.Desc
                                 </p>
                             }
                         </figcaption>
@@ -99,101 +99,98 @@
 
                     <!-- Please carefully read the README.pdf file in order to setup the PHP reservation form properly -->
 
-                    <form id="reservation-form_sendemail" class="reservation__form" data-animate-in="animateUp">
+                    <form method="post" id="reservation-form_sendemail" class="reservation__form" data-animate-in="animateUp">
+                        <div class="text-danger" asp-validation-summary="ModelOnly"></div>
+                        <input value="@Model.room.Id" type="hidden" name="RoomId" asp-for="reservation.RoomId" />
+                        <input value="@ViewBag.UserId" type="hidden" name="AppUserId" asp-for="reservation.AppUserId" />
+                        <input value="0" type="hidden" name="Id" asp-for="reservation.Id" />
                         <div class="col-sm-12 col-md-6">
                             <div class="form-group">
-                                <label for="check-in" class="sr-only">Arrival date</label>
-                                <input type="date" name="check-in" class="form-control" id="check-in"
-                                       value="2017-04-09">
-                                <span class="help-block"></span>
+                                <label asp-for="reservation.CheckIn" class="sr-only">Arrival date</label>
+                                <input asp-for="reservation.CheckIn" required type="date" name="CheckIn" class="form-control" id="CheckIn"
+                                       placeholder="mm/dd/yyyy">
+                                <span asp-validation-for="reservation.CheckIn" class="text-danger"></span>
                             </div>
                         </div>
                         <div class="col-sm-12 col-md-6">
                             <div class="form-group">
-                                <label for="check-out" class="sr-only">Departure date</label>
-                                <input type="date" name="check-out" class="form-control" id="check-out"
-                                       value="2017-04-18">
-                                <span class="help-block"></span>
+                                <label asp-for="reservation.CheckOut" class="sr-only">Departure date</label>
+                                <input asp-for="reservation.CheckOut" required type="date" name="CheckOut" class="form-control" id="CheckOut"
+                                       placeholder="mm/dd/yyyy">
+                                <span asp-validation-for="reservation.CheckOut" class="text-danger"></span>
                             </div>
                         </div>
                         <div class="col-sm-12 col-md-6">
                             <div class="form-group">
-                                <label for="form-adults" class="sr-only">Adults</label>
-                                <select class="form-control" name="form-adults" id="form-adults">
-                                    <option value="1" selected="">Adults</option>
-                                    <option value="2">1 Adult</option>
-                                    <option value="3">2 Adults</option>
-                                    <option value="4">3 Adults</option>
+                                <label asp-for="reservation.AdultCount" class="sr-only">Adults</label>
+                                <select asp-for="reservation.AdultCount" class="form-control" asp-items="@(new SelectList(ViewBag.MaxAdult,"Id","Value"))" name="AdultCount" id="AdultCount">
                                 </select>
-                                <span class="help-block"></span>
+                                <span asp-validation-for="reservation.AdultCount" class="text-danger"></span>
                             </div>
                         </div>
                         <div class="col-sm-12 col-md-6">
                             <div class="form-group">
-                                <label for="form-children" class="sr-only">Children</label>
-                                <select class="form-control" name="form-children" id="form-children">
-                                    <option value="1" selected="">Children</option>
-                                    <option value="2">1 Child</option>
-                                    <option value="3">2 Children</option>
-                                    <option value="4">3 Children</option>
+                                <label asp-for="reservation.ChildCount" class="sr-only">Children</label>
+                                <select asp-for="reservation.ChildCount" class="form-control" asp-items="@(new SelectList(ViewBag.MaxChild,"Id","Value"))" name="ChildCount" id="ChildCount">
                                 </select>
-                                <span class="help-block"></span>
+                                <span asp-validation-for="reservation.ChildCount" class="text-danger"></span>
                             </div>
                         </div>
                         <div class="col-sm-12 col-md-6">
                             <div class="form-group">
-                                <label for="first-name" class="sr-only">Full name</label>
-                                <input type="text" name="first-name" class="form-control" id="first-name"
-                                       placeholder="First Name">
-                                <span class="help-block"></span>
+                                <label asp-for="reservation.FullName" class="sr-only">Full name</label>
+                                <input asp-for="reservation.FullName" required value="@Model.appUser.FullName" type="text" name="FullName" class="form-control" id="FullName"
+                                       placeholder="Full Name">
+                                <span asp-validation-for="reservation.FullName" class="text-danger"></span>
                             </div>
                         </div>
                         <div class="col-sm-12 col-md-6">
                             <div class="form-group">
-                                <label for="email" class="sr-only">Email</label>
-                                <input type="email" name="email" class="form-control" id="email"
+                                <label asp-for="reservation.Email" class="sr-only">Email</label>
+                                <input asp-for="reservation.Email" required value="@Model.appUser.Email" type="email" name="Email" class="form-control" id="email"
                                        placeholder="Email">
-                                <span class="help-block"></span>
+                                <span asp-validation-for="reservation.Email" class="text-danger"></span>
                             </div>
                         </div>
                         <div class="col-sm-12 col-md-6">
                             <div class="form-group">
-                                <label for="phone" class="sr-only">Phone</label>
-                                <input type="tel" name="phone" class="form-control" id="phone" placeholder="Phone">
-                                <span class="help-block"></span>
+                                <label asp-for="reservation.PhoneNumber" class="sr-only">Phone</label>
+                                <input asp-for="reservation.PhoneNumber" required maxlength="13" value="@Model.appUser.PhoneNumber" type="tel" name="PhoneNumber" 
+                                       class="form-control" id="PhoneNumber" placeholder="Phone">
+                                <span asp-validation-for="reservation.PhoneNumber" class="text-danger"></span>
                             </div>
                         </div>
                         <div class="col-sm-12 col-md-6">
                             <div class="form-group">
-                                <label for="address-line1" class="sr-only">Address line </label>
-                                <input type="text" name="address-line1" class="form-control" id="address-line1"
-                                       placeholder="Address line">
-                                <span class="help-block"></span>
+                                <label asp-for="reservation.Address" class="sr-only">Address</label>
+                                <input asp-for="reservation.Address" value="@Model.appUser.Address" required type="text" name="Address" class="form-control" id="address-line1"
+                                       placeholder="Address">
+                                <span asp-validation-for="reservation.Address" class="text-danger"></span>
                             </div>
                         </div>
 
                         <div class="col-sm-12 col-md-6">
                             <div class="form-group">
-                                <label for="city" class="sr-only">City</label>
-                                <input type="text" name="city" class="form-control" id="city" placeholder="City">
-                                <span class="help-block"></span>
+                                <label asp-for="reservation.City" class="sr-only">City</label>
+                                <input asp-for="reservation.City" required value="@Model.appUser.City" type="text" name="city" class="form-control" id="city" placeholder="City">
+                                <span asp-validation-for="reservation.City" class="text-danger"></span>
                             </div>
                         </div>
                         <div class="col-sm-12 col-md-6">
                             <div class="form-group">
-                                <label for="country" class="sr-only">Country</label>
-                                <input type="text" name="country" class="form-control" id="country"
+                                <label asp-for="reservation.Country" class="sr-only">Country</label>
+                                <input required asp-for="reservation.Country" value=@Model.appUser.Country type="text" name="country" class="form-control" id="country"
                                        placeholder="Country">
-                                <span class="help-block"></span>
+                                <span asp-validation-for="reservation.Country" class="text-danger"></span>
                             </div>
                         </div>
 
                         <div class="col-sm-12">
                             <div class="form-group">
-                                <label for="requirements" class="sr-only">Special requirements</label>
-                                <textarea name="requirements" class="form-control" rows="8" id="requirements"
+                                <label asp-for="reservation.SpecialReq" class="sr-only">Special requirements</label>
+                                <textarea asp-for="reservation.SpecialReq" name="SpecialReq" class="form-control" rows="8" id="requirements"
                                           placeholder="Special requirements"></textarea>
-                                <span class="help-block"></span>
+                                <span asp-validation-for="reservation.SpecialReq" class="text-danger"></span>
                             </div>
                         </div>
                         <div class="col-sm-12">
