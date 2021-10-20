@@ -104,14 +104,29 @@
                         <input value="@Model.room.Id" type="hidden" name="RoomId" asp-for="reservation.RoomId" />
                         <input value="@ViewBag.UserId" type="hidden" name="AppUserId" asp-for="reservation.AppUserId" />
                         <input value="0" type="hidden" name="Id" asp-for="reservation.Id" />
-                        <div class="col-sm-12 col-md-6">
-                            <div class="form-group">
-                                <label asp-for="reservation.CheckIn" class="sr-only">Arrival date</label>
-                                <input asp-for="reservation.CheckIn" required type="date" name="CheckIn" class="form-control" id="CheckIn"
-                                       placeholder="mm/dd/yyyy">
-                                <span asp-validation-for="reservation.CheckIn" class="text-danger"></span>
+                        @if (ViewBag.IsPossible != null)
+                        {
+                            <div class="col-sm-12 col-md-6">
+                                <div class="form-group" style="margin-bottom:0">
+                                    <label asp-for="reservation.CheckIn" class="sr-only">Arrival date</label>
+                                    <input asp-for="reservation.CheckIn" required type="date" name="CheckIn" class="form-control" id="CheckIn"
+                                           placeholder="mm/dd/yyyy">
+                                    <span asp-validation-for="reservation.CheckIn" class="text-danger"></span>
+                                </div>
                             </div>
-                        </div>
+                        }
+                        else
+                        {
+                            <div class="col-sm-12 col-md-6">
+                                <div class="form-group">
+                                    <label asp-for="reservation.CheckIn" class="sr-only">Arrival date</label>
+                                    <input asp-for="reservation.CheckIn" required type="date" name="CheckIn" class="form-control" id="CheckIn"
+                                           placeholder="mm/dd/yyyy">
+                                    <span asp-validation-for="reservation.CheckIn" class="text-danger"></span>
+                                </div>
+                            </div>
+                        }
+
                         <div class="col-sm-12 col-md-6">
                             <div class="form-group">
                                 <label asp-for="reservation.CheckOut" class="sr-only">Departure date</label>
@@ -155,7 +170,7 @@
                         <div class="col-sm-12 col-md-6">
                             <div class="form-group">
                                 <label asp-for="reservation.PhoneNumber" class="sr-only">Phone</label>
-                                <input asp-for="reservation.PhoneNumber" required maxlength="13" value="@Model.appUser.PhoneNumber" type="tel" name="PhoneNumber" 
+                                <input asp-for="reservation.PhoneNumber" required maxlength="13" value="@Model.appUser.PhoneNumber" type="tel" name="PhoneNumber"
                                        class="form-control" id="PhoneNumber" placeholder="Phone">
                                 <span asp-validation-for="reservation.PhoneNumber" class="text-danger"></span>
                             </div>

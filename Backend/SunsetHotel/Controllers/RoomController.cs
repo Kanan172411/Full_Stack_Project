@@ -156,6 +156,7 @@ namespace SunsetHotel.Controllers
             if (reservation.CheckIn<DateTime.UtcNow)
             {
                 ModelState.AddModelError("reservation.CheckIn", "Keçmişə rezervasiya etmək mümkün deyil");
+                ViewBag.IsPossible = false;
                 return View(reservationViewModel);
             }
             if (reservation.CheckOut <= reservation.CheckIn)
@@ -167,8 +168,27 @@ namespace SunsetHotel.Controllers
             {
                 ModelState.AddModelError("reservation.FullName", "This field is required");
                 return View(reservationViewModel);
-            }            
-            
+            }
+            if (reservation.AdultCount <= 0)
+            {
+                ModelState.AddModelError("reservation.AdultCount", "Adult Count must be Greater than 0");
+                return View(reservationViewModel);
+            }
+            if (reservation.AdultCount > existroom.MaxAdult)
+            {
+                ModelState.AddModelError("reservation.AdultCount", $"Adult Count must be less than {existroom.MaxAdult}");
+                return View(reservationViewModel);
+            }
+            if (reservation.ChildCount < 0)
+            {
+                ModelState.AddModelError("reservation.ChildCount", "Child Count must be Greater than 0");
+                return View(reservationViewModel);
+            }
+            if (reservation.ChildCount > existroom.MaxChild)
+            {
+                ModelState.AddModelError("reservation.ChildCount", $"Child Count must be less than {existroom.MaxChild}");
+                return View(reservationViewModel);
+            }
             if (reservation.Address==null)
             {
                 ModelState.AddModelError("reservation.Address", "This field is required");

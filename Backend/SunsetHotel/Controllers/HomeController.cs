@@ -61,7 +61,46 @@ namespace SunsetHotel.Controllers
 
             return View(aboutVM);
         }
-        
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public IActionResult Subscribe(Subscriber subscriber)
+        {
+            if (!ModelState.IsValid)
+                return RedirectToAction("index");
+            if (subscriber.Email.Trim().EndsWith("."))
+            {
+                TempData["Alert"] = "Emaili düzgün formatda daxil edin";
+                TempData["Type"] = "danger";
+                return RedirectToAction("index");
+            }
+            try
+            {
+                var addr = new System.Net.Mail.MailAddress(subscriber.Email);
+            }
+            catch
+            {
+                TempData["Alert"] = "Emaili düzgün formatda daxil edin";
+                TempData["Type"] = "danger";
+                return RedirectToAction("index");
+            }
+            if (_context.Subscribers.Any(x => x.Email == subscriber.Email))
+            {
+                TempData["Alert"] = "Bu email artiq abune olub";
+                TempData["Type"] = "danger";
+                return RedirectToAction("index");
+            }
+            Subscriber subscriber1 = new Subscriber
+            {
+                Email = subscriber.Email
+            };
+            TempData["Alert"] = "Successfully subscribed";
+            TempData["Type"] = "success";
+            _context.Add(subscriber1);
+            _context.SaveChanges();
+            return RedirectToAction("index");
+        }
+
         public IActionResult Error()
         {
             return View();

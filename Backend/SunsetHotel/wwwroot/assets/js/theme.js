@@ -158,51 +158,51 @@ var alert = (function () {
  * Newsletter
  */
 
-var newsletter = (function () {
+//var newsletter = (function () {
 
-    // Variables
-    var $form = $("#mc-embedded-subscribe-form");
+//    // Variables
+//    var $form = $("#mc-embedded-subscribe-form");
 
-    // Proceed form
-    function register() {
-        $.ajax({
-            type: $form.attr("method"),
-            url: $form.attr("action"),
-            data: $form.serialize(),
-            cache: false,
-            dataType: "json",
-            contentType: "application/json; charset=utf-8",
-            error: function (err) {
-                console.log(err);
-                $(document).trigger("sunset.alert.show", [
-                    "success",
-                    "Successfully subscribed."
-                ]);
-            },
-            success: function (data) {
-                // Remove message id
-                var successMessage = data.msg.substr(0);
+//    // Proceed form
+//    function register() {
+//        $.ajax({
+//            type: $form.attr("method"),
+//            url: $form.attr("action"),
+//            data: $form.serialize(),
+//            cache: false,
+//            dataType: "json",
+//            contentType: "application/json; charset=utf-8",
+//            error: function (err) {
+//                console.log(err);
+//                $(document).trigger("sunset.alert.show", [
+//                    "success",
+//                    "Successfully subscribed."
+//                ]);
+//            },
+//            success: function (data) {
+//                // Remove message id
+//                var successMessage = data.msg.substr(0);
 
-                if (data.result != "success") {
-                    $(document).trigger("sunset.alert.show", ["danger", successMessage]);
-                } else {
-                    // Show a confirmation
-                    $(document).trigger("sunset.alert.show", ["success", data.msg]);
+//                if (data.result != "success") {
+//                    $(document).trigger("sunset.alert.show", ["danger", successMessage]);
+//                } else {
+//                    // Show a confirmation
+//                    $(document).trigger("sunset.alert.show", ["success", data.msg]);
 
-                    // Reset a form
-                    $form[0].reset();
-                }
-            }
-        });
-    }
+//                    // Reset a form
+//                    $form[0].reset();
+//                }
+//            }
+//        });
+//    }
 
-    // Events
-    $form.on("submit", function (e) {
-        register();
+//    // Events
+//    $form.on("submit", function (e) {
+//        register();
 
-        e.preventDefault();
-    });
-})();
+//        e.preventDefault();
+//    });
+//})();
 
 
 

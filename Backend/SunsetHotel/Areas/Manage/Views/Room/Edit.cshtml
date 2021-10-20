@@ -117,8 +117,6 @@
                     confirmButtonText: 'Yes, delete it!'
                 }).then((result) => {
                     if (result.isConfirmed) {
-                        console.log(ID, NAME)
-
                         $.ajax({
                             type: "GET",
                             url: '/Manage/Room/DeleteImage', 

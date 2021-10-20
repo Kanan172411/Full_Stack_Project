@@ -32,5 +32,6 @@ namespace SunsetHotel.DAL
         public DbSet<Setting> Settings { get; set; }
         public DbSet<AppUser> AppUsers { get; set; }
         public DbSet<Reservation> Reservations { get; set; }
+        public DbSet<Subscriber> Subscribers { get; set; }
     }
 }

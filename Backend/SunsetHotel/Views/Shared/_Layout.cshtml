@@ -240,22 +240,15 @@
 
                             <!-- Newsletter form -->
                             <div id="mc_embed_signup">
-                                <form class="newsletter__form validate" id="mc-embedded-subscribe-form"
-                                      name="mc-embedded-subscribe-form" target="_blank" novalidate="">
+                                <form method="post" class="newsletter__form validate" asp-action="Subscribe" asp-controller="Home">
                                     <div id="mc_embed_signup_scroll">
                                         <div class="mc-field-group form-group">
                                             <label for="mce-EMAIL" class="sr-only">E-mail address</label>
-                                            <input type="email" value="" name="EMAIL"
-                                                   class="required email form-control newsletter_input" id="mce-EMAIL"
-                                                   placeholder="Email address">
+                                            <input type="email" value="" name="EMAIL" class="required email form-control newsletter_input"
+                                                   id="mce-EMAIL" placeholder="Email address">
                                         </div>
-                                        <div id="mce-responses" class="clear">
-                                            <div class="response"></div>
-                                            <div class="response" id="mce-success-response"></div>
-                                        </div>
-
-                                        <div class="clear">
-                                            <button type="submit" class="btn btn-default btn-newsletter"
+                                        <div>
+                                            <button type="submit" onclick="postEmail" class="btn btn-default btn-newsletter"
                                                     id="mc-embedded-subscribe">
                                                 <i class="icon ion-paper-airplane"></i>
                                             </button>
@@ -302,15 +295,28 @@
     <script src="~/assets/js/theme.js"></script>
     <!-- endbuild -->
     <script src="~/assets/js/google_maps.js"></script>
-    @*<script>
-            if ($("#toast-message").length) {
-                console.log("zor")
-                $(document).trigger("sunset.alert.show", [
-                    @TempData["Type"],
-                    @TempData["Alert"]
-                ]);
-            }
-        </script>*@
+    <script>
+        //console.log("peyser isle")
+        //function postEmail() {
+        //    console.log("sikdir girda iceri")
+        //    let EMAIL = $(".forPosting").val();
+        //    console.log(EMAIL);
+        //    $.ajax({
+        //        type: "POST",
+        //        url: '/Home/Subscribe',
+        //        data: {
+        //            EMAIL: EMAIL,
+        //        },
+        //        success: function (data) {
+
+        //        },
+        //        error: function () {
+
+        //        }
+        //    });
+        //}
+
+    </script>
     @RenderSection("Scripts", required: false)
 </body>
 
