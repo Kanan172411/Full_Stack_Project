@@ -124,6 +124,30 @@ namespace SunsetHotel.Controllers
                 appUser = appUser1
             };
 
+            List<Select> MaxChild = new List<Select>();
+            for (int i = 1; i < existroom.MaxChild + 1; i++)
+            {
+                Select selectList = new Select
+                {
+                    Id = i,
+                    Value = $"{i} Child"
+                };
+                MaxChild.Add(selectList);
+            }
+            ViewBag.MaxChild = MaxChild;
+
+            List<Select> MaxAdult = new List<Select>();
+            for (int i = 1; i < existroom.MaxAdult + 1; i++)
+            {
+                Select selectList = new Select
+                {
+                    Id = i,
+                    Value = $"{i} Adult"
+                };
+                MaxAdult.Add(selectList);
+            }
+            ViewBag.MaxAdult = MaxAdult;
+
             #region Checking
             if (existroom == null)
             {
@@ -137,11 +161,6 @@ namespace SunsetHotel.Controllers
             if (reservation.CheckOut <= reservation.CheckIn)
             {
                 ModelState.AddModelError("reservation.CheckOut", "Check-out tarixi Check-in tarixindən böyük olmalıdır");
-                return View(reservationViewModel);
-            }
-            if (existroom.reservations.Any(x => x.CheckIn < reservation.CheckIn && x.CheckOut >= reservation.CheckIn)) 
-            {
-                ModelState.AddModelError("","Seçdiyiniz tarixlər üçün otaq artıq rezerv olunub");
                 return View(reservationViewModel);
             }
             if (reservation.FullName==null)
@@ -175,33 +194,29 @@ namespace SunsetHotel.Controllers
                 ModelState.AddModelError("reservation.Email", "This field is required");
                 return View(reservationViewModel);
             }
+            if (existroom.reservations.Any(x => x.CheckIn <= reservation.CheckIn && x.CheckOut >= reservation.CheckIn)) 
+            {
+                TempData["Alert"] = "Seçdiyiniz tarixlər üçün artıq rezervasiya olunub";
+                TempData["Type"] = "danger";
+                return View(reservationViewModel);
+            }
+            if (existroom.reservations.Any(x => x.CheckIn <= reservation.CheckOut && x.CheckOut >= reservation.CheckOut))
+            {
+                TempData["Alert"] = "Seçdiyiniz tarixlər üçün artıq rezervasiya olunub";
+                TempData["Type"] = "danger";
+                return View(reservationViewModel);
+            }
+            if (existroom.reservations.Any(x => x.CheckIn >= reservation.CheckIn && x.CheckOut <= reservation.CheckOut))
+            {
+                TempData["Alert"] = "Seçdiyiniz tarixlər üçün artıq rezervasiya olunub";
+                TempData["Type"] = "danger";
+                return View(reservationViewModel);
+            }
             #endregion
-            List<Select> MaxChild = new List<Select>();
-            for (int i = 1; i < existroom.MaxChild + 1; i++)
-            {
-                Select selectList = new Select
-                {
-                    Id = i,
-                    Value = $"{i} Child"
-                };
-                MaxChild.Add(selectList);
-            }
-            ViewBag.MaxChild = MaxChild;
-
-            List<Select> MaxAdult = new List<Select>();
-            for (int i = 1; i < existroom.MaxAdult + 1; i++)
-            {
-                Select selectList = new Select
-                {
-                    Id = i,
-                    Value = $"{i} Adult"
-                };
-                MaxAdult.Add(selectList);
-            }
-            ViewBag.MaxAdult = MaxAdult;
-            ViewBag.MaxAdult = MaxAdult;
             _context.Reservations.Add(reservation);
             _context.SaveChanges();
+            TempData["Alert"] = "Rezervasiya istəyi göndərildi";
+            TempData["Type"] = "success";
             return RedirectToAction("details", "room", new { id = reservation.RoomId });
         }
 

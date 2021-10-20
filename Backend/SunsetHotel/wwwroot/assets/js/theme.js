@@ -122,7 +122,7 @@ var alert = (function () {
     // Config
     // ======
 
-    var alertLifetime = 6000;
+    var alertLifetime = 8000;
 
     // Methods
     // =======
@@ -415,3 +415,11 @@ $(function () {
     };
 
 });
+if ($("#toast-message").length) {
+    let message = document.getElementById("toast-message").value;
+    let type = document.getElementById("toast-type").value;
+    $(document).trigger("sunset.alert.show", [
+        type,
+        message
+    ]);
+}

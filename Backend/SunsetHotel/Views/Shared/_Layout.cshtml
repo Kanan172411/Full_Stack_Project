@@ -40,6 +40,11 @@
     <div id="loader-wrapper">
         <div id="loader"></div>
     </div>
+    @if (TempData["Alert"] != null)
+    {
+        <input type="hidden" value="@TempData["Alert"]" id="toast-message" />
+        <input type="hidden" value="@TempData["Type"]" id="toast-type" />
+    }
 
     <!-- Info Section
     ================================================== -->
@@ -297,6 +302,15 @@
     <script src="~/assets/js/theme.js"></script>
     <!-- endbuild -->
     <script src="~/assets/js/google_maps.js"></script>
+    @*<script>
+            if ($("#toast-message").length) {
+                console.log("zor")
+                $(document).trigger("sunset.alert.show", [
+                    @TempData["Type"],
+                    @TempData["Alert"]
+                ]);
+            }
+        </script>*@
     @RenderSection("Scripts", required: false)
 </body>
 

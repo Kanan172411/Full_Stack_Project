@@ -128,6 +128,11 @@
                             },
                             success: function (data) {
                                 $(Variable).parent().parent().empty()
+                                Swal.fire(
+                                    'Successfull!',
+                                    "Image Successfull deleted",
+                                    'success'
+                                )
                             },
                             error: function () {
                                 Swal.fire(

@@ -123,7 +123,7 @@
                         <div class="col-sm-12 col-md-6">
                             <div class="form-group">
                                 <label asp-for="reservation.AdultCount" class="sr-only">Adults</label>
-                                <select asp-for="reservation.AdultCount" class="form-control" asp-items="@(new SelectList(ViewBag.MaxAdult,"Id","Value"))" name="AdultCount" id="AdultCount">
+                                <select required asp-for="reservation.AdultCount" class="form-control" asp-items="@(new SelectList(ViewBag.MaxAdult,"Id","Value"))" name="AdultCount" id="AdultCount">
                                 </select>
                                 <span asp-validation-for="reservation.AdultCount" class="text-danger"></span>
                             </div>
@@ -131,7 +131,7 @@
                         <div class="col-sm-12 col-md-6">
                             <div class="form-group">
                                 <label asp-for="reservation.ChildCount" class="sr-only">Children</label>
-                                <select asp-for="reservation.ChildCount" class="form-control" asp-items="@(new SelectList(ViewBag.MaxChild,"Id","Value"))" name="ChildCount" id="ChildCount">
+                                <select required asp-for="reservation.ChildCount" class="form-control" asp-items="@(new SelectList(ViewBag.MaxChild,"Id","Value"))" name="ChildCount" id="ChildCount">
                                 </select>
                                 <span asp-validation-for="reservation.ChildCount" class="text-danger"></span>
                             </div>
