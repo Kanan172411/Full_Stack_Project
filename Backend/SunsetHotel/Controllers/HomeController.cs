@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using SunsetHotel.DAL;
 using SunsetHotel.Models;
@@ -14,10 +15,11 @@ namespace SunsetHotel.Controllers
     public class HomeController : Controller
     {
         private readonly AppDbContext _context;
-
-        public HomeController(AppDbContext context)
+        private readonly UserManager<AppUser> _userManager;
+        public HomeController(AppDbContext context, UserManager<AppUser> userManager)
         {
             _context = context;
+            _userManager = userManager;
         }
 
         public IActionResult Index()
@@ -99,6 +101,132 @@ namespace SunsetHotel.Controllers
             _context.Add(subscriber1);
             _context.SaveChanges();
             return RedirectToAction("index");
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> SendMessage(ContactMessages contactMessages, int id)
+        {
+            if (id==1)
+            {
+                if (!ModelState.IsValid)
+                {
+                    return RedirectToAction("contact","home");
+                }
+                ContactMessages contactMessages1 = new ContactMessages();
+                if (!User.Identity.IsAuthenticated || User.IsInRole("Member") == false)
+                {
+                    if (contactMessages.Name == null || string.IsNullOrWhiteSpace(contactMessages.Name))
+                    {
+                        TempData["Alert"] = "Name required";
+                        TempData["Type"] = "danger";
+                        return RedirectToAction("contact", "home");
+                    }
+                    if (contactMessages.Email == null || string.IsNullOrWhiteSpace(contactMessages.Email))
+                    {
+                        TempData["Alert"] = "Email required";
+                        TempData["Type"] = "danger";
+                        return RedirectToAction("contact", "home");
+                    }
+                    if (contactMessages.Message ==null || string.IsNullOrWhiteSpace(contactMessages.Message) || contactMessages.Message.Length<15)
+                    {
+                        TempData["Alert"] = "Message must be less 15 character";
+                        TempData["Type"] = "danger";
+                        return RedirectToAction("contact", "home");
+                    }
+                    if (contactMessages.Email.Trim().EndsWith("."))
+                    {
+                        TempData["Alert"] = "Emaili düzgün formatda daxil edin";
+                        TempData["Type"] = "danger";
+                        return RedirectToAction("contact", "home");
+                    }
+                    try
+                    {
+                        var addr = new System.Net.Mail.MailAddress(contactMessages.Email);
+                    }
+                    catch
+                    {
+                        TempData["Alert"] = "Emaili düzgün formatda daxil edin";
+                        TempData["Type"] = "danger";
+                        return RedirectToAction("contact");
+                    }
+                    contactMessages1.Name = contactMessages.Name;
+                    contactMessages1.Email = contactMessages.Email;
+                }
+                else
+                {
+                    AppUser user = await _userManager.FindByNameAsync(User.Identity.Name);
+                    contactMessages1.Email = user.Email;
+                    contactMessages1.Name = user.FullName;
+                }
+                contactMessages1.Message = contactMessages.Message;
+                contactMessages1.SendedAt = DateTime.UtcNow;
+                _context.ContactMessages.Add(contactMessages1);
+                _context.SaveChanges();
+                TempData["Alert"] = "Successfully sended";
+                TempData["Type"] = "success";
+                return RedirectToAction("contact", "home");
+            }
+            else
+            {
+                if (!ModelState.IsValid)
+                {
+                    return RedirectToAction("index", "home");
+                }
+                ContactMessages contactMessages1 = new ContactMessages();
+                if (!User.Identity.IsAuthenticated || User.IsInRole("Member") == false)
+                {
+                    if (contactMessages.Name == null || string.IsNullOrWhiteSpace(contactMessages.Name))
+                    {
+                        TempData["Alert"] = "Name required";
+                        TempData["Type"] = "danger";
+                        return RedirectToAction("index", "home");
+                    }
+                    if (contactMessages.Email == null || string.IsNullOrWhiteSpace(contactMessages.Email))
+                    {
+                        TempData["Alert"] = "Email required";
+                        TempData["Type"] = "danger";
+                        return RedirectToAction("index", "home");
+                    }
+                    if (contactMessages.Message == null || string.IsNullOrWhiteSpace(contactMessages.Message) || contactMessages.Message.Length < 15)
+                    {
+                        TempData["Alert"] = "Message must be less 15 character";
+                        TempData["Type"] = "danger";
+                        return RedirectToAction("index", "home");
+                    }
+                    if (contactMessages.Email.Trim().EndsWith("."))
+                    {
+                        TempData["Alert"] = "Emaili düzgün formatda daxil edin";
+                        TempData["Type"] = "danger";
+                        return RedirectToAction("index", "home");
+                    }
+                    try
+                    {
+                        var addr = new System.Net.Mail.MailAddress(contactMessages.Email);
+                    }
+                    catch
+                    {
+                        TempData["Alert"] = "Emaili düzgün formatda daxil edin";
+                        TempData["Type"] = "danger";
+                        return RedirectToAction("index","home");
+                    }
+                    contactMessages1.Name = contactMessages.Name;
+                    contactMessages1.Email = contactMessages.Email;
+                }
+                else
+                {
+                    AppUser user = await _userManager.FindByNameAsync(User.Identity.Name);
+                    contactMessages1.Email = user.Email;
+                    contactMessages1.Name = user.FullName;
+                }
+                contactMessages1.Message = contactMessages.Message;
+                contactMessages1.SendedAt = DateTime.UtcNow;
+                _context.ContactMessages.Add(contactMessages1);
+                _context.SaveChanges();
+                TempData["Alert"] = "Successfully sended";
+                TempData["Type"] = "success";
+                return RedirectToAction("index", "home");
+            }
         }
 
         public IActionResult Error()
