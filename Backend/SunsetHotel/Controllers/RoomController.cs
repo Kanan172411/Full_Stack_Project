@@ -75,6 +75,13 @@ namespace SunsetHotel.Controllers
             };
             return View(roomDetailsVm);
         }
+
+        public IActionResult Search(string search)
+        {
+            List<Room> rooms = _context.Rooms.Include(x=>x.RoomImages).Where(x => x.Name.ToLower().Contains(search.ToLower())).ToList();
+            return PartialView("_SearchPartial", rooms);
+        }
+
         [Authorize(Roles = "Member")]
         public async Task<IActionResult> Reservation(int id)
         {

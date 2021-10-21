@@ -29,16 +29,16 @@
 <section class="section__rooms-2">
 
     <div class="container" style="position: relative;">
-        <p class="subheading hidden-xs">Search</p>
+        <p style=" text-align: center;" class="subheading hidden-xs">Search</p>
 
-        <form asp-action="index" asp-controller="room" asp-route-search="@ViewBag.search" class="search-form hidden-xs room-page" role="search">
+        <form style=" width: 60%; margin: auto;" asp-action="index" asp-controller="room" asp-route-search="@ViewBag.search" class="search-form hidden-xs room-page" role="search">
             <div class="form-group">
-                <input autocomplete="off" value="@ViewBag.search" name="search" type="text" class="form-control searching" placeholder="Search">
+                <input id="searching" autocomplete="off" value="@ViewBag.search" name="search" type="text" class="form-control searching" placeholder="Search">
             </div>
             <button type="submit" class="btn btn-default btn-search"><i class="icon ion-search"></i></button>
         </form> <!-- .search-form -->
 
-        <ul class="search-results">
+        <ul style=" width:58.55%; z-index: 998; padding: 0; position: absolute; margin-left: 229px;" id="searchresult" class="search-result">
 
         </ul>
         <div class="inner-container hidden-xs">
@@ -120,7 +120,7 @@
                                     </p>
                                 }
                                 else
-                                {                                        
+                                {
                                     <p class="rooms_desc__desc">
                                         @item.Desc
                                     </p>
@@ -166,3 +166,24 @@
         </div>
     </div>
 </section> <!-- / .section__rooms-1 -->
+@section Scripts{
+    <script>
+
+        document.querySelector("#searching").addEventListener("keyup", function () {
+            if (this.value.trim().length > 0)
+            {
+                fetch('Room/Search?search=' + this.value)
+                    .then(response => {
+                        response.text().then(a => document.querySelector("#searchresult").innerHTML = a)
+                }   )
+            };
+            if (this.value.trim().length == 0)
+            {
+                 document.querySelector("#searchresult").innerHTML = "";
+            }
+        })
+
+
+
+    </script>
+}
