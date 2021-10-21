@@ -59,7 +59,7 @@
                             <p>Tags:</p>
                             @foreach (var item in Model.blog.BlogTags)
                             {
-                                <a href="#">#@item.Tag.Name</a>
+                                <a asp-action="index" asp-controller="Blog" asp-route-Tagid="@item.Tag.Id">#@item.Tag.Name</a>
                             }
                         </div>
                         <div class="blog-item__footer">
@@ -189,9 +189,9 @@
                 <div class="blog__sidebar">
                     <div class="sidebar__item">
                         <p class="subheading">Search</p>
-                        <form class="search-form" role="search">
+                        <form asp-action="index" asp-controller="blog" asp-route-search="@ViewBag.search" class="search-form" role="search">
                             <div class="form-group">
-                                <input type="text" class="form-control" placeholder="Enter keywords">
+                                <input autocomplete="off" value="@ViewBag.Search" name="search" type="text" class="form-control" placeholder="Enter keywords">
                             </div>
                             <button type="submit" class="btn btn-search"><i class="icon ion-search"></i></button>
                         </form> <!-- .search-form -->
@@ -199,7 +199,14 @@
                         <ul class="categories">
                             @foreach (var item in Model.blogCategories)
                             {
-                                <li><a href="#">@item.Name</a></li>
+                                if (ViewBag.categoryId == item.Id)
+                                {
+                                    <li><a style="color: #DEAA86" asp-action="index" asp-controller="Blog" asp-route-categoryId="@item.Id">@item.Name</a></li>
+                                }
+                                else
+                                {
+                                    <li><a asp-action="index" asp-controller="Blog" asp-route-categoryId="@item.Id">@item.Name</a></li>
+                                }
                             }
                         </ul> <!-- .categories -->
                     </div> <!-- .sidebar__item -->
@@ -237,7 +244,15 @@
                         <ul class="tags">
                             @foreach (var item in Model.tags)
                             {
-                                <li><a href="#">#@item.Name</a></li>
+                                if (ViewBag.TagId == item.Id)
+                                {
+                                    <li><a asp-action="index" asp-controller="Blog" asp-route-Tagid="@item.Id" style="color: #DEAA86">#@item.Name</a></li>
+                                }
+                                else
+                                {
+                                    <li><a asp-action="index" asp-controller="Blog" asp-route-Tagid="@item.Id">#@item.Name</a></li>
+
+                                }
                             }
                         </ul>
                     </div> <!-- .sidebar__item -->

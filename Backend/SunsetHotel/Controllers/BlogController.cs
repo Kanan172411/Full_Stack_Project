@@ -42,14 +42,11 @@ namespace SunsetHotel.Controllers
             }
             if (search != null)
             {
+                query = query.Where(x => x.Name.ToLower().Contains(search.ToLower()) || x.BlogPostTitle.ToLower().Contains(search.ToLower()));
                 ViewBag.search = search;
-                query = query.Where(x => x.Name.ToLower().Contains(search.ToLower()));
             }
             double pageCount = Math.Ceiling(query.Count() / 3d);
-            if (page > pageCount)
-            {
-                return RedirectToAction("error", "home");
-            }
+
             Setting setting = _context.Settings.FirstOrDefault();
             ViewBag.TotalPage = pageCount;
             ViewBag.SelectedPage = page;
