@@ -68,8 +68,12 @@ namespace SunsetHotel.Controllers
         [ValidateAntiForgeryToken]
         public IActionResult Subscribe(Subscriber subscriber)
         {
-            if (!ModelState.IsValid)
+            if (subscriber.Email.Length>49)
+            {
+                TempData["Alert"] = "Email uzunluğu maksimum 50 xarakterdir";
+                TempData["Type"] = "danger";
                 return RedirectToAction("index");
+            }
             if (subscriber.Email.Trim().EndsWith("."))
             {
                 TempData["Alert"] = "Emaili düzgün formatda daxil edin";
@@ -109,11 +113,21 @@ namespace SunsetHotel.Controllers
         {
             if (id==1)
             {
-                if (!ModelState.IsValid)
+                if (contactMessages.Message == null || string.IsNullOrWhiteSpace(contactMessages.Message) || contactMessages.Message.Length < 15)
                 {
-                    return RedirectToAction("contact","home");
+                    TempData["Alert"] = "Message must be more than 15 character";
+                    TempData["Type"] = "danger";
+                    return RedirectToAction("contact", "home");
                 }
+                if (contactMessages.Message.Length > 299)
+                {
+                    TempData["Alert"] = "Message must be less than 300 character";
+                    TempData["Type"] = "danger";
+                    return RedirectToAction("contact", "home");
+                }
+
                 ContactMessages contactMessages1 = new ContactMessages();
+
                 if (!User.Identity.IsAuthenticated || User.IsInRole("Member") == false)
                 {
                     if (contactMessages.Name == null || string.IsNullOrWhiteSpace(contactMessages.Name))
@@ -125,12 +139,6 @@ namespace SunsetHotel.Controllers
                     if (contactMessages.Email == null || string.IsNullOrWhiteSpace(contactMessages.Email))
                     {
                         TempData["Alert"] = "Email required";
-                        TempData["Type"] = "danger";
-                        return RedirectToAction("contact", "home");
-                    }
-                    if (contactMessages.Message ==null || string.IsNullOrWhiteSpace(contactMessages.Message) || contactMessages.Message.Length<15)
-                    {
-                        TempData["Alert"] = "Message must be less 15 character";
                         TempData["Type"] = "danger";
                         return RedirectToAction("contact", "home");
                     }
@@ -169,10 +177,19 @@ namespace SunsetHotel.Controllers
             }
             else
             {
-                if (!ModelState.IsValid)
+                if (contactMessages.Message == null || string.IsNullOrWhiteSpace(contactMessages.Message) || contactMessages.Message.Length < 15)
                 {
+                    TempData["Alert"] = "Message must be more than 15 character";
+                    TempData["Type"] = "danger";
                     return RedirectToAction("index", "home");
                 }
+                if (contactMessages.Message.Length > 299)
+                {
+                    TempData["Alert"] = "Message must be less than 300 character";
+                    TempData["Type"] = "danger";
+                    return RedirectToAction("index", "home");
+                }
+
                 ContactMessages contactMessages1 = new ContactMessages();
                 if (!User.Identity.IsAuthenticated || User.IsInRole("Member") == false)
                 {
@@ -185,12 +202,6 @@ namespace SunsetHotel.Controllers
                     if (contactMessages.Email == null || string.IsNullOrWhiteSpace(contactMessages.Email))
                     {
                         TempData["Alert"] = "Email required";
-                        TempData["Type"] = "danger";
-                        return RedirectToAction("index", "home");
-                    }
-                    if (contactMessages.Message == null || string.IsNullOrWhiteSpace(contactMessages.Message) || contactMessages.Message.Length < 15)
-                    {
-                        TempData["Alert"] = "Message must be less 15 character";
                         TempData["Type"] = "danger";
                         return RedirectToAction("index", "home");
                     }

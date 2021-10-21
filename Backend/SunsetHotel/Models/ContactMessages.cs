@@ -10,7 +10,7 @@ namespace SunsetHotel.Models
     {
         public int Id { get; set; }
         [Required]
-        [StringLength(maximumLength: 100)]
+        [StringLength(maximumLength: 300)]
         public string Message { get; set; }
         public string Name { get; set; }
         public string Email { get; set; }
