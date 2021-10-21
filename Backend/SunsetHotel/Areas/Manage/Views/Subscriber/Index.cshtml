@@ -1,0 +1,85 @@
+﻿@model List<Subscriber>
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Areas/Manage/Views/Shared/_Layout.cshtml";
+    int order = (ViewBag.SelectedPage - 1) * 10 + 1;
+}
+
+<div class="main-content">
+
+    <div class="page-content">
+        <div class="container-fluid" style="text-align:center">
+
+            <!-- start page title -->
+            <div class="row">
+                <div class="col-12">
+                    <div class="page-title-box d-sm-flex align-items-center justify-content-between">
+                        <h4 class="mb-sm-0">Subscribers</h4>
+                        <div class="page-title-right">
+                            <ol class="breadcrumb m-0">
+                                <li class="breadcrumb-item"><a href="javascript: void(0);">Tables</a></li>
+                                <li class="breadcrumb-item active">Subscribers Table</li>
+                            </ol>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+            <!-- end page title -->
+
+            <div class="row">
+                <div class="col-12">
+                    <div class="card">
+                        <div class="card-body">
+                            <div class="table-responsive">
+                                <table class="table table-editable table-nowrap align-middle table-edits">
+                                    <thead>
+                                        <tr>
+                                            <th style="width: 50px"></th>
+                                            <th style="width: 400px">Email</th>
+
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        @foreach (var item in Model)
+                                        {
+                                            <tr>
+                                                <td>@order</td>
+                                                <td data-field="Email" style="width: 80px">@item.Email</td>
+                                            </tr>
+                                            order++;
+                                        }
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div> <!-- end col -->
+            </div> <!-- end row -->
+            @if (ViewBag.TotalPage > 1)
+            {
+                <div class="d-inline-block ">
+                    <ul class="pagination pagination-rounded mb-0">
+                        <li class="page-item @(ViewBag.SelectedPage==1 ? "disabled":"")">
+                            <a class="page-link" asp-action="index" asp-controller="Subscriber" asp-route-page="@(ViewBag.SelectedPage==1 ? 1:ViewBag.SelectedPage-1)">
+                                <i class="mdi mdi-chevron-left"></i>
+                            </a>
+                        </li>
+                        @for (int i = 1; i <= ViewBag.TotalPage; i++)
+                        {
+                            <li class="page-item @(i==ViewBag.SelectedPage?"active":"")"><a class="page-link" asp-action="index" asp-controller="Subscriber" asp-route-page="@i">@i</a></li>
+                        }
+                        <li class="page-item @(ViewBag.SelectedPage==ViewBag.TotalPage ? "disabled" : "")">
+                            <a class="page-link" asp-action="index" asp-controller="Subscriber" asp-route-page="@(ViewBag.SelectedPage==ViewBag.TotalPage ? ViewBag.TotalPage:ViewBag.SelectedPage+1)">
+                                <i class="mdi mdi-chevron-right"></i>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            }
+
+        </div> <!-- container-fluid -->
+    </div>
+    <!-- End Page-content -->
+</div>
+
