@@ -22,14 +22,24 @@ namespace SunsetHotel.Controllers
             _context = context;
             _userManager = userManager;
         }
-        public IActionResult Index(int page = 1)
+        public IActionResult Index(int? categoryId, string search, int page = 1)
         {
             TempData["forSelect"] = 3;
-            double pageCount = Math.Ceiling(_context.Rooms.Count() / 4d);
-            if (page > pageCount)
+
+            var query = _context.Rooms.AsQueryable();
+            if (categoryId != null)
             {
-                return RedirectToAction("error", "home");
+                query = query.Where(x => x.RoomCategoryId == categoryId);
+                ViewBag.categoryId = categoryId;
             }
+
+            if (search != null)
+            {
+                query = query.Where(x => x.Name.ToLower().Contains(search.ToLower()));
+                ViewBag.search = search;
+            }
+
+            double pageCount = Math.Ceiling(query.Count() / 4d);
             ViewBag.TotalPage = pageCount;
             ViewBag.SelectedPage = page;
 
@@ -39,7 +49,7 @@ namespace SunsetHotel.Controllers
             ViewBag.Categories = _context.RoomCategories.ToList();
             RoomViewModel roomVM = new RoomViewModel
             {
-                rooms = _context.Rooms.Include(x=>x.RoomImages).Include(x => x.Categories).Include(x =>x.RoomFeatureRelations).ThenInclude(x =>x.RoomFeature).Skip((page - 1) * 4).Take(4).ToList().ToList()
+                rooms = query.Include(x=>x.RoomImages).Include(x => x.Categories).Include(x =>x.RoomFeatureRelations).ThenInclude(x =>x.RoomFeature).Skip((page - 1) * 4).Take(4).ToList().ToList()
             };
             return View(roomVM);
         }

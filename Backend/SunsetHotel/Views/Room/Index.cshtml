@@ -30,13 +30,16 @@
 
     <div class="container" style="position: relative;">
         <p class="subheading hidden-xs">Search</p>
-        <form class="search-form hidden-xs room-page" role="search">
+
+        <form asp-action="index" asp-controller="room" asp-route-search="@ViewBag.search" class="search-form hidden-xs room-page" role="search">
             <div class="form-group">
-                <input type="text" class="form-control searching" placeholder="Search">
+                <input autocomplete="off" value="@ViewBag.search" name="search" type="text" class="form-control searching" placeholder="Search">
             </div>
             <button type="submit" class="btn btn-default btn-search"><i class="icon ion-search"></i></button>
         </form> <!-- .search-form -->
+
         <ul class="search-results">
+
         </ul>
         <div class="inner-container hidden-xs">
             <div class="row">
@@ -48,7 +51,14 @@
                             <ul class="categories">
                                 @foreach (var item in ViewBag.Categories)
                                 {
-                                    <li><a href="#">@item.Name</a></li>
+                                    if (ViewBag.categoryId == item.Id)
+                                    {
+                                        <li><a style="color: #DEAA86" asp-action="index" asp-controller="room" asp-route-categoryId="@item.Id">@item.Name</a></li>
+                                    }
+                                    else
+                                    {
+                                        <li><a asp-action="index" asp-controller="room" asp-route-categoryId="@item.Id">@item.Name</a></li>
+                                    }
                                 }
                             </ul> <!-- .categories -->
                         </div> <!-- .sidebar__item -->
@@ -133,16 +143,16 @@
                             <nav aria-label="Page navigation">
                                 <ul class="pagination">
                                     <li class="@(ViewBag.SelectedPage==1 ? "disabled":"")">
-                                        <a asp-action="index" asp-controller="room" asp-route-page="@(ViewBag.SelectedPage==1 ? 1:ViewBag.SelectedPage-1)">
+                                        <a asp-action="index" asp-route-categoryId="@ViewBag.categoryId" asp-route-search="@ViewBag.search" asp-controller="room" asp-route-page="@(ViewBag.SelectedPage==1 ? 1:ViewBag.SelectedPage-1)">
                                             <span aria-hidden="true">&laquo;</span>
                                         </a>
                                     </li>
                                     @for (int i = 1; i <= ViewBag.TotalPage; i++)
                                     {
-                                        <li class="@(i==ViewBag.SelectedPage?"active":"")"><a asp-action="index" asp-controller="room" asp-route-page="@i">@i</a></li>
+                                        <li class="@(i==ViewBag.SelectedPage?"active":"")"><a asp-action="index" asp-route-search="@ViewBag.search" asp-route-categoryId="@ViewBag.categoryId" asp-controller="room" asp-route-page="@i">@i</a></li>
                                     }
                                     <li class="@(ViewBag.SelectedPage==ViewBag.TotalPage ? "disabled" : "")">
-                                        <a asp-action="index" asp-controller="room" asp-route-page="@(ViewBag.SelectedPage==ViewBag.TotalPage ? ViewBag.TotalPage:ViewBag.SelectedPage+1)">
+                                        <a asp-action="index" asp-controller="room" asp-route-categoryId="@ViewBag.categoryId" asp-route-search="@ViewBag.search" asp-route-page="@(ViewBag.SelectedPage==ViewBag.TotalPage ? ViewBag.TotalPage:ViewBag.SelectedPage+1)">
                                             <span aria-hidden="true">&raquo;</span>
                                         </a>
                                     </li>
