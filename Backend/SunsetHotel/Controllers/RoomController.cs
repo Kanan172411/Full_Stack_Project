@@ -65,7 +65,7 @@ namespace SunsetHotel.Controllers
             };
             return View(roomVM);
         }
-        public IActionResult Details(int id)
+        public async Task<IActionResult> Details(int id)
         {
             Room room = _context.Rooms.Where(x => x.Id == id).FirstOrDefault();
             if (room==null)
@@ -74,16 +74,29 @@ namespace SunsetHotel.Controllers
             }
             RoomDetailsViewModel roomDetailsVm = new RoomDetailsViewModel
             {
-                similiarRooms = _context.Rooms.Where(x => x.RoomCategoryId == room.RoomCategoryId && x.Id != id).Include(x=>x.RoomImages).ToList(),
+                similiarRooms = _context.Rooms.Where(x => x.RoomCategoryId == room.RoomCategoryId && x.Id != id).Include(x => x.RoomImages).ToList(),
                 setting = _context.Settings.FirstOrDefault(),
                 room = _context.Rooms
                 .Where(x => x.Id == id)
+                .Include(x => x.Comments)
                 .Include(x => x.RoomImages)
                 .Include(x => x.Categories)
                 .Include(x => x.RoomFeatureRelations)
                 .ThenInclude(x => x.RoomFeature)
                 .FirstOrDefault()
             };
+            if (User.IsInRole("Member"))
+            {
+                AppUser appUser = await _userManager.FindByNameAsync(User.Identity.Name);
+                var user = _context.AppUsers.Where(x => x.Id == appUser.Id).Include(x => x.reservations).FirstOrDefault();
+                if (appUser.reservations.Count != 0)
+                {
+                    if (user.reservations.Where(y => y.RoomId == id).Any(x => x.CheckOut < DateTime.Now)) 
+                    {
+                        ViewBag.Comment = true;
+                    }
+                }
+            }
             return View(roomDetailsVm);
         }
 
@@ -261,11 +274,57 @@ namespace SunsetHotel.Controllers
                 return View(reservationViewModel);
             }
             #endregion
+
             _context.Reservations.Add(reservation);
             _context.SaveChanges();
             TempData["Alert"] = "Rezervasiya istəyi göndərildi";
             TempData["Type"] = "success";
             return RedirectToAction("details", "room", new { id = reservation.RoomId });
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        [Authorize(Roles ="Member")]
+        public async Task<IActionResult> Comment(RoomComment roomComment)
+        {
+            Room room = _context.Rooms.Where(x => x.Id == roomComment.RoomId).FirstOrDefault();
+            if (room==null)
+            {
+                return RedirectToAction("error", "home");
+            }
+
+            AppUser appUser = await _userManager.FindByNameAsync(User.Identity.Name);
+            var user = _context.AppUsers.Where(x => x.Id == appUser.Id).Include(x => x.reservations).FirstOrDefault();
+            if (appUser.reservations.Count != 0)
+            {
+                if (user.reservations.Where(y => y.RoomId == roomComment.RoomId).Any(x => x.CheckOut < DateTime.Now))
+                {
+                    if (roomComment.Text.Length < 10 || roomComment.Text.Length > 300)
+                    {
+                        TempData["Alert"] = "Commenti düzgün formatda daxil edin";
+                        TempData["Type"] = "danger";
+                        return RedirectToAction("details", "room", new { id = roomComment.RoomId });
+                    }
+                    roomComment.Name = appUser.FullName;
+                    roomComment.Email = appUser.Email;
+                    roomComment.CreatedAt = DateTime.Now;
+                    roomComment.AppUserId = appUser.Id;
+                    _context.RoomComments.Add(roomComment);
+                    _context.SaveChanges();
+
+                    TempData["Alert"] = "Comment əlavə edildi";
+                    TempData["Type"] = "success";
+                    return RedirectToAction("details", "room", new { id = roomComment.RoomId });
+                }
+                else
+                {
+                    return RedirectToAction("error", "home");
+                }
+            }
+            else
+            {
+                return RedirectToAction("error", "home");
+            }
         }
 
         public IActionResult MyReservation()

@@ -37,5 +37,6 @@ namespace SunsetHotel.Models
         [Required]
         public int MaxAdult { get; set; }
         public List<Reservation> reservations { get; set; }
+        public List<RoomComment> Comments { get; set; }
     }
 }

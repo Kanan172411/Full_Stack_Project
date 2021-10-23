@@ -47,73 +47,44 @@
                     <a asp-action="reservation" asp-controller="room" asp-route-id="@Model.room.Id" class="btn">Book this room now</a>
                 </div> <!-- .room-detail__body -->
                 <div class="room__reviews">
-                    <p class="subheading">Room reviews</p>
-                    <ul class="reviews__list">
-                        <li class="review">
-                            <div class="review__user">
-                                Robert Jones
-                            </div>
-                            <div class="review__date">
-                                April 8, 2017 at 1:15 pm
-                            </div>
-                            <div class="review__message">
-                                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Magni dicta alias enim
-                                quasi sapiente saepe, repellat soluta commodi delectus doloribus, veniam odit hic
-                                ratione quae modi earum dolor dignissimos quas?
-                            </div>
-                        </li> <!-- .review -->
-                        <li class="review">
-                            <div class="review__user">
-                                Maria Atkinson
-                            </div>
-                            <div class="review__date">
-                                March 24, 2017 at 1:38 am
-                            </div>
-                            <div class="review__message">
-                                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sit eaque magni aliquam
-                                dolore cum aliquid ipsa, asperiores modi voluptates.
-                            </div>
-                        </li> <!-- .review -->
-                        <li class="review">
-                            <div class="review__user">
-                                Brad pitt
-                            </div>
-                            <div class="review__date">
-                                March 20, 2017 at 3:40 pm
-                            </div>
-                            <div class="review__message">
-                                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Deleniti provident
-                                adipisci eos reiciendis. Ab dolore natus nam temporibus quidem esse soluta.
-                                Accusamus sapiente, officia architecto accusantium sunt amet harum quis!
-                            </div>
-                        </li> <!-- .review -->
-                    </ul> <!-- .reviews__list -->
-                    <p class="subheading">Leave a review</p>
-                    <form class="comments__form" data-animate-in="animateUp">
+                    @if (Model.room.Comments.Count!=0)
+                    {
+                        <p class="subheading">Room reviews</p>
+                        <ul class="reviews__list">
+                            @foreach (var item in Model.room.Comments)
+                            {
+                                <li class="review">
+                                    <div class="review__user">
+                                        @item.Name
+                                    </div>
+                                    <div class="review__date">
+                                        @item.CreatedAt.ToString($"MMMM dd, yyyy - HH:mm")
+                                    </div>
+                                    <div class="review__message">
+                                        @item.Text
+                                    </div>
+                                </li> <!-- .review -->
+                            }
+                        </ul> <!-- .reviews__list -->
+                    }
+                    @if (ViewBag.Comment != null)
+                    {
+                        <p class="subheading">Leave a review</p>
+                        <form method="post" asp-action="comment" asp-controller="room" class="comments__form" data-animate-in="animateUp">
+                            <input type="hidden" value="@Model.room.Id" name="RoomId" />
 
-                        <div class="form-group">
-                            <label for="name">Name (Required)</label>
-                            <input type="text" name="name" class="form-control" id="name"
-                                   placeholder="Enter Your Full Name">
-                        </div>
+                            <div class="form-group">
+                                <label for="message">Message (Required)</label>
+                                <textarea maxlength="300" minlength=10 required title="10 characters minimum" name="text" class="form-control" rows="6" id="text"
+                                          placeholder="Enter Your Message"></textarea>
+                                <span class="help-block"></span>
+                            </div>
 
-                        <div class="form-group">
-                            <label for="email">Email address</label>
-                            <input type="email" name="email" class="form-control" id="email"
-                                   placeholder="Enter Your E-mail">
-                        </div>
-
-                        <div class="form-group">
-                            <label for="message">Comment (Required)</label>
-                            <textarea name="message" class="form-control" rows="6" id="message"
-                                      placeholder="Enter Your Comment"></textarea>
-                            <span class="help-block"></span>
-                        </div>
-
-                        <button type="submit" class="btn">
-                            Submit review
-                        </button>
-                    </form>
+                            <button type="submit" class="btn">
+                                Submit review
+                            </button>
+                        </form>
+                    }
                 </div> <!-- .room__reviews -->
             </div>
             <div class="col-sm-5 col-md-4">

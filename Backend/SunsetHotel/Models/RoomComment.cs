@@ -6,20 +6,19 @@ using System.Threading.Tasks;
 
 namespace SunsetHotel.Models
 {
-    public class BlogComment
+    public class RoomComment
     {
         public int Id { get; set; }
         [Required]
         [StringLength(maximumLength: 300)]
         public string Text { get; set; }
-        [StringLength(maximumLength:50)]
         public string Name { get; set; }
-        [StringLength(maximumLength: 60)]
-        [DataType(DataType.EmailAddress)]
         public string Email { get; set; }
         [Required]
         public DateTime CreatedAt { get; set; }
-        public int BlogId { get; set; }
-        public Blog blog { get; set; }
+        public int RoomId { get; set; }
+        public Room room { get; set; }
+        public string AppUserId { get; set; }
+        public AppUser appUser { get; set; }
     }
 }
