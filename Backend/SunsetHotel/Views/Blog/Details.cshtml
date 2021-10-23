@@ -67,7 +67,7 @@
                                 <ul class="item-info__list">
                                     <li class="info-list__item">
                                         <i class="ion ion-android-chat"
-                                           aria-hidden="true"></i> 5 Comments
+                                           aria-hidden="true"></i> @Model.blog.Comments.Count() Comments
                                     </li>
                                 </ul> <!-- .item-info__list -->
                             </div> <!-- .footer__item -->
@@ -98,59 +98,26 @@
                     </div> <!-- / .blog-item__content -->
                 </div> <!-- .blog__item -->
                 <div class="comments">
-                    <p class="subheading">Comments</p>
-                    <ul class="comments__list">
-                        <li class="comment">
-                            <div class="comment__user">
-                                Robert Jones
-                            </div>
-                            <div class="comment__date">
-                                April 8, 2017 at 1:15 pm
-                            </div>
-                            <div class="comment__message">
-                                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Magni dicta alias enim
-                                quasi sapiente saepe, repellat soluta commodi delectus doloribus, veniam odit hic
-                                ratione quae modi earum dolor dignissimos quas?
-                            </div>
-                        </li> <!-- .comment -->
-                        <li class="comment">
-                            <div class="comment__user">
-                                Maria Atkinson
-                            </div>
-                            <div class="comment__date">
-                                March 24, 2017 at 1:38 am
-                            </div>
-                            <div class="comment__message">
-                                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sit eaque magni aliquam
-                                dolore cum aliquid ipsa, asperiores modi voluptates.
-                            </div>
-                        </li> <!-- .comment -->
-                        <li class="comment">
-                            <div class="comment__user">
-                                Brad pitt
-                            </div>
-                            <div class="comment__date">
-                                March 20, 2017 at 3:40 pm
-                            </div>
-                            <div class="comment__message">
-                                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Deleniti provident
-                                adipisci eos reiciendis. Ab dolore natus nam temporibus quidem esse soluta.
-                                Accusamus sapiente, officia architecto accusantium sunt amet harum quis!
-                            </div>
-                        </li> <!-- .comment -->
-                        <li class="comment">
-                            <div class="comment__user">
-                                Jessica Doe
-                            </div>
-                            <div class="comment__date">
-                                March 15, 2017 at 10:30 am
-                            </div>
-                            <div class="comment__message">
-                                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quasi quas iste et dolor
-                                harum accusamus.
-                            </div>
-                        </li> <!-- .comment -->
-                    </ul> <!-- .comments__list -->
+                    @if (Model.blog.Comments.Count != 0) 
+                    {
+                        <p class="subheading">Comments</p>
+                        <ul class="comments__list">
+                            @foreach (var item in Model.blog.Comments)
+                            {
+                                <li class="comment">
+                                    <div class="comment__user">
+                                        @item.Name
+                                    </div>
+                                    <div class="comment__date">
+                                        @item.CreatedAt.ToString($"MMMM dd, yyyy - HH:mm")
+                                    </div>
+                                    <div class="comment__message">
+                                        @item.Text
+                                    </div>
+                                </li> <!-- .comment -->
+                            }
+                        </ul> <!-- .comments__list -->
+                    }
                     <p class="subheading">Leave a comment</p>
                     <form method="post" asp-action="Comment" asp-controller="Blog" class="comments__form" data-animate-in="animateUp">
                         @if (!User.IsInRole("Member"))

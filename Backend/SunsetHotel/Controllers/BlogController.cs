@@ -26,7 +26,7 @@ namespace SunsetHotel.Controllers
         {
             TempData["forSelect"] = 4;
 
-            var query = _context.Blogs.Include(x=>x.BlogCategory).Include(x=>x.BlogTags).ThenInclude(x=>x.Tag).AsQueryable();
+            var query = _context.Blogs.Include(x=>x.Comments).Include(x=>x.BlogCategory).Include(x=>x.BlogTags).ThenInclude(x=>x.Tag).AsQueryable();
             var queryBlogTag = _context.BlogTags.AsQueryable();
             if (categoryId != null)
             {
@@ -77,7 +77,7 @@ namespace SunsetHotel.Controllers
                 tags = _context.Tags.ToList(),
                 blogCategories = _context.BlogCategories.ToList(),
                 recentPost = _context.Blogs.OrderByDescending(x => x.Createdat).Take(4).ToList(),
-                blog = _context.Blogs.Where(x => x.Id == id).Include(x => x.BlogCategory).Include(x => x.BlogTags).ThenInclude(x => x.Tag).FirstOrDefault()
+                blog = _context.Blogs.Where(x => x.Id == id).Include(x => x.BlogCategory).Include(x=>x.Comments).Include(x => x.BlogTags).ThenInclude(x => x.Tag).FirstOrDefault()
             };
             return View(blogVM);
         }
