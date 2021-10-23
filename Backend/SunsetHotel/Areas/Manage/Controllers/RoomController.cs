@@ -31,7 +31,7 @@ namespace SunsetHotel.Areas.Manage.Controllers
             {
                 return RedirectToAction("error", "dashboard");
             }
-            List<Room> rooms = _context.Rooms.Include(x => x.RoomImages).Include(x=>x.Categories).Skip((page - 1) * 6).Take(6).ToList();
+            List<Room> rooms = _context.Rooms.Include(x=>x.Comments).Include(x => x.RoomImages).Include(x=>x.Categories).Skip((page - 1) * 6).Take(6).ToList();
             return View(rooms);
         }
         public IActionResult Create()
@@ -237,6 +237,33 @@ namespace SunsetHotel.Areas.Manage.Controllers
             _context.Rooms.Remove(existRoom);
             _context.SaveChanges();
 
+            return Json(new { status = 200 });
+        }
+
+        public IActionResult Comment(int id, int page = 1)
+        {
+            Room room = _context.Rooms.Where(x => x.Id == id).FirstOrDefault();
+            if (room == null)
+            {
+                return RedirectToAction("error", "dashboard");
+            }
+            ViewBag.SelectedPage = page;
+            ViewBag.TotalPage = Math.Ceiling(_context.RoomComments.Where(x => x.RoomId == id).Count() / 8d);
+            ViewBag.Id = id;
+
+            List<RoomComment> comments = _context.RoomComments.Where(x => x.RoomId == room.Id).Skip((page - 1) * 8).Take(8).ToList();
+            return View(comments);
+        }
+        public IActionResult DeleteComment(int id)
+        {
+            RoomComment roomComment = _context.RoomComments.FirstOrDefault(x => x.Id == id);
+            if (roomComment == null)
+            {
+                return RedirectToAction("error", "dashboard");
+            }
+
+            _context.RoomComments.Remove(roomComment);
+            _context.SaveChanges();
             return Json(new { status = 200 });
         }
     }
