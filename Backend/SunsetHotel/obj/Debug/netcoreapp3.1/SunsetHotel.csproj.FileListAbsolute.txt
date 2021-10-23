@@ -440,3 +440,4 @@ C:\Users\Kanan Qarazada\Desktop\Full_Stack_Project\Backend\SunsetHotel\bin\Debug
 C:\Users\Kanan Qarazada\Desktop\Full_Stack_Project\Backend\SunsetHotel\obj\Debug\netcoreapp3.1\Razor\Areas\Manage\Views\ContactMessages\Index.cshtml.g.cs
 C:\Users\Kanan Qarazada\Desktop\Full_Stack_Project\Backend\SunsetHotel\obj\Debug\netcoreapp3.1\Razor\Areas\Manage\Views\Subscriber\Index.cshtml.g.cs
 C:\Users\Kanan Qarazada\Desktop\Full_Stack_Project\Backend\SunsetHotel\obj\Debug\netcoreapp3.1\Razor\Views\Shared\_SearchPartial.cshtml.g.cs
+C:\Users\Kanan Qarazada\Desktop\Full_Stack_Project\Backend\SunsetHotel\obj\Debug\netcoreapp3.1\Razor\Areas\Manage\Views\Blog\Comment.cshtml.g.cs

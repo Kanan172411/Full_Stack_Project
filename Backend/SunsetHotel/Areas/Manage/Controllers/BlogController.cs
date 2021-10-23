@@ -32,7 +32,7 @@ namespace SunsetHotel.Areas.Manage.Controllers
             {
                 return RedirectToAction("error", "dashboard");
             }
-            List<Blog> blogs = _context.Blogs.Include(x=>x.BlogCategory).Skip((page - 1) * 6).Take(6).ToList();
+            List<Blog> blogs = _context.Blogs.Include(x=>x.Comments).Include(x=>x.BlogCategory).Skip((page - 1) * 6).Take(6).ToList();
             return View(blogs);
         }
         public IActionResult Create()
@@ -196,6 +196,33 @@ namespace SunsetHotel.Areas.Manage.Controllers
                 FileManager.Delete(_env.WebRootPath, "assets/img", existBlog.ImageName);
             }
             _context.Blogs.Remove(existBlog);
+            _context.SaveChanges();
+            return Json(new { status = 200 });
+        }
+
+        public IActionResult Comment(int id,int page=1)
+        {
+            Blog blog = _context.Blogs.Where(x => x.Id == id).FirstOrDefault();
+            if (blog == null) 
+            {
+                return RedirectToAction("error", "dashboard");
+            }
+            ViewBag.SelectedPage = page;
+            ViewBag.TotalPage = Math.Ceiling(_context.BlogComments.Where(x => x.BlogId == id).Count() / 8d);
+            ViewBag.Id = id;
+
+            List<BlogComment> comments = _context.BlogComments.Where(x => x.BlogId == blog.Id).Skip((page - 1) * 8).Take(8).ToList();
+            return View(comments);
+        }
+        public IActionResult DeleteComment(int id)
+        {
+            BlogComment blogComment = _context.BlogComments.FirstOrDefault(x => x.Id == id);
+            if (blogComment == null)
+            {
+                return RedirectToAction("error", "dashboard");
+            }
+
+            _context.BlogComments.Remove(blogComment);
             _context.SaveChanges();
             return Json(new { status = 200 });
         }

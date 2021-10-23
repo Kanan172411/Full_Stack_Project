@@ -41,6 +41,7 @@
                                             <th>Category</th>
                                             <th>Description</th>
                                             <th>Post Title</th>
+                                            <th>Comments</th>
                                             <th style="width:0%">Edit</th>
                                             <th>Delete</th>
                                         </tr>
@@ -52,9 +53,9 @@
                                                 <td>@order</td>
                                                 <td data-field="Name" style="width: 80px">@item.Name</td>
                                                 <td data-field="Category">@item.BlogCategory.Name</td>
-                                                @if (item.Desc1.Length > 40)
+                                                @if (item.Desc1.Length > 30)
                                                 {
-                                                    <td data-field="Description" data-bs-toggle="tooltip" data-bs-placement="bottom" title="@item.Desc1">@item.Desc1.Substring(0, 40)...</td>
+                                                    <td data-field="Description" data-bs-toggle="tooltip" data-bs-placement="bottom" title="@item.Desc1">@item.Desc1.Substring(0, 30)...</td>
                                                 }
                                                 else
                                                 {
@@ -62,13 +63,18 @@
 
                                                 }
                                                 <td data-field="Post Title">@item.BlogPostTitle</td>
+                                                <td>
+                                                    <a asp-action="Comment" asp-route-id="@item.Id" class="btn btn-light waves-effect" title="Comments"><i class="fas fa-comments">
+                                                        <span class="badge rounded-pill bg-dark">@item.Comments.Count()</span></i>
+                                                    </a>
+                                                </td>
                                                 <td style="width: 100px">
-                                                    <a asp-action="Edit" asp-route-id="@item.Id" class="btn btn-outline-secondary btn-sm edit" title="Edit">
+                                                    <a asp-action="Edit" asp-route-id="@item.Id" class="btn btn-light waves-effect edit" title="Edit">
                                                         <i class="fas fa-pencil-alt"></i>
                                                     </a>
                                                 </td>
                                                 <td>
-                                                    <a class="btn btn-outline-secondary btn-sm edit item-delete" asp-action="delete" asp-route-id="@item.Id" title="Delete">
+                                                    <a class="btn btn-light waves-effect item-delete" asp-action="delete" asp-route-id="@item.Id" title="Delete">
                                                         <i class="ri-delete-bin-line"></i>
                                                     </a>
                                                 </td>

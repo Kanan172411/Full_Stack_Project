@@ -1,12 +1,12 @@
-﻿@model List<Room>
+﻿@model List<BlogComment>
 @{
-    ViewData["Title"] = "Index";
+    ViewData["Title"] = "Comment";
     Layout = "~/Areas/Manage/Views/Shared/_Layout.cshtml";
-    int order = (ViewBag.SelectedPage - 1) * 6 + 1;
+    int order = (ViewBag.SelectedPage - 1) * 8 + 1;
 }
 
 <div class="main-content">
-
+    <input type="hidden" id="forBlogId" value="@ViewBag.Id"/>
     <div class="page-content">
         <div class="container-fluid">
 
@@ -14,12 +14,11 @@
             <div class="row">
                 <div class="col-12">
                     <div class="page-title-box d-sm-flex align-items-center justify-content-between">
-                        <h4 class="mb-sm-0">Rooms</h4>
-                        <a asp-action="create" class="btn btn-info waves-effect waves-light">Add new</a>
+                        <h4 class="mb-sm-0">Blog Comments</h4>
                         <div class="page-title-right">
                             <ol class="breadcrumb m-0">
                                 <li class="breadcrumb-item"><a href="javascript: void(0);">Tables</a></li>
-                                <li class="breadcrumb-item active">Rooms Table</li>
+                                <li class="breadcrumb-item active">Blog Comments Table</li>
                             </ol>
                         </div>
 
@@ -37,11 +36,10 @@
                                     <thead>
                                         <tr>
                                             <th></th>
-                                            <th>Name</th>
-                                            <th>Category</th>
-                                            <th>Description</th>
-                                            <th>Price</th>
-                                            <th style="width:0%">Edit</th>
+                                            <th>UserName</th>
+                                            <th>Email</th>
+                                            <th>Comment</th>
+                                            <th>Created Time</th>
                                             <th>Delete</th>
                                         </tr>
                                     </thead>
@@ -50,25 +48,20 @@
                                         {
                                             <tr>
                                                 <td>@order</td>
-                                                <td data-field="Name" style="width: 80px">@item.Name</td>
-                                                <td data-field="Category">@item.Categories.Name</td>
-                                                @if (item.Desc.Length > 70)
+                                                <td data-field="Name">@item.Name</td>
+                                                <td data-field="Category">@item.Email</td>
+                                                @if (item.Text.Length > 40)
                                                 {
-                                                    <td data-field="Description" data-bs-toggle="tooltip" data-bs-placement="bottom" title="@item.Desc">@item.Desc.Substring(0, 70)...</td>
+                                                    <td data-field="Description" data-bs-toggle="tooltip" data-bs-placement="bottom" title="@item.Text">@item.Text.Substring(0, 40)...</td>
                                                 }
                                                 else
                                                 {
-                                                    <td data-field="Description" data-bs-toggle="tooltip" data-bs-placement="bottom" title="@item.Desc">@item.Desc</td>
+                                                    <td data-field="Description" data-bs-toggle="tooltip" data-bs-placement="bottom" title="@item.Text">@item.Text</td>
 
                                                 }
-                                                <td data-field="Post Title">@item.Price</td>
-                                                <td style="width: 100px">
-                                                    <a asp-action="Edit" asp-route-id="@item.Id" class="btn btn-light waves-effect edit" title="Edit">
-                                                        <i class="fas fa-pencil-alt"></i>
-                                                    </a>
-                                                </td>
+                                                <td data-field="Post Title">@item.CreatedAt.ToString("MM-dd-yyyy")</td>
                                                 <td>
-                                                    <a class="btn btn-light waves-effect item-delete" asp-action="delete" asp-route-id="@item.Id" title="Delete">
+                                                    <a class="btn btn-light waves-effect item-delete" asp-action="DeleteComment" asp-route-id="@item.Id" title="Delete">
                                                         <i class="ri-delete-bin-line"></i>
                                                     </a>
                                                 </td>
@@ -87,16 +80,16 @@
                 <div class="d-inline-block ">
                     <ul class="pagination pagination-rounded mb-0">
                         <li class="page-item @(ViewBag.SelectedPage==1 ? "disabled":"")">
-                            <a class="page-link" asp-action="index" asp-controller="Room" asp-route-page="@(ViewBag.SelectedPage==1 ? 1:ViewBag.SelectedPage-1)">
+                            <a class="page-link" asp-action="comment" asp-controller="Blog" asp-route-page="@(ViewBag.SelectedPage==1 ? 1:ViewBag.SelectedPage-1)">
                                 <i class="mdi mdi-chevron-left"></i>
                             </a>
                         </li>
                         @for (int i = 1; i <= ViewBag.TotalPage; i++)
                         {
-                            <li class="page-item @(i==ViewBag.SelectedPage?"active":"")"><a class="page-link" asp-action="index" asp-controller="Room" asp-route-page="@i">@i</a></li>
+                            <li class="page-item @(i==ViewBag.SelectedPage?"active":"")"><a class="page-link" asp-action="comment" asp-controller="Blog" asp-route-page="@i">@i</a></li>
                         }
                         <li class="page-item @(ViewBag.SelectedPage==ViewBag.TotalPage ? "disabled" : "")">
-                            <a class="page-link" asp-action="index" asp-controller="Room" asp-route-page="@(ViewBag.SelectedPage==ViewBag.TotalPage ? ViewBag.TotalPage:ViewBag.SelectedPage+1)">
+                            <a class="page-link" asp-action="comment" asp-controller="Blog" asp-route-page="@(ViewBag.SelectedPage==ViewBag.TotalPage ? ViewBag.TotalPage:ViewBag.SelectedPage+1)">
                                 <i class="mdi mdi-chevron-right"></i>
                             </a>
                         </li>
@@ -112,7 +105,8 @@
 {
     <script>
 
-            $(document).ready(function () {
+        $(document).ready(function () {
+            let ID = document.getElementById("forBlogId").value 
                 $(document).on("click", ".item-delete", function (e) {
                     e.preventDefault();
                     Swal.fire({
@@ -125,14 +119,12 @@
                         confirmButtonText: 'Yes, delete it!'
                     }).then((result) => {
                         if (result.isConfirmed) {
-
                             var url = $(this).attr("href");
-
                             fetch(url)
                                 .then(response => response.json())
                                 .then(data => {
                                     if (data.status == 200) {
-                                        window.location="Room"
+                                        window.location = `https://localhost:44321/Manage/Blog/Comment/${ID}`
                                     }
                                     else {
                                         Swal.fire(
@@ -141,7 +133,7 @@
                                             'error'
                                         )
                                     }
-                                });
+                            });
 
 
                         }
@@ -152,4 +144,3 @@
 
     </script>
 }
-
