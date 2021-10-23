@@ -22,7 +22,8 @@ namespace SunsetHotel.Controllers
             _context = context;
             _userManager = userManager;
         }
-        public IActionResult Index(int? categoryId, string search, int page = 1)
+
+        public IActionResult Index(int? categoryId, string search, DateTime? checkin, DateTime? checkout, int page = 1)
         {
             TempData["forSelect"] = 3;
 
@@ -38,7 +39,18 @@ namespace SunsetHotel.Controllers
                 query = query.Where(x => x.Name.ToLower().Contains(search.ToLower()));
                 ViewBag.search = search;
             }
-
+            if (checkin != null && checkout != null)
+            {
+                ViewBag.checkin = checkin;
+                ViewBag.checkout = checkout;
+                query = query.Where(x => x.reservations.Any(y => y.CheckIn > checkin && y.CheckIn > checkout
+                || y.CheckIn < checkin && y.CheckOut < checkin) || x.reservations.Count == 0);
+            }
+            if (checkin == null && checkout != null || checkout == null && checkin != null || checkin > checkout)
+            {
+                TempData["Alert"] = "Check-in və Check-out tarixlərini düzgün daxil edin";
+                TempData["Type"] = "danger";
+            }
             double pageCount = Math.Ceiling(query.Count() / 4d);
             ViewBag.TotalPage = pageCount;
             ViewBag.SelectedPage = page;
@@ -49,11 +61,10 @@ namespace SunsetHotel.Controllers
             ViewBag.Categories = _context.RoomCategories.ToList();
             RoomViewModel roomVM = new RoomViewModel
             {
-                rooms = query.Include(x=>x.RoomImages).Include(x => x.Categories).Include(x =>x.RoomFeatureRelations).ThenInclude(x =>x.RoomFeature).Skip((page - 1) * 4).Take(4).ToList().ToList()
+                rooms = query.Include(x => x.RoomImages).Include(x => x.Categories).Include(x => x.RoomFeatureRelations).ThenInclude(x => x.RoomFeature).Skip((page - 1) * 4).Take(4).ToList().ToList()
             };
             return View(roomVM);
         }
-
         public IActionResult Details(int id)
         {
             Room room = _context.Rooms.Where(x => x.Id == id).FirstOrDefault();
@@ -170,7 +181,7 @@ namespace SunsetHotel.Controllers
             {
                 return RedirectToAction("error", "home");
             }
-            if (reservation.CheckIn<DateTime.UtcNow)
+            if (reservation.CheckIn<DateTime.Now)
             {
                 ModelState.AddModelError("reservation.CheckIn", "Keçmişə rezervasiya etmək mümkün deyil");
                 ViewBag.IsPossible = false;

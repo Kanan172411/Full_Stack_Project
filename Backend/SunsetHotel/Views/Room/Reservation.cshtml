@@ -109,7 +109,7 @@
                             <div class="col-sm-12 col-md-6">
                                 <div class="form-group" style="margin-bottom:0">
                                     <label asp-for="reservation.CheckIn" class="sr-only">Arrival date</label>
-                                    <input asp-for="reservation.CheckIn" required type="date" name="CheckIn" class="form-control" id="CheckIn"
+                                    <input onblur="ChangeOtherValue(this);" min="@DateTime.Now.AddDays(1).ToString("yyyy-MM-dd")" asp-for="reservation.CheckIn" required type="date" name="CheckIn" class="form-control" id="CheckIn"
                                            placeholder="mm/dd/yyyy">
                                     <span asp-validation-for="reservation.CheckIn" class="text-danger"></span>
                                 </div>
@@ -120,7 +120,7 @@
                             <div class="col-sm-12 col-md-6">
                                 <div class="form-group">
                                     <label asp-for="reservation.CheckIn" class="sr-only">Arrival date</label>
-                                    <input asp-for="reservation.CheckIn" required type="date" name="CheckIn" class="form-control" id="CheckIn"
+                                    <input onblur="ChangeOtherValue(this);" min="@DateTime.Now.AddDays(1).ToString("yyyy-MM-dd")" asp-for="reservation.CheckIn" required type="date" name="CheckIn" class="form-control" id="CheckIn"
                                            placeholder="mm/dd/yyyy">
                                     <span asp-validation-for="reservation.CheckIn" class="text-danger"></span>
                                 </div>
@@ -130,7 +130,7 @@
                         <div class="col-sm-12 col-md-6">
                             <div class="form-group">
                                 <label asp-for="reservation.CheckOut" class="sr-only">Departure date</label>
-                                <input asp-for="reservation.CheckOut" required type="date" name="CheckOut" class="form-control" id="CheckOut"
+                                <input min="@DateTime.Now.AddDays(2).ToString("yyyy-MM-dd")" asp-for="reservation.CheckOut" required type="date" name="CheckOut" class="form-control" id="CheckOut"
                                        placeholder="mm/dd/yyyy">
                                 <span asp-validation-for="reservation.CheckOut" class="text-danger"></span>
                             </div>
@@ -217,3 +217,14 @@
         </div> <!-- / .row -->
     </div> <!-- / .container -->
 </section> <!-- / .section reservation -->
+@section Scripts{
+    <script>
+        function ChangeOtherValue(object) {
+            var minToDate = document.getElementById("CheckIn").value;
+            var result = new Date(minToDate);
+            result.setDate(result.getDate() + 1);
+            var dateString = result.toISOString().split('T')[0];
+            document.getElementById("CheckOut").setAttribute("min", dateString);
+        }
+    </script>
+}

@@ -71,27 +71,54 @@
                             <p style="margin-top: 0px;" class="subheading for-date-range">Date Range</p>
 
                             <div class="date-range">
-                                <form action="">
-                                    <div class="col-sm-12 col-md-12 date">
-                                        <div class="form-group">
-                                            <label for="check-in">Start date</label>
-                                            <input type="date" name="check-in" class="form-control" id="check-in"
-                                                   value="2017-04-09">
-                                            <span class="help-block"></span>
+                                @if (ViewBag.checkin != null && ViewBag.checkout != null)
+                                {
+                                    <form asp-action="index" asp-controller="room">
+                                        <div class="col-sm-12 col-md-12 date">
+                                            <div class="form-group">
+                                                <label for="check-in">Check-in date</label>
+                                                <input onchange="ChangeOtherValue(this);" required min="@DateTime.Now.AddDays(1).ToString("yyyy-MM-dd")" type="date" name="checkin" class="form-control" id="checkin"
+                                                       value="@ViewBag.checkin.ToString("yyyy-MM-dd")">
+                                                <span class="help-block"></span>
+                                            </div>
                                         </div>
-                                    </div>
-                                    <div class="col-sm-12 col-md-12 date">
-                                        <div class="form-group">
-                                            <label for="check-out">End date</label>
-                                            <input type="date" name="check-out" class="form-control" id="check-out"
-                                                   value="2017-04-18">
-                                            <span class="help-block"></span>
+                                        <div class="col-sm-12 col-md-12 date">
+                                            <div class="form-group">
+                                                <label for="check-out">Check-out date</label>
+                                                <input required min="@DateTime.Now.AddDays(2).ToString("yyyy-MM-dd")" type="date" name="checkout" class="form-control" id="checkout"
+                                                       value="@ViewBag.checkout.ToString("yyyy-MM-dd")">
+                                                <span class="help-block"></span>
+                                            </div>
                                         </div>
-                                    </div>
-                                    <button type="submit" class="btn btn-default btn-submit">
-                                        submit
-                                    </button>
-                                </form>
+                                        <button type="submit" class="btn btn-default btn-submit">
+                                            submit
+                                        </button>
+                                    </form>
+                                }
+                                else
+                                {
+                                    <form asp-action="index" asp-controller="room">
+                                        <div class="col-sm-12 col-md-12 date">
+                                            <div class="form-group">
+                                                <label for="check-in">Check-in date</label>
+                                                <input onchange="ChangeOtherValue(this);" required min="@DateTime.Now.AddDays(1).ToString("yyyy-MM-dd")" type="date" name="checkin" class="form-control forValue" id="checkin"
+                                                       value="@DateTime.Now.AddDays(1).ToString("yyyy-MM-dd")">
+                                                <span class="help-block"></span>
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-12 col-md-12 date">
+                                            <div class="form-group">
+                                                <label for="check-out">Check-out date</label>
+                                                <input required min="@DateTime.Now.AddDays(2).ToString("yyyy-MM-dd")" type="date" name="checkout" class="form-control forValue1" id="checkout"
+                                                       value="@DateTime.Now.AddDays(2).ToString("yyyy-MM-dd")">
+                                                <span class="help-block"></span>
+                                            </div>
+                                        </div>
+                                        <button type="submit" class="btn btn-default btn-submit">
+                                            submit
+                                        </button>
+                                    </form>
+                                }
                             </div>
                         </div> <!-- .sidebar__item -->
 
@@ -143,16 +170,16 @@
                             <nav aria-label="Page navigation">
                                 <ul class="pagination">
                                     <li class="@(ViewBag.SelectedPage==1 ? "disabled":"")">
-                                        <a asp-action="index" asp-route-categoryId="@ViewBag.categoryId" asp-route-search="@ViewBag.search" asp-controller="room" asp-route-page="@(ViewBag.SelectedPage==1 ? 1:ViewBag.SelectedPage-1)">
+                                        <a asp-action="index" asp-route-checkin="@ViewBag.checkin" asp-route-checkout="@ViewBag.checkout" asp-route-categoryId="@ViewBag.categoryId" asp-route-search="@ViewBag.search" asp-controller="room" asp-route-page="@(ViewBag.SelectedPage==1 ? 1:ViewBag.SelectedPage-1)">
                                             <span aria-hidden="true">&laquo;</span>
                                         </a>
                                     </li>
                                     @for (int i = 1; i <= ViewBag.TotalPage; i++)
                                     {
-                                        <li class="@(i==ViewBag.SelectedPage?"active":"")"><a asp-action="index" asp-route-search="@ViewBag.search" asp-route-categoryId="@ViewBag.categoryId" asp-controller="room" asp-route-page="@i">@i</a></li>
+                                        <li class="@(i==ViewBag.SelectedPage?"active":"")"><a asp-action="index" asp-route-checkin="@ViewBag.checkin" asp-route-checkout="@ViewBag.checkout" asp-route-search="@ViewBag.search" asp-route-categoryId="@ViewBag.categoryId" asp-controller="room" asp-route-page="@i">@i</a></li>
                                     }
                                     <li class="@(ViewBag.SelectedPage==ViewBag.TotalPage ? "disabled" : "")">
-                                        <a asp-action="index" asp-controller="room" asp-route-categoryId="@ViewBag.categoryId" asp-route-search="@ViewBag.search" asp-route-page="@(ViewBag.SelectedPage==ViewBag.TotalPage ? ViewBag.TotalPage:ViewBag.SelectedPage+1)">
+                                        <a asp-action="index" asp-controller="room" asp-route-categoryId="@ViewBag.categoryId" asp-route-checkin="@ViewBag.checkin" asp-route-checkout="@ViewBag.checkout" asp-route-search="@ViewBag.search" asp-route-page="@(ViewBag.SelectedPage==ViewBag.TotalPage ? ViewBag.TotalPage:ViewBag.SelectedPage+1)">
                                             <span aria-hidden="true">&raquo;</span>
                                         </a>
                                     </li>
@@ -168,7 +195,6 @@
 </section> <!-- / .section__rooms-1 -->
 @section Scripts{
     <script>
-
         document.querySelector("#searching").addEventListener("keyup", function () {
             if (this.value.trim().length > 0)
             {
@@ -182,8 +208,13 @@
                  document.querySelector("#searchresult").innerHTML = "";
             }
         })
-
-
-
+        function ChangeOtherValue(object) {
+            var minToDate = document.getElementById("checkin").value;
+            var result = new Date(minToDate);
+            result.setDate(result.getDate() + 1);
+            var dateString = result.toISOString().split('T')[0];
+            document.getElementById("checkout").setAttribute("min", dateString);
+            document.getElementById("checkout").setAttribute("value", dateString);
+        }
     </script>
 }
