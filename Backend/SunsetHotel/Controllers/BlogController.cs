@@ -1,4 +1,6 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using SunsetHotel.DAL;
 using SunsetHotel.Models;
@@ -13,10 +15,12 @@ namespace SunsetHotel.Controllers
     public class BlogController : Controller
     {
         private readonly AppDbContext _context;
+        private readonly UserManager<AppUser> _userManager;
 
-        public BlogController(AppDbContext context)
+        public BlogController(AppDbContext context, UserManager<AppUser> userManager)
         {
             _context = context;
+            _userManager = userManager;
         }
         public IActionResult Index(int? categoryId, int? Tagid, string search, int page=1)
         {
@@ -76,6 +80,48 @@ namespace SunsetHotel.Controllers
                 blog = _context.Blogs.Where(x => x.Id == id).Include(x => x.BlogCategory).Include(x => x.BlogTags).ThenInclude(x => x.Tag).FirstOrDefault()
             };
             return View(blogVM);
+        }
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Comment(BlogComment comment)
+        {
+            Blog blog = _context.Blogs.Where(x => x.Id == comment.BlogId).FirstOrDefault();
+            if (blog==null)
+            {
+                return RedirectToAction("error", "home");
+            }
+            BlogComment blogComment = new BlogComment();
+            if (User.IsInRole("Member"))
+            {
+                AppUser appUser = await _userManager.FindByNameAsync(User.Identity.Name);
+                blogComment.Name = appUser.FullName;
+                blogComment.Email = appUser.Email;
+            }
+            else
+            {
+                if (comment.Name.Length < 7 || comment.Email.Length < 6 || comment.Name.Length > 50 || comment.Email.Length > 60)
+                {
+                    TempData["Alert"] = "Commenti düzgün formatda daxil edin";
+                    TempData["Type"] = "danger";
+                    return RedirectToAction("details", "blog", new { id = comment.BlogId });
+                }
+                blogComment.Name = comment.Name;
+                blogComment.Email = comment.Email;
+            }
+            if (comment.Text.Length < 10 || comment.Text.Length > 300)
+            {
+                TempData["Alert"] = "Commenti düzgün formatda daxil edin";
+                TempData["Type"] = "danger";
+                return RedirectToAction("details", "blog", new { id = comment.BlogId });
+            }
+            blogComment.BlogId = comment.BlogId;
+            blogComment.Text = comment.Text;
+            blogComment.CreatedAt = DateTime.Now;
+            _context.BlogComments.Add(blogComment);
+            _context.SaveChanges();
+            TempData["Alert"] = "Comment əlavə edildi";
+            TempData["Type"] = "success";
+            return RedirectToAction("details", "blog", new { id = comment.BlogId });
         }
     }
 }

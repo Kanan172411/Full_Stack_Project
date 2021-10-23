@@ -38,5 +38,6 @@ namespace SunsetHotel.Models
         public IFormFile ImageFile { get; set; }
         [NotMapped]
         public List<int> TagId { get; set; }
+        public List<BlogComment> Comments { get; set; }
     }
 }

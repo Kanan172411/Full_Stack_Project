@@ -34,5 +34,6 @@ namespace SunsetHotel.DAL
         public DbSet<Reservation> Reservations { get; set; }
         public DbSet<Subscriber> Subscribers { get; set; }
         public DbSet<ContactMessages> ContactMessages { get; set; }
+        public DbSet<BlogComment> BlogComments { get; set; }
     }
 }
