@@ -41,6 +41,7 @@
                                             <th>Category</th>
                                             <th>Description</th>
                                             <th>Price</th>
+                                            <th>Bookings</th>
                                             <th>Comments</th>
                                             <th style="width:0%">Edit</th>
                                             <th>Delete</th>
@@ -63,6 +64,13 @@
 
                                                 }
                                                 <td data-field="Post Title">@item.Price</td>
+                                                <td>
+                                                    <a asp-action="Reservation" asp-route-id="@item.Id" class="btn btn-light waves-effect" title="Comments">
+                                                        <i class="far fa-calendar-alt">
+                                                            <span class="badge rounded-pill bg-dark">@item.reservations.Count()</span>
+                                                        </i>
+                                                    </a>
+                                                </td>
                                                 <td>
                                                     <a asp-action="Comment" asp-route-id="@item.Id" class="btn btn-light waves-effect" title="Comments">
                                                         <i class="fas fa-comments">

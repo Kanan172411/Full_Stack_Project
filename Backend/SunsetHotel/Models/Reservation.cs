@@ -37,6 +37,8 @@ namespace SunsetHotel.Models
         public string Country { get; set; }
         [StringLength(maximumLength: 500)]
         public string SpecialReq { get; set; }
+        [StringLength(maximumLength: 300)]
+        public string AdminNote { get; set; }
         public bool? Status { get; set; }
         public int RoomId { get; set; }
         [Required]

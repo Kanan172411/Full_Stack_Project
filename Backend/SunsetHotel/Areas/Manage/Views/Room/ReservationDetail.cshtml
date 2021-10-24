@@ -1,0 +1,103 @@
+﻿@*@model Reservation
+@{
+    ViewData["Title"] = "ReservationDetail";
+    Layout = "~/Areas/Manage/Views/Shared/_Layout.cshtml";
+}
+<div class="container-fluid">
+    <div class="card">
+        <div class="card-body">
+            <h6 class="card-title">UserName: @Model.appUser.FullName - @Model.appUser.Email</h6>
+            <h6 class="card-title">Address 1: @Model.Country / @Model.City / @Model.Address </h6>
+            <h6 class="card-title">User note: @Model.Note</h6>
+            @if (Model.Status != null)
+            {
+                <h6 class="card-title">Admin note: @Model.AdminNote</h6>
+            }
+            <h6 class="card-title">
+                Status:
+                @if (Model.Status == null)
+                {
+                    <span class="badge badge-warning">Pending</span>
+                }
+                else if (Model.Status == true)
+                {
+                    <span class="badge badge-success">Accepted</span>
+                }
+                else
+                {
+                    <span class="badge badge-danger">Rejected</span>
+                }
+            </h6>
+
+
+            <h5 class="card-title">Products: </h5>
+            <ul>
+                @foreach (var item in Model.OrderItems)
+                {
+
+                    <li>
+                        <h6 class="card-title">@item.Book.Name X @item.Count - Total: @(item.Count*item.Price)$ </h6>
+                    </li>
+                }
+            </ul>
+
+
+
+            @if (Model.Status == null)
+            {
+                <form>
+                    <div class="form-row">
+                        <div class="form-group col-md-6">
+                            <label for="note">Desc</label>
+                            <textarea name="note" id="note" class="form-control"></textarea>
+                            <span class="text-danger" id="note-error"></span>
+                        </div>
+                    </div>
+                </form>
+                <a asp-action="accept" asp-route-id="@Model.Id" class="btn btn-success order-accept">Accpet</a>
+                <a asp-action="reject" asp-route-id="@Model.Id" class="btn btn-danger order-reject">Reject</a>
+            }
+        </div>
+    </div>
+</div>
+
+@section Scripts{
+    <script>
+    $(document).ready(function () {
+        $(document).on("click", ".order-accept", function (e) {
+            e.preventDefault();
+            var note = $("#note").val();
+            var url = $(this).attr("href") + "?note=" + note;
+            fetch(url)
+                .then(response => response.json())
+                .then(data => {
+                    window.location.href = "https://localhost:44302/manage/Order";
+                });
+        })
+        $(document).on("click", ".order-reject", function (e) {
+            e.preventDefault();
+            var note = $("#note").val();
+            if (note == "")
+            {
+                $("#note-error").text("Note is required!")
+            }
+            else {
+                var url = $(this).attr("href") + "?note=" + note;
+                fetch(url)
+                    .then(response => response.json())
+                    .then(data => {
+                        if (data.status == 400) {
+                            $("#note-error").text("Note is required!")
+                        }
+                        else {
+                            window.location.href = "/manage/Order";
+                        }
+                    });
+            }
+
+        })
+    })
+    </script>
+}*@
+
+

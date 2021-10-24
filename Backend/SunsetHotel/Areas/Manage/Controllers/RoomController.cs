@@ -31,7 +31,7 @@ namespace SunsetHotel.Areas.Manage.Controllers
             {
                 return RedirectToAction("error", "dashboard");
             }
-            List<Room> rooms = _context.Rooms.Include(x=>x.Comments).Include(x => x.RoomImages).Include(x=>x.Categories).Skip((page - 1) * 6).Take(6).ToList();
+            List<Room> rooms = _context.Rooms.Include(x=>x.reservations).Include(x=>x.Comments).Include(x => x.RoomImages).Include(x=>x.Categories).Skip((page - 1) * 6).Take(6).ToList();
             return View(rooms);
         }
         public IActionResult Create()
@@ -265,6 +265,30 @@ namespace SunsetHotel.Areas.Manage.Controllers
             _context.RoomComments.Remove(roomComment);
             _context.SaveChanges();
             return Json(new { status = 200 });
+        }
+        public IActionResult Reservation(int id, int page = 1)
+        {
+            Room room = _context.Rooms.Where(x => x.Id == id).FirstOrDefault();
+            if (room == null)
+            {
+                return RedirectToAction("error", "dashboard");
+            }
+            ViewBag.SelectedPage = page;
+            ViewBag.TotalPage = Math.Ceiling(_context.Reservations.Where(x => x.RoomId == id).Count() / 8d);
+            ViewBag.Id = id;
+
+            List<Reservation> reservations = _context.Reservations.Include(x=>x.appUser).Include(x=>x.room).Where(x => x.RoomId == room.Id).Skip((page - 1) * 8).Take(8).ToList();
+            return View(reservations);
+        }
+        public IActionResult ReservationDetail(int id)
+        {
+            Reservation reservation = _context.Reservations.Include(x=>x.appUser).Include(x=>x.room).Where(x => x.Id == id).FirstOrDefault();
+            if (reservation==null)
+            {
+                return RedirectToAction("error", "dashboard");
+            }
+
+            return View(reservation);
         }
     }
 }
