@@ -116,7 +116,7 @@ namespace SunsetHotel.Controllers
             }
 
             List<Select> MaxChild = new List<Select>();
-            for (int i = 1; i < room.MaxChild + 1; i++)
+            for (int i = 0; i < room.MaxChild + 1; i++)
             {
                 Select selectList = new Select
                 {
@@ -166,7 +166,7 @@ namespace SunsetHotel.Controllers
             };
 
             List<Select> MaxChild = new List<Select>();
-            for (int i = 1; i < existroom.MaxChild + 1; i++)
+            for (int i = 0; i < existroom.MaxChild + 1; i++)
             {
                 Select selectList = new Select
                 {
@@ -274,7 +274,7 @@ namespace SunsetHotel.Controllers
                 return View(reservationViewModel);
             }
             #endregion
-
+            reservation.NightCount = (int)(reservation.CheckOut - reservation.CheckIn).TotalDays;
             _context.Reservations.Add(reservation);
             _context.SaveChanges();
             TempData["Alert"] = "Rezervasiya istəyi göndərildi";
@@ -327,9 +327,16 @@ namespace SunsetHotel.Controllers
             }
         }
 
-        public IActionResult MyReservation()
+        [Authorize(Roles = "Member")]
+        public async Task<IActionResult> MyReservation(int page = 1)
         {
-            return View();
+            AppUser appUser = await _userManager.FindByNameAsync(User.Identity.Name);
+            List<Reservation> reservations = _context.Reservations.Where(x => x.AppUserId == appUser.Id).ToList();
+            double pageCount = Math.Ceiling(reservations.Count() / 3d);
+            List<Reservation> reservations1 = _context.Reservations.Include(x => x.room).ThenInclude(x => x.RoomImages).Where(x => x.AppUserId == appUser.Id).Skip((page - 1) * 3).Take(3).ToList();
+            ViewBag.TotalPage = pageCount;
+            ViewBag.SelectedPage = page;
+            return View(reservations1);
         } 
     }
 }

@@ -39,6 +39,7 @@ namespace SunsetHotel.Models
         public string SpecialReq { get; set; }
         [StringLength(maximumLength: 300)]
         public string AdminNote { get; set; }
+        public int NightCount { get; set; }
         public bool? Status { get; set; }
         public int RoomId { get; set; }
         [Required]

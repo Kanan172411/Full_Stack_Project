@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Identity;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using SunsetHotel.DAL;
 using SunsetHotel.Models;
@@ -110,6 +111,7 @@ namespace SunsetHotel.Controllers
             await _signInManager.SignOutAsync();
             return RedirectToAction("Index", "Home");
         }
+        [Authorize(Roles = "Member")]
         public async Task<IActionResult> Edit()
         {
             AppUser user = await _userManager.FindByNameAsync(User.Identity.Name);
@@ -125,7 +127,7 @@ namespace SunsetHotel.Controllers
             };
             return View(updateModel);
         }
-
+        [Authorize(Roles = "Member")]
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(UserUpdateViewModel updateVM)
@@ -161,12 +163,12 @@ namespace SunsetHotel.Controllers
             return RedirectToAction("index", "home");
         }
 
-
+        [Authorize(Roles = "Member")]
         public IActionResult ChangePassword()
         {
             return View();
         }
-
+        [Authorize(Roles = "Member")]
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> ChangePassword(ChangePasswordViewModel changePasswordVM)
