@@ -72,6 +72,7 @@ namespace SunsetHotel.Areas.Manage.Controllers
             existData.ReservationWelcomeContent = setting.ReservationWelcomeContent;
             existData.ReservationTitle = setting.ReservationTitle;
             existData.InfoTitle = setting.InfoTitle;
+            existData.AboutVideoIframe = setting.AboutVideoIframe;
             if (setting.AboutBannerImageFile != null)
             {
                 if (setting.AboutBannerImageFile.ContentType != "image/jpeg" && setting.AboutBannerImageFile.ContentType != "image/png")

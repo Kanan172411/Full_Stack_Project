@@ -207,6 +207,18 @@
                                             <td data-field="@Model.InfoTitle">@Model.InfoTitle</td>
                                         </tr>
                                         <tr>
+                                            <td data-field="Iframe" style="width: 50%">Iframe:</td>
+                                            @if (Model.AboutVideoIframe.Length > 70)
+                                            {
+                                                <td data-field="Description" data-bs-toggle="tooltip" data-bs-placement="bottom" title="@Model.AboutVideoIframe">@Model.AboutVideoIframe.Substring(0, 70)...</td>
+                                            }
+                                            else
+                                            {
+                                                <td data-field="Description" data-bs-toggle="tooltip" data-bs-placement="bottom" title="@Model.AboutVideoIframe">@Model.AboutVideoIframe</td>
+
+                                            }
+                                        </tr>
+                                        <tr>
                                             <td data-field="About Banner Image" style="width: 50%">About Banner Image:</td>
                                             <td data-field="@Model.AboutBannerImage">
                                                 <div class="col-md-6 col-xl-3" style="width:250px">

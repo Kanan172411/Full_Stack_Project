@@ -118,7 +118,11 @@
             fetch(url)
                 .then(response => response.json())
                 .then(data => {
-                    window.location.href = `/manage/room/reservation/${ROOMID}`;
+                    if (data.status == 402) {
+                        window.location.href = "/manage/dashboard/error"
+                    } else {
+                        window.location.href = `/manage/room/reservation/${ROOMID}`;
+                    }
                 });
         })
         $(document).on("click", ".order-reject", function (e) {
@@ -135,6 +139,9 @@
                     .then(data => {
                         if (data.status == 400) {
                             $("#note-error").text("Note is required!")
+                        }
+                        else if (data.status == 402) {
+                            window.location.href = "/manage/dashboard/error"
                         }
                         else {
                             window.location.href = `/manage/room/reservation/${ROOMID}`;

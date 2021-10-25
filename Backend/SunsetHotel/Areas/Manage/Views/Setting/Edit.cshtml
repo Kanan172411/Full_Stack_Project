@@ -162,6 +162,11 @@
                             <input type="text" asp-for="InfoTitle" class="form-control">
                             <span class="text-danger" asp-validation-for="InfoTitle"></span>
                         </div>
+                        <div class="form-group">
+                            <label asp-for="AboutVideoIframe">About Video Iframe</label>
+                            <textarea type="text" asp-for="AboutVideoIframe" class="form-control"></textarea>
+                            <span class="text-danger" asp-validation-for="AboutVideoIframe"></span>
+                        </div>
                         <div class="form-group" style="margin: 20px 0px 20px 0px;">
                             @if (Model.AboutBannerImage != null)
                             {

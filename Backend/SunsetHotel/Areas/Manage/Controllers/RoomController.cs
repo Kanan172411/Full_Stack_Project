@@ -300,7 +300,9 @@ namespace SunsetHotel.Areas.Manage.Controllers
         {
             Reservation reservation = _context.Reservations.Include(x=>x.room).Include(x=>x.appUser).FirstOrDefault(x => x.Id == id);
 
-            if (reservation == null) return Json(new { status = 404 });
+            if (reservation == null) return Json(new { status = 402 });
+            if (reservation.Status != null) return Json(new { status = 402 });
+
             reservation.Status = true;
             reservation.AdminNote = note;
 
@@ -327,11 +329,12 @@ namespace SunsetHotel.Areas.Manage.Controllers
 
             if (reservation == null)
             {
-                return Json(new { status = 404 });
+                return Json(new { status = 402 });
             }
+            if (reservation.Status != null) return Json(new { status = 404 });
             if (string.IsNullOrWhiteSpace(note))
             {
-                return Json(new { status = 400 });
+                return Json(new { status = 402 });
             }
 
             reservation.Status = false;

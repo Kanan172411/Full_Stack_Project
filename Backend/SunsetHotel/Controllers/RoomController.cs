@@ -27,7 +27,8 @@ namespace SunsetHotel.Controllers
         {
             TempData["forSelect"] = 3;
 
-            var query = _context.Rooms.AsQueryable();
+            var query = _context.Rooms.Include(x => x.reservations).AsQueryable();
+            //IQueryable<Room> roomQuery = null;
             if (categoryId != null)
             {
                 query = query.Where(x => x.RoomCategoryId == categoryId);
@@ -43,8 +44,7 @@ namespace SunsetHotel.Controllers
             {
                 ViewBag.checkin = checkin;
                 ViewBag.checkout = checkout;
-                query = query.Where(x => x.reservations.Any(y => y.CheckIn > checkin && y.CheckIn > checkout
-                || y.CheckIn < checkin && y.CheckOut < checkin) || x.reservations.Count == 0);
+                query = query.Where(x => x.reservations.Count == 0 || x.reservations.Where(y => y.Status != false).All(y => y.CheckIn > checkout || y.CheckOut < checkin));
             }
             if (checkin == null && checkout != null || checkout == null && checkin != null || checkin > checkout)
             {
@@ -63,6 +63,12 @@ namespace SunsetHotel.Controllers
             {
                 rooms = query.Include(x => x.RoomImages).Include(x => x.Categories).Include(x => x.RoomFeatureRelations).ThenInclude(x => x.RoomFeature).Skip((page - 1) * 4).Take(4).ToList().ToList()
             };
+            if (checkin == null && checkout != null || checkout == null && checkin != null || checkin > checkout)
+            {
+                TempData["Alert"] = "Check-in və Check-out tarixlərini düzgün daxil edin";
+                TempData["Type"] = "danger";
+                return View(roomVM);
+            }
             return View(roomVM);
         }
         public async Task<IActionResult> Details(int id)
@@ -255,19 +261,19 @@ namespace SunsetHotel.Controllers
                 ModelState.AddModelError("reservation.Email", "This field is required");
                 return View(reservationViewModel);
             }
-            if (existroom.reservations.Any(x => x.CheckIn <= reservation.CheckIn && x.CheckOut >= reservation.CheckIn)) 
+            if (existroom.reservations.Where(x => x.Status != false).Any(x => x.CheckIn <= reservation.CheckIn && x.CheckOut >= reservation.CheckIn)) 
             {
                 TempData["Alert"] = "Seçdiyiniz tarixlər üçün artıq rezervasiya olunub";
                 TempData["Type"] = "danger";
                 return View(reservationViewModel);
             }
-            if (existroom.reservations.Any(x => x.CheckIn <= reservation.CheckOut && x.CheckOut >= reservation.CheckOut))
+            if (existroom.reservations.Where(x => x.Status != false).Any(x => x.CheckIn <= reservation.CheckOut && x.CheckOut >= reservation.CheckOut))
             {
                 TempData["Alert"] = "Seçdiyiniz tarixlər üçün artıq rezervasiya olunub";
                 TempData["Type"] = "danger";
                 return View(reservationViewModel);
             }
-            if (existroom.reservations.Any(x => x.CheckIn >= reservation.CheckIn && x.CheckOut <= reservation.CheckOut))
+            if (existroom.reservations.Where(x => x.Status != false).Any(x => x.CheckIn >= reservation.CheckIn && x.CheckOut <= reservation.CheckOut))
             {
                 TempData["Alert"] = "Seçdiyiniz tarixlər üçün artıq rezervasiya olunub";
                 TempData["Type"] = "danger";
@@ -297,7 +303,7 @@ namespace SunsetHotel.Controllers
             var user = _context.AppUsers.Where(x => x.Id == appUser.Id).Include(x => x.reservations).FirstOrDefault();
             if (appUser.reservations.Count != 0)
             {
-                if (user.reservations.Where(y => y.RoomId == roomComment.RoomId).Any(x => x.CheckOut < DateTime.Now))
+                if (user.reservations.Where(y => y.RoomId == roomComment.RoomId).Any(x => x.CheckOut < DateTime.Now && x.Status == true))
                 {
                     if (roomComment.Text.Length < 10 || roomComment.Text.Length > 300)
                     {

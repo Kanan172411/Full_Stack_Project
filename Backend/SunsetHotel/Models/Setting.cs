@@ -96,5 +96,6 @@ namespace SunsetHotel.Models
         public string InfoTitle { get; set; }
         [NotMapped]
         public IFormFile AboutBannerImageFile { get; set; }
+        public string AboutVideoIframe { get; set; }
     }
 }
