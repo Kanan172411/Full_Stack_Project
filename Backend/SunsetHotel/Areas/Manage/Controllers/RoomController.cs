@@ -5,6 +5,7 @@ using Microsoft.EntityFrameworkCore;
 using SunsetHotel.DAL;
 using SunsetHotel.Helpers;
 using SunsetHotel.Models;
+using SunsetHotel.Services;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -18,10 +19,12 @@ namespace SunsetHotel.Areas.Manage.Controllers
     {
         private readonly AppDbContext _context;
         private readonly IWebHostEnvironment _env;
-        public RoomController(AppDbContext context, IWebHostEnvironment env)
+        private readonly IEmailService _emailService;
+        public RoomController(AppDbContext context, IWebHostEnvironment env, IEmailService emailService)
         {
             _context = context;
             _env = env;
+            _emailService = emailService;
         }
         public IActionResult Index(int page = 1)
         {
@@ -287,8 +290,48 @@ namespace SunsetHotel.Areas.Manage.Controllers
             {
                 return RedirectToAction("error", "dashboard");
             }
-
+            ViewBag.Id = reservation.RoomId;
             return View(reservation);
+        }
+        public IActionResult Accept(int id, string note)
+        {
+            Reservation reservation = _context.Reservations.Include(x=>x.room).Include(x=>x.appUser).FirstOrDefault(x => x.Id == id);
+
+            if (reservation == null) return Json(new { status = 404 });
+            reservation.Status = true;
+            reservation.AdminNote = note;
+
+            _context.SaveChanges();
+
+            if (note==null)
+            {
+                _emailService.Send(reservation.appUser.Email, "Reservation accepted", "Room: " + reservation.room.Name);
+            }
+            else
+            {
+                _emailService.Send(reservation.appUser.Email, "Reservation accepted", "Room: " + reservation.room.Name + "/" + " Admin Note: " + note);
+            }
+            return Json(new { status = 200 });
+        }
+        public IActionResult Reject(int id, string note)
+        {
+            Reservation reservation = _context.Reservations.Include(x => x.appUser).Include(x => x.room).FirstOrDefault(x => x.Id == id);
+
+            if (reservation == null)
+            {
+                return Json(new { status = 404 });
+            }
+            if (string.IsNullOrWhiteSpace(note))
+            {
+                return Json(new { status = 400 });
+            }
+
+            reservation.Status = false;
+            reservation.AdminNote = note;
+
+            _context.SaveChanges();
+            _emailService.Send(reservation.appUser.Email, "Reservation rejected", "Room:   " + reservation.room.Name + " / " + " Admin Note:  " + note);
+            return Json(new { status = 200 });
         }
     }
 }

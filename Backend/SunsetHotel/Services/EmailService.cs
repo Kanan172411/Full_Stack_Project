@@ -20,7 +20,7 @@ namespace SunsetHotel.Services
         {
             // create message
             var email = new MimeMessage();
-            email.From.Add(MailboxAddress.Parse("kanan172@yandex.com"));
+            email.From.Add(MailboxAddress.Parse("sunseth0tel@yandex.com"));
             email.To.Add(MailboxAddress.Parse(to));
             email.Subject = subject;
             email.Body = new TextPart(TextFormat.Html) { Text = html };
@@ -28,7 +28,7 @@ namespace SunsetHotel.Services
             // send email
             using var smtp = new SmtpClient();
             smtp.Connect("smtp.yandex.com", 587, SecureSocketOptions.StartTls);
-            smtp.Authenticate("kanan172@yandex.com", "kenan2002");
+            smtp.Authenticate("sunseth0tel@yandex.com", "kenan2002");
             smtp.Send(email);
             smtp.Disconnect(true);
         }

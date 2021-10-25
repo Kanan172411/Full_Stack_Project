@@ -1,69 +1,116 @@
-﻿@*@model Reservation
+﻿@model Reservation
 @{
     ViewData["Title"] = "ReservationDetail";
     Layout = "~/Areas/Manage/Views/Shared/_Layout.cshtml";
 }
-<div class="container-fluid">
-    <div class="card">
-        <div class="card-body">
-            <h6 class="card-title">UserName: @Model.appUser.FullName - @Model.appUser.Email</h6>
-            <h6 class="card-title">Address 1: @Model.Country / @Model.City / @Model.Address </h6>
-            <h6 class="card-title">User note: @Model.Note</h6>
-            @if (Model.Status != null)
-            {
-                <h6 class="card-title">Admin note: @Model.AdminNote</h6>
-            }
-            <h6 class="card-title">
-                Status:
-                @if (Model.Status == null)
-                {
-                    <span class="badge badge-warning">Pending</span>
-                }
-                else if (Model.Status == true)
-                {
-                    <span class="badge badge-success">Accepted</span>
-                }
-                else
-                {
-                    <span class="badge badge-danger">Rejected</span>
-                }
-            </h6>
+<div class="main-content">
 
+    <div class="page-content">
+        <div class="container-fluid">
 
-            <h5 class="card-title">Products: </h5>
-            <ul>
-                @foreach (var item in Model.OrderItems)
-                {
+            <!-- start page title -->
+            <div class="row">
+                <div class="col-12">
+                    <div class="page-title-box d-sm-flex align-items-center justify-content-between">
+                        <h4 class="mb-sm-0">Reservation Details</h4>
+                        <div class="page-title-right">
+                            <ol class="breadcrumb m-0">
+                                <li class="breadcrumb-item"><a href="javascript: void(0);">Tables</a></li>
+                                <li class="breadcrumb-item active">Reservation Details</li>
+                            </ol>
+                        </div>
 
-                    <li>
-                        <h6 class="card-title">@item.Book.Name X @item.Count - Total: @(item.Count*item.Price)$ </h6>
-                    </li>
-                }
-            </ul>
+                    </div>
+                </div>
+            </div>
+            <!-- end page title -->
 
-
-
-            @if (Model.Status == null)
-            {
-                <form>
-                    <div class="form-row">
-                        <div class="form-group col-md-6">
-                            <label for="note">Desc</label>
-                            <textarea name="note" id="note" class="form-control"></textarea>
-                            <span class="text-danger" id="note-error"></span>
+            <div class="row">
+                <div class="col-12">
+                    <div class="card">
+                        <div class="card-body">
+                            <div class="table-responsive">
+                                <table class="table table-editable table-nowrap align-middle table-edits">
+                                    <tbody>
+                                        <tr>
+                                            <td data-field="User" style="width: 20%">User:</td>
+                                            <td data-field="v">@Model.appUser.FullName / @Model.appUser.Email / @Model.PhoneNumber</td>
+                                        </tr>
+                                        <tr>
+                                            <td data-field="Address" style="width: 20%">Address:</td>
+                                            <td data-field="@Model.Country / @Model.City / @Model.Address">@Model.Country / @Model.City / @Model.Address</td>
+                                        </tr>
+                                        <tr>
+                                            <td data-field="Logo Part 1" style="width: 20%">Check-in:</td>
+                                            <td data-field="@Model.CheckIn.ToString("MM-dd-yyyy")">@Model.CheckIn.ToString("MM-dd-yyyy")</td>
+                                        </tr>
+                                        <tr>
+                                            <td data-field="Check-out" style="width: 20%">Check-out:</td>
+                                            <td data-field="@Model.CheckOut.ToString("MM-dd-yyyy")">@Model.CheckOut.ToString("MM-dd-yyyy")</td>
+                                        </tr>
+                                        <tr>
+                                            <td data-field="User note" style="width: 20%">User note:</td>
+                                            <td data-field="@Model.SpecialReq">@Model.SpecialReq</td>
+                                        </tr>
+                                        <tr>
+                                            <td data-field="Adult Count" style="width: 20%">Adult Count:</td>
+                                            <td data-field="@Model.AdultCount">@Model.AdultCount</td>
+                                        </tr>
+                                        <tr>
+                                            <td data-field="Child Count" style="width: 20%">Child Count:</td>
+                                            <td data-field="@Model.ChildCount">@Model.ChildCount</td>
+                                        </tr>
+                                        <tr>
+                                            <td data-field="Status" style="width: 20%">Status:</td>
+                                            @if (Model.Status == null)
+                                            {
+                                                <td data-field="Status"><span class="badge rounded-pill bg-warning">Pending</span></td>
+                                            }
+                                            else if (Model.Status == true)
+                                            {
+                                                <td data-field="Status"><span class="badge rounded-pill bg-success">Accepted</span></td>
+                                            }
+                                            else
+                                            {
+                                                <td data-field="Status"><span class="badge rounded-pill bg-danger">Rejected</span></td>
+                                            }
+                                        </tr>
+                                        @if (Model.AdminNote != null)
+                                        {
+                                            <tr>
+                                                <td data-field="Admin note" style="width: 20%">Admin note:</td>
+                                                <td data-field="@Model.AdminNote">@Model.AdminNote</td>
+                                            </tr>
+                                        }
+                                    </tbody>
+                                </table>
+                                @if (Model.Status == null)
+                                {
+                                    <form enctype="multipart/form-data">
+                                        <div style="margin-bottom:30px" class="form-group col-6">
+                                            <label>Admin Note</label>
+                                            <textarea id="note" type="text" class="form-control"></textarea>
+                                            <span class="text-danger" id="note-error"></span>
+                                        </div>
+                                    </form>
+                                    <a asp-action="accept" asp-route-id="@Model.Id" class="btn btn-success waves-effect waves-light order-accept">Accept</a>
+                                    <a asp-action="reject" asp-route-id="@Model.Id" class="btn btn-danger waves-effect waves-light order-reject">Reject</a>
+                                }
+                                <input type="hidden" value="@ViewBag.Id" id="RoomId"/>
+                            </div>
                         </div>
                     </div>
-                </form>
-                <a asp-action="accept" asp-route-id="@Model.Id" class="btn btn-success order-accept">Accpet</a>
-                <a asp-action="reject" asp-route-id="@Model.Id" class="btn btn-danger order-reject">Reject</a>
-            }
-        </div>
+                </div> <!-- end col -->
+            </div> <!-- end row -->
+        </div> <!-- container-fluid -->
     </div>
+    <!-- End Page-content -->
 </div>
 
 @section Scripts{
     <script>
     $(document).ready(function () {
+        var ROOMID = document.getElementById("RoomId").value
         $(document).on("click", ".order-accept", function (e) {
             e.preventDefault();
             var note = $("#note").val();
@@ -71,7 +118,7 @@
             fetch(url)
                 .then(response => response.json())
                 .then(data => {
-                    window.location.href = "https://localhost:44302/manage/Order";
+                    window.location.href = `/manage/room/reservation/${ROOMID}`;
                 });
         })
         $(document).on("click", ".order-reject", function (e) {
@@ -90,7 +137,7 @@
                             $("#note-error").text("Note is required!")
                         }
                         else {
-                            window.location.href = "/manage/Order";
+                            window.location.href = `/manage/room/reservation/${ROOMID}`;
                         }
                     });
             }
@@ -98,6 +145,6 @@
         })
     })
     </script>
-}*@
+}
 
 

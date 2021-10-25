@@ -28,6 +28,7 @@ namespace SunsetHotel
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllersWithViews();
+            services.AddScoped<IEmailService, EmailService>();
             services.AddScoped<LayoutService>();
             services.AddDbContext<AppDbContext>(options =>
             {
