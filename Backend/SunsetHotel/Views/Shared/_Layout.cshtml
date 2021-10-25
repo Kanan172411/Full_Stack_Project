@@ -297,6 +297,27 @@
     <script src="~/assets/js/theme.js"></script>
     <!-- endbuild -->
     <script src="~/assets/js/google_maps.js"></script>
+    <script src="~/js/signalr/dist/browser/signalr.min.js"></script>
+    <script>
+        var connection = new signalR.HubConnectionBuilder().withUrl("/sunsethub").build();
+        connection.start();
+        $(document).ready(function () {
+            connection.on("OrderAccept", function () {
+                console.log("isledi")
+                $(document).trigger("sunset.alert.show", [
+                    "success",
+                    "Reservation Accepted"
+                ]);
+            })
+            connection.on("OrderReject", function () {
+                console.log("isledi")
+                $(document).trigger("sunset.alert.show", [
+                    "danger",
+                    "Reservation Rejected"
+                ]);
+            })
+        })
+    </script>
     @RenderSection("Scripts", required: false)
 </body>
 

@@ -14,6 +14,7 @@ namespace SunsetHotel.Models
         public string Country { get; set; }
         public string City { get; set; }
         public string Address { get; set; }
+        public string ConnectionId { get; set; }
         public List<Reservation> reservations { get; set; }
         public List<RoomComment> Comments { get; set; }
     }

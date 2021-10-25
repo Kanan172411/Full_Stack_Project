@@ -30,6 +30,7 @@ namespace SunsetHotel
             services.AddControllersWithViews();
             services.AddScoped<IEmailService, EmailService>();
             services.AddScoped<LayoutService>();
+            services.AddSignalR();
             services.AddDbContext<AppDbContext>(options =>
             {
                 options.UseSqlServer(Configuration.GetConnectionString("default"));
@@ -79,6 +80,7 @@ namespace SunsetHotel
                 endpoints.MapControllerRoute(
                     name: "default",
                     pattern: "{controller=Home}/{action=Index}/{id?}");
+                endpoints.MapHub<SunsetHub>("/sunsethub");
             });
         }
     }

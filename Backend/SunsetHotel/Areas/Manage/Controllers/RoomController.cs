@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.SignalR;
 using Microsoft.EntityFrameworkCore;
 using SunsetHotel.DAL;
 using SunsetHotel.Helpers;
@@ -20,11 +21,13 @@ namespace SunsetHotel.Areas.Manage.Controllers
         private readonly AppDbContext _context;
         private readonly IWebHostEnvironment _env;
         private readonly IEmailService _emailService;
-        public RoomController(AppDbContext context, IWebHostEnvironment env, IEmailService emailService)
+        private readonly IHubContext<SunsetHub> _hubContext;
+        public RoomController(AppDbContext context, IWebHostEnvironment env, IEmailService emailService, IHubContext<SunsetHub> hubContext)
         {
             _context = context;
             _env = env;
             _emailService = emailService;
+            _hubContext = hubContext;
         }
         public IActionResult Index(int page = 1)
         {
@@ -293,7 +296,7 @@ namespace SunsetHotel.Areas.Manage.Controllers
             ViewBag.Id = reservation.RoomId;
             return View(reservation);
         }
-        public IActionResult Accept(int id, string note)
+        public async Task<IActionResult> Accept(int id, string note)
         {
             Reservation reservation = _context.Reservations.Include(x=>x.room).Include(x=>x.appUser).FirstOrDefault(x => x.Id == id);
 
@@ -302,6 +305,11 @@ namespace SunsetHotel.Areas.Manage.Controllers
             reservation.AdminNote = note;
 
             _context.SaveChanges();
+
+            if (reservation.appUser.ConnectionId != null)
+            {
+                await _hubContext.Clients.Client(reservation.appUser.ConnectionId).SendAsync("OrderAccept");
+            }
 
             if (note==null)
             {
@@ -313,7 +321,7 @@ namespace SunsetHotel.Areas.Manage.Controllers
             }
             return Json(new { status = 200 });
         }
-        public IActionResult Reject(int id, string note)
+        public async Task<IActionResult> Reject(int id, string note)
         {
             Reservation reservation = _context.Reservations.Include(x => x.appUser).Include(x => x.room).FirstOrDefault(x => x.Id == id);
 
@@ -328,7 +336,10 @@ namespace SunsetHotel.Areas.Manage.Controllers
 
             reservation.Status = false;
             reservation.AdminNote = note;
-
+            if (reservation.appUser.ConnectionId != null)
+            {
+                await _hubContext.Clients.Client(reservation.appUser.ConnectionId).SendAsync("OrderReject");
+            }
             _context.SaveChanges();
             _emailService.Send(reservation.appUser.Email, "Reservation rejected", "Room:   " + reservation.room.Name + " / " + " Admin Note:  " + note);
             return Json(new { status = 200 });
