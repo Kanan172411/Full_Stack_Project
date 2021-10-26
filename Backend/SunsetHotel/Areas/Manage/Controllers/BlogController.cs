@@ -120,7 +120,7 @@ namespace SunsetHotel.Areas.Manage.Controllers
             if (!_context.BlogCategories.Any(x => x.Id == blog.BlogCategoryId))
             {
                 ModelState.AddModelError("BlogCAtegoryId", "Cateqoriya mövcud deyil!");
-                return View();
+                return View(existBlog);
             }
 
             existBlog.Name = blog.Name;
@@ -155,13 +155,13 @@ namespace SunsetHotel.Areas.Manage.Controllers
                 if (blog.ImageFile.ContentType != "image/jpeg" && blog.ImageFile.ContentType != "image/png")
                 {
                     ModelState.AddModelError("ImageFile", "Fayl   .jpg ve ya   .png ola biler!");
-                    return View();
+                    return View(existBlog);
                 }
 
                 if (blog.ImageFile.Length > 3145728)
                 {
                     ModelState.AddModelError("ImageFile", "Fayl olcusu 3mb-dan boyuk ola bilmez!");
-                    return View();
+                    return View(existBlog);
                 }
 
 

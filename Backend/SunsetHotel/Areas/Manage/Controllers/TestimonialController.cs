@@ -102,13 +102,13 @@ namespace SunsetHotel.Areas.Manage.Controllers
                 if (testimonial.ImageFile.ContentType != "image/jpeg" && testimonial.ImageFile.ContentType != "image/png")
                 {
                     ModelState.AddModelError("ImageFile", "Fayl   .jpg ve ya   .png ola biler!");
-                    return View();
+                    return View(existTestimonial);
                 }
 
                 if (testimonial.ImageFile.Length > 3145728)
                 {
                     ModelState.AddModelError("ImageFile", "Fayl olcusu 3mb-dan boyuk ola bilmez!");
-                    return View();
+                    return View(existTestimonial);
                 }
 
 

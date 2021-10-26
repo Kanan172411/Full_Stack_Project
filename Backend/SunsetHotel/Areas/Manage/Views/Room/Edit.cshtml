@@ -8,7 +8,7 @@
 
     <div class="page-content">
         <div class="container-fluid">
-            <input type="hidden" class="forRoomId" value="@Model.Id"/>
+            @*<input type="hidden" class="forRoomId" value="@Model.Id"/>*@
             <!-- start page title -->
             <div class="row">
                 <div class="col-12">
@@ -39,7 +39,11 @@
                             <input asp-for="Price" class="form-control" type="number">
                             <span class="text-danger" asp-validation-for="Price"></span>
                         </div>
-
+                        <div class="form-group">
+                            <label asp-for="Code">Room Code</label>
+                            <input asp-for="Code" class="form-control" type="text">
+                            <span class="text-danger" asp-validation-for="Code"></span>
+                        </div>
                         <div class="form-group">
                             <label asp-for="MaxAdult">Max Adult Count</label>
                             <input asp-for="MaxAdult" class="form-control" type="number">
@@ -104,7 +108,6 @@
             $(document).on("click", ".item-delete", function (e) {
                 let ID = $(this).attr("referrerpolicy");
                 let NAME = $(this).attr("rel");
-                let RoomId = $(".forRoomId").val();
                 let Variable = this;
                 e.preventDefault();
                 Swal.fire({

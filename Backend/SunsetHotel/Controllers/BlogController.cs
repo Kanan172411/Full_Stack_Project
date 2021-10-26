@@ -72,6 +72,8 @@ namespace SunsetHotel.Controllers
             {
                 return RedirectToAction("error", "home");
             }
+            blog.ViewsCount++;
+            _context.SaveChanges();
             BlogDetailViewModel blogVM = new BlogDetailViewModel
             {
                 tags = _context.Tags.ToList(),

@@ -11,6 +11,8 @@
     <Compile Remove="Migrations\20211018192729_UserTableEdited.Designer.cs" />
     <Compile Remove="Migrations\20211023160132_RoomCommentsTableCreated.cs" />
     <Compile Remove="Migrations\20211023160132_RoomCommentsTableCreated.Designer.cs" />
+    <Compile Remove="Migrations\20211026164639_BlogEdited.cs" />
+    <Compile Remove="Migrations\20211026164639_BlogEdited.Designer.cs" />
   </ItemGroup>
 
   <ItemGroup>

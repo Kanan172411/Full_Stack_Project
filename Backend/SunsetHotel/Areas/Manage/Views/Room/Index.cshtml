@@ -40,6 +40,7 @@
                                             <th>Name</th>
                                             <th>Category</th>
                                             <th>Description</th>
+                                            <th>Code</th>
                                             <th>Price</th>
                                             <th>Bookings</th>
                                             <th>Comments</th>
@@ -54,16 +55,17 @@
                                                 <td>@order</td>
                                                 <td data-field="Name" style="width: 80px">@item.Name</td>
                                                 <td data-field="Category">@item.Categories.Name</td>
-                                                @if (item.Desc.Length > 70)
+                                                @if (item.Desc.Length > 50)
                                                 {
-                                                    <td data-field="Description" data-bs-toggle="tooltip" data-bs-placement="bottom" title="@item.Desc">@item.Desc.Substring(0, 70)...</td>
+                                                    <td data-field="Description" data-bs-toggle="tooltip" data-bs-placement="bottom" title="@item.Desc">@item.Desc.Substring(0, 50)...</td>
                                                 }
                                                 else
                                                 {
                                                     <td data-field="Description" data-bs-toggle="tooltip" data-bs-placement="bottom" title="@item.Desc">@item.Desc</td>
 
                                                 }
-                                                <td data-field="Post Title">@item.Price</td>
+                                                <td data-field="Code">@item.Code</td>
+                                                <td data-field="Price">@item.Price</td>
                                                 <td>
                                                     <a asp-action="Reservation" asp-route-id="@item.Id" class="btn btn-light waves-effect" title="Comments">
                                                         <i class="far fa-calendar-alt">

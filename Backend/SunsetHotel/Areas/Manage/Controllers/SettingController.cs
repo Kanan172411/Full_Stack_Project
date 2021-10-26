@@ -78,13 +78,13 @@ namespace SunsetHotel.Areas.Manage.Controllers
                 if (setting.AboutBannerImageFile.ContentType != "image/jpeg" && setting.AboutBannerImageFile.ContentType != "image/png")
                 {
                     ModelState.AddModelError("ImageFile", "Fayl   .jpg ve ya   .png ola biler!");
-                    return View();
+                    return View(existData);
                 }
 
                 if (setting.AboutBannerImageFile.Length > 3145728)
                 {
                     ModelState.AddModelError("ImageFile", "Fayl olcusu 3mb-dan boyuk ola bilmez!");
-                    return View();
+                    return View(existData);
                 }
 
 

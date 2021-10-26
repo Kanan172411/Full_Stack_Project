@@ -60,7 +60,11 @@ namespace SunsetHotel.Areas.Manage.Controllers
                 ModelState.AddModelError("RoomCategoryId", "Kateqoriya mövcud deyil!");
                 return View();
             }
-
+            if (_context.Rooms.Any(x => x.Code.ToLower() == room.Code.ToLower())) 
+            {
+                ModelState.AddModelError("Code", "This code already taken");
+                return View();
+            }
             if (room.Images != null)
             {
                 foreach (var item in room.Images)
@@ -149,9 +153,14 @@ namespace SunsetHotel.Areas.Manage.Controllers
             if (!_context.RoomCategories.Any(x => x.Id == room.RoomCategoryId))
             {
                 ModelState.AddModelError("RoomCategoryId", "Kateqoriya mövcud deyil!");
-                return View();
+                return View(existRoom);
             }
-
+            if (_context.Rooms.Any(x => x.Code.ToLower() == room.Code.ToLower()))
+            {
+                ModelState.AddModelError("Code", "This code already taken");
+                return View(existRoom);
+            }
+            existRoom.Code = room.Code;
             existRoom.Name = room.Name;
             existRoom.Price = room.Price;
             existRoom.Desc = room.Desc;
@@ -183,13 +192,13 @@ namespace SunsetHotel.Areas.Manage.Controllers
                         if (item.ContentType != "image/jpeg" && item.ContentType != "image/png")
                         {
                             ModelState.AddModelError("Images", "Fayl   .jpg ve ya   .png ola biler!");
-                            return View();
+                            return View(existRoom);
                         }
 
                         if (item.Length > 2097152)
                         {
                             ModelState.AddModelError("Images", "Fayl olcusu 2mb-dan boyuk ola bilmez!");
-                            return View();
+                            return View(existRoom);
                         }
                     }
                     foreach (var item1 in room.Images)

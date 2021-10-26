@@ -41,6 +41,7 @@
                                             <th>Category</th>
                                             <th>Description</th>
                                             <th>Post Title</th>
+                                            <th>Views</th>
                                             <th>Comments</th>
                                             <th style="width:0%">Edit</th>
                                             <th>Delete</th>
@@ -51,7 +52,15 @@
                                         {
                                             <tr>
                                                 <td>@order</td>
-                                                <td data-field="Name" style="width: 80px">@item.Name</td>
+                                                @if (item.Name.Length > 20)
+                                                {
+                                                    <td data-field="Description" data-bs-toggle="tooltip" data-bs-placement="bottom" title="@item.Name">@item.Name.Substring(0, 30)...</td>
+                                                }
+                                                else
+                                                {
+                                                    <td data-field="Description" data-bs-toggle="tooltip" data-bs-placement="bottom" title="@item.Name">@item.Name</td>
+
+                                                }
                                                 <td data-field="Category">@item.BlogCategory.Name</td>
                                                 @if (item.Desc1.Length > 30)
                                                 {
@@ -63,9 +72,12 @@
 
                                                 }
                                                 <td data-field="Post Title">@item.BlogPostTitle</td>
+                                                <td data-field="Views">@item.ViewsCount</td>
                                                 <td>
-                                                    <a asp-action="Comment" asp-route-id="@item.Id" class="btn btn-light waves-effect" title="Comments"><i class="fas fa-comments">
-                                                        <span class="badge rounded-pill bg-dark">@item.Comments.Count()</span></i>
+                                                    <a asp-action="Comment" asp-route-id="@item.Id" class="btn btn-light waves-effect" title="Comments">
+                                                        <i class="fas fa-comments">
+                                                            <span class="badge rounded-pill bg-dark">@item.Comments.Count()</span>
+                                                        </i>
                                                     </a>
                                                 </td>
                                                 <td style="width: 100px">

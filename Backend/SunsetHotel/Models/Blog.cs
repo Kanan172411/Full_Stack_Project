@@ -39,5 +39,6 @@ namespace SunsetHotel.Models
         [NotMapped]
         public List<int> TagId { get; set; }
         public List<BlogComment> Comments { get; set; }
+        public int ViewsCount { get; set; }
     }
 }
