@@ -34,29 +34,5 @@ var options = {
     markers: { size: 0 },
     colors: ["#0bb197", "#eff2f7", "#ff3d60"],
 },
-    chart = new ApexCharts(document.querySelector("#mixed-chart"), options);
-chart.render();
-options = {
-    chart: { height: 350, type: "radialBar" },
-    plotOptions: {
-        radialBar: {
-            hollow: { margin: 10, size: "45%" },
-            track: { show: !0, strokeWidth: "70%", margin: 12 },
-            dataLabels: {
-                name: { fontSize: "27px" },
-                value: { fontSize: "20px" },
-                total: {
-                    show: !0,
-                    label: "Total",
-                    formatter: function (a) {
-                        return 341;
-                    },
-                },
-            },
-        },
-    },
-    series: [44, 55, 67],
-    labels: ["Facebook", "Twitter", "Instagram"],
-    colors: ["#099680", "#4aa3ff", "#5664d2"],
-};
+  
 (chart = new ApexCharts(document.querySelector("#radialBar-chart"), options)).render()

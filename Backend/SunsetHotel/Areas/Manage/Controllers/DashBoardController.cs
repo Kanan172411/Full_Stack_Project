@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using SunsetHotel.Areas.Manage.ViewModels;
 using SunsetHotel.DAL;
 using System;
 using System.Collections.Generic;
@@ -36,7 +37,33 @@ namespace SunsetHotel.Areas.Manage.Controllers
             double acceptedBooking = _context.Reservations.Where(x => x.Status == true).Count();
             ViewBag.AcceptedPercent = (int)acceptedBooking * 100 / (int)allBooking;
             ViewBag.Pending = _context.Reservations.Where(x => x.Status == null).Count();
-            return View();
+            int BlogCount = 0;
+            foreach (var item in _context.Blogs)
+            {
+                BlogCount += item.ViewsCount;
+            }
+            ViewBag.BlogCount = BlogCount;
+            List<RadialChartViewModel> radialChartViewModels = new List<RadialChartViewModel>();
+            foreach (var item in _context.BlogCategories.Include(x=>x.Blogs))
+            {
+                int SerieCount = 0;
+                foreach (var item1 in item.Blogs)
+                {
+                    SerieCount += item1.ViewsCount;
+                }
+                radialChartViewModels.Add(new RadialChartViewModel
+                {
+                    Series = SerieCount*100/BlogCount,
+                    Labels = item.Name
+
+                });
+            }
+            DashBoardViewModel dashBoardViewModel = new DashBoardViewModel()
+            {
+                radialChart = radialChartViewModels
+            };
+ 
+            return View(dashBoardViewModel);
         }
         public IActionResult Error()
         {
