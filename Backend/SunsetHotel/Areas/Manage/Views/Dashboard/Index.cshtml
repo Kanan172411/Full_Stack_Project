@@ -3,8 +3,10 @@
 @{
     ViewData["Title"] = "Index";
     Layout = "~/Areas/Manage/Views/Shared/_Layout.cshtml";
-    var XLabels = Newtonsoft.Json.JsonConvert.SerializeObject(Model.radialChart.Select(x => x.Series).ToList());
-    var YValues = Newtonsoft.Json.JsonConvert.SerializeObject(Model.radialChart.Select(x => x.Labels).ToList());
+    var RadialLabel = Newtonsoft.Json.JsonConvert.SerializeObject(Model.radialChart.Select(x => x.Labels).ToList());
+    var RadialSeries = Newtonsoft.Json.JsonConvert.SerializeObject(Model.radialChart.Select(x => x.Series).ToList());
+    var BlogCategoryLabel = Newtonsoft.Json.JsonConvert.SerializeObject(Model.blogCategory.Select(x => x.Labels).ToList());
+    var BlogCategorySeries = Newtonsoft.Json.JsonConvert.SerializeObject(Model.blogCategory.Select(x => x.Series).ToList());
 }
 
 <div class="main-content">
@@ -125,9 +127,19 @@
                         <!--end card-->
                     </div>
                 </div>
+                <div class="row">
+                    <div class="col-lg-6">
+                        <div class="card">
+                            <div class="card-body">
+                                <h4 class="card-title mb-4">Donut Chart</h4>
+
+                                <div id="donut_chart" class="apex-charts" dir="ltr"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
-
     </div>
     <!-- container-fluid -->
 </div>
@@ -282,7 +294,7 @@
                     borderColor: "#f1f1f1"
                 }
             },
-                (chart = new ApexCharts(document.querySelector("#line_chart_dashed"), options)).render()), $("#spline_area").length && (options = {
+            (chart = new ApexCharts(document.querySelector("#line_chart_dashed"), options)).render()), $("#spline_area").length && (options = {
                     chart: {
                         height: 350,
                         type: "area"
@@ -315,7 +327,7 @@
                         }
                     }
                 },
-                    (chart = new ApexCharts(document.querySelector("#spline_area"), options)).render()), $("#column_chart").length && (options = {
+            (chart = new ApexCharts(document.querySelector("#spline_area"), options)).render()), $("#column_chart").length && (options = {
                         chart: {
                             height: 350,
                             type: "bar",
@@ -371,7 +383,7 @@
                             }
                         }
                     },
-                        (chart = new ApexCharts(document.querySelector("#column_chart"), options)).render()), $("#column_chart_datalabel").length && (options = {
+            (chart = new ApexCharts(document.querySelector("#column_chart"), options)).render()), $("#column_chart_datalabel").length && (options = {
                             chart: {
                                 height: 350,
                                 type: "bar",
@@ -470,7 +482,7 @@
                                 }
                             }
                         },
-                            (chart = new ApexCharts(document.querySelector("#column_chart_datalabel"), options)).render()), $("#bar_chart").length && (options = {
+            (chart = new ApexCharts(document.querySelector("#column_chart_datalabel"), options)).render()), $("#bar_chart").length && (options = {
                                 chart: {
                                     height: 350,
                                     type: "bar",
@@ -497,7 +509,7 @@
                                     categories: ["South Korea", "Canada", "United Kingdom", "Netherlands", "Italy", "France", "Japan", "United States", "China", "Germany"]
                                 }
                             },
-                                (chart = new ApexCharts(document.querySelector("#bar_chart"), options)).render()), $("#mixed_chart").length && (options = {
+            (chart = new ApexCharts(document.querySelector("#bar_chart"), options)).render()), $("#mixed_chart").length && (options = {
                                     chart: {
                                         height: 350,
                                         type: "line",
@@ -568,7 +580,7 @@
                                         borderColor: "#f1f1f1"
                                     }
                                 },
-                                    (chart = new ApexCharts(document.querySelector("#mixed_chart"), options)).render()), $("#radial_chart").length && (options = {
+            (chart = new ApexCharts(document.querySelector("#mixed_chart"), options)).render()), $("#radial_chart").length && (options = {
                                         chart: {
                                             height: 370,
                                             type: "radialBar"
@@ -592,11 +604,11 @@
                                                 }
                                             }
                                         },
-                                        series: @Html.Raw(XLabels),
-                                        labels: @Html.Raw(YValues),
+                                        series: @Html.Raw(RadialLabel),
+                                        labels: @Html.Raw(RadialSeries),
                                         colors: ["#3d8ef8", "#11c46e", "#f1b44c", "#fb4d53", "#1EFBC6", "#393280", "#58DFC0", "#017854", "#A32A3A", "#FED7BF", "#822ACC", "#589BC6", "#8F148F"]
                                     },
-                                        (chart = new ApexCharts(document.querySelector("#radial_chart"), options)).render()), $("#pie_chart").length && (options = {
+            (chart = new ApexCharts(document.querySelector("#radial_chart"), options)).render()), $("#pie_chart").length && (options = {
                                             chart: {
                                                 height: 320,
                                                 type: "pie"
@@ -626,14 +638,14 @@
                                                 }
                                             }]
                                         },
-                                            (chart = new ApexCharts(document.querySelector("#pie_chart"), options)).render()), $("#donut_chart").length && (options = {
+            (chart = new ApexCharts(document.querySelector("#pie_chart"), options)).render()), $("#donut_chart").length && (options = {
                                                 chart: {
                                                     height: 320,
                                                     type: "donut"
                                                 },
-                                                series: [44, 55, 41, 17, 15],
-                                                labels: ["Series 1", "Series 2", "Series 3", "Series 4", "Series 5"],
-                                                colors: ["#3d8ef8", "#11c46e", "#0db4d6", "#fb4d53", "#eff2f7"],
+                                                series: @Html.Raw(BlogCategoryLabel),
+                                                labels: @Html.Raw(BlogCategorySeries),
+                                                colors: ["#3d8ef8", "#11c46e", "#0db4d6", "#fb4d53", "#8F148F", "#58DFC0", "#017854", "#A32A3A", "#FED7BF", "#822ACC", "#589BC6", "#EFF2F7"],
                                                 legend: {
                                                     show: !0,
                                                     position: "bottom",
@@ -656,7 +668,7 @@
                                                     }
                                                 }]
                                             },
-                                                (chart = new ApexCharts(document.querySelector("#donut_chart"), options)).render());
+            (chart = new ApexCharts(document.querySelector("#donut_chart"), options)).render());
     </script>
 }
 

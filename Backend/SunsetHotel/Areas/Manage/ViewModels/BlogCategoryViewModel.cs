@@ -5,9 +5,9 @@ using System.Threading.Tasks;
 
 namespace SunsetHotel.Areas.Manage.ViewModels
 {
-    public class RadialChartViewModel
+    public class BlogCategoryViewModel
     {
-        public int Series { get; set; }
-        public string Labels { get; set; }
+        public string Series { get; set; }
+        public int Labels { get; set; }
     }
 }

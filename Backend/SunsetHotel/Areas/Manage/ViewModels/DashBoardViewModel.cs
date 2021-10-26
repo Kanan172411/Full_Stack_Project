@@ -7,6 +7,7 @@ namespace SunsetHotel.Areas.Manage.ViewModels
 {
     public class DashBoardViewModel
     {
-        public List<RadialChartViewModel> radialChart { get; set; }
+        public List<BlogViewViewModel> radialChart { get; set; }
+        public List<BlogCategoryViewModel> blogCategory{ get; set; }
     }
 }

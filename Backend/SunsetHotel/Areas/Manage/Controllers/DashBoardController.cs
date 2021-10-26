@@ -43,7 +43,7 @@ namespace SunsetHotel.Areas.Manage.Controllers
                 BlogCount += item.ViewsCount;
             }
             ViewBag.BlogCount = BlogCount;
-            List<RadialChartViewModel> radialChartViewModels = new List<RadialChartViewModel>();
+            List<BlogViewViewModel> radialChartViewModels = new List<BlogViewViewModel>();
             foreach (var item in _context.BlogCategories.Include(x=>x.Blogs))
             {
                 int SerieCount = 0;
@@ -51,16 +51,27 @@ namespace SunsetHotel.Areas.Manage.Controllers
                 {
                     SerieCount += item1.ViewsCount;
                 }
-                radialChartViewModels.Add(new RadialChartViewModel
+                radialChartViewModels.Add(new BlogViewViewModel
                 {
-                    Series = SerieCount*100/BlogCount,
-                    Labels = item.Name
+                    Labels = SerieCount*100/BlogCount,
+                    Series = item.Name
 
+                });
+            }
+
+            List<BlogCategoryViewModel> blogCategoryViewModels = new List<BlogCategoryViewModel>();
+            foreach (var item in _context.BlogCategories.Include(x=>x.Blogs))
+            {
+                blogCategoryViewModels.Add(new BlogCategoryViewModel
+                {
+                    Labels = item.Blogs.Count(),
+                    Series = item.Name
                 });
             }
             DashBoardViewModel dashBoardViewModel = new DashBoardViewModel()
             {
-                radialChart = radialChartViewModels
+                radialChart = radialChartViewModels,
+                blogCategory = blogCategoryViewModels 
             };
  
             return View(dashBoardViewModel);
