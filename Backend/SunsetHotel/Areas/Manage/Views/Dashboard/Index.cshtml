@@ -7,10 +7,10 @@
     var RadialSeries = Newtonsoft.Json.JsonConvert.SerializeObject(Model.radialChart.Select(x => x.Series).ToList());
     var BlogCategoryLabel = Newtonsoft.Json.JsonConvert.SerializeObject(Model.blogCategory.Select(x => x.Labels).ToList());
     var BlogCategorySeries = Newtonsoft.Json.JsonConvert.SerializeObject(Model.blogCategory.Select(x => x.Series).ToList());
-    var ReservationByCatLabels = Newtonsoft.Json.JsonConvert.SerializeObject(Model.reservationByCategory.Select(x =>
-    x.Labels).ToList());
-    var ReservationByCatSeries = Newtonsoft.Json.JsonConvert.SerializeObject(Model.reservationByCategory.Select(x =>
-    x.Series).ToList());
+    var ReservationByCatLabels = Newtonsoft.Json.JsonConvert.SerializeObject(Model.reservationByCategory.Select(x =>x.Labels).ToList());
+    var ReservationByCatSeries = Newtonsoft.Json.JsonConvert.SerializeObject(Model.reservationByCategory.Select(x =>x.Series).ToList());   
+    var RoomByCatLabel = Newtonsoft.Json.JsonConvert.SerializeObject(Model.roomCatCount.Select(x =>x.Labels).ToList());
+    var RoomByCatSeries = Newtonsoft.Json.JsonConvert.SerializeObject(Model.roomCatCount.Select(x =>x.Series).ToList());
 }
 
 <div class="main-content">
@@ -634,9 +634,9 @@
             height: 320,
             type: "pie"
         },
-        series: [44, 55, 41, 17, 15],
-        labels: ["Series 1", "Series 2", "Series 3", "Series 4", "Series 5"],
-        colors: ["#3d8ef8", "#11c46e", "#f1b44c", "#fb4d53", "#eff2f7"],
+        series: @Html.Raw(RoomByCatLabel),
+        labels: @Html.Raw(RoomByCatSeries),
+        colors: ["#3d8ef8", "#11c46e", "#0db4d6", "#fb4d53", "#58DFC0", "#017854", "#A32A3A", "#FED7BF", "#822ACC", "#589BC6", "#EFF2F7"],
         legend: {
             show: !0,
             position: "bottom",
