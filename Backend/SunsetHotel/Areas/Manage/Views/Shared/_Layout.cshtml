@@ -120,25 +120,25 @@
                                 <span>Tables</span>
                             </a>
                             <ul class="sub-menu" aria-expanded="false">
+                                <li><a asp-action="index" asp-controller="Feature">Features</a></li>
+                                <li><a asp-action="index" asp-controller="BlogCategory">Blog Categories</a></li>
                                 <li><a asp-action="index" asp-controller="Tag">Tags</a></li>
+                                <li><a asp-action="index" asp-controller="OurService">Our Services</a></li>
+                                <li><a asp-action="index" asp-controller="RoomFeature">Room Features</a></li>
+                                <li><a asp-action="index" asp-controller="RoomCategory">Room Categories</a></li>
                                 <li><a asp-action="index" asp-controller="Blog">Blogs</a></li>
+                                <li><a asp-action="index" asp-controller="Contactmessages">Contact Messages</a></li>
                                 <li><a asp-action="index" asp-controller="Room">Rooms</a></li>
                                 @if (User.IsInRole("SuperAdmin"))
                                 {
                                     <li><a asp-action="index" asp-controller="Admin">Admins</a></li>
                                 }
-                                <li><a asp-action="index" asp-controller="Feature">Features</a></li>
+                                <li><a asp-action="index" asp-controller="testimonial">Testimonials</a></li>
                                 <li><a asp-action="index" asp-controller="Gallery">Galleries</a></li>
                                 @if (User.IsInRole("Admin") || User.IsInRole("SuperAdmin"))
                                 {
                                     <li><a asp-action="index" asp-controller="Setting">Setting Datas</a></li>
                                 }
-                                <li><a asp-action="index" asp-controller="OurService">Our Services</a></li>
-                                <li><a asp-action="index" asp-controller="testimonial">Testimonials</a></li>
-                                <li><a asp-action="index" asp-controller="RoomFeature">Room Features</a></li>
-                                <li><a asp-action="index" asp-controller="BlogCategory">Blog Categories</a></li>
-                                <li><a asp-action="index" asp-controller="RoomCategory">Room Categories</a></li>
-                                <li><a asp-action="index" asp-controller="Contactmessages">Contact Messages</a></li>
                                 <li><a asp-action="index" asp-controller="Subscriber">Subscribers</a></li>
                                 @if (User.IsInRole("Admin") || User.IsInRole("SuperAdmin"))
                                 {
