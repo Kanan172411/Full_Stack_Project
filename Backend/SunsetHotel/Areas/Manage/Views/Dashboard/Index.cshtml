@@ -7,6 +7,10 @@
     var RadialSeries = Newtonsoft.Json.JsonConvert.SerializeObject(Model.radialChart.Select(x => x.Series).ToList());
     var BlogCategoryLabel = Newtonsoft.Json.JsonConvert.SerializeObject(Model.blogCategory.Select(x => x.Labels).ToList());
     var BlogCategorySeries = Newtonsoft.Json.JsonConvert.SerializeObject(Model.blogCategory.Select(x => x.Series).ToList());
+    var ReservationByCatLabels = Newtonsoft.Json.JsonConvert.SerializeObject(Model.reservationByCategory.Select(x =>
+    x.Labels).ToList());
+    var ReservationByCatSeries = Newtonsoft.Json.JsonConvert.SerializeObject(Model.reservationByCategory.Select(x =>
+    x.Series).ToList());
 }
 
 <div class="main-content">
@@ -126,14 +130,33 @@
                         </div>
                         <!--end card-->
                     </div>
+                    <div class="col-lg-6">
+                        <div class="card">
+                            <div class="card-body">
+                                <h4 class="card-title mb-4">Reservation Count by Category</h4>
+
+                                <div id="bar_chart" class="apex-charts" dir="ltr"></div>
+                            </div>
+                        </div>
+                        <!--end card-->
+                    </div>
                 </div>
                 <div class="row">
                     <div class="col-lg-6">
                         <div class="card">
                             <div class="card-body">
-                                <h4 class="card-title mb-4">Donut Chart</h4>
+                                <h4 class="card-title mb-4">Blog Counts by Category</h4>
 
                                 <div id="donut_chart" class="apex-charts" dir="ltr"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-6">
+                        <div class="card">
+                            <div class="card-body">
+                                <h4 class="card-title mb-4">Pie Chart</h4>
+
+                                <div id="pie_chart" class="apex-charts" dir="ltr"></div>
                             </div>
                         </div>
                     </div>
@@ -146,12 +169,84 @@
 <!-- End Page-content -->
 </div>
 @section Scripts{
-    <!-- Plugin Js-->
-    <script src="~/assets1/libs/apexcharts/apexcharts.min.js"></script>
-    <!-- demo js-->
     <script>
-        var options, chart;
-        $("#line_chart_datalabel").length && (options = {
+    var options, chart;
+    $("#line_chart_datalabel").length && (options = {
+        chart: {
+            height: 380,
+            type: "line",
+            zoom: {
+                enabled: !1
+            },
+            toolbar: {
+                show: !1
+            }
+        },
+        colors: ["#0db4d6", "#f1b44c"],
+        dataLabels: {
+            enabled: !0
+        },
+        stroke: {
+            width: [3, 3],
+            curve: "straight"
+        },
+        series: [{
+            name: "High - 2018",
+            data: [26, 24, 32, 36, 33, 31, 33]
+        }, {
+            name: "Low - 2018",
+            data: [14, 11, 16, 12, 17, 13, 12]
+        }],
+        title: {
+            text: "Average High & Low Temperature",
+            align: "left"
+        },
+        grid: {
+            row: {
+                colors: ["transparent", "transparent"],
+                opacity: .2
+            },
+            borderColor: "#f1f1f1"
+        },
+        markers: {
+            style: "inverted",
+            size: 6
+        },
+        xaxis: {
+            categories: ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul"],
+            title: {
+                text: "Month"
+            }
+        },
+        yaxis: {
+            title: {
+                text: "Temperature"
+            },
+            min: 5,
+            max: 40
+        },
+        legend: {
+            position: "top",
+            horizontalAlign: "right",
+            floating: !0,
+            offsetY: -25,
+            offsetX: -5
+        },
+        responsive: [{
+            breakpoint: 600,
+            options: {
+                chart: {
+                    toolbar: {
+                        show: !1
+                    }
+                },
+                legend: {
+                    show: !1
+                }
+            }
+        }]
+    },
+        (chart = new ApexCharts(document.querySelector("#line_chart_datalabel"), options)).render()), $("#line_chart_dashed").length && (options = {
             chart: {
                 height: 380,
                 type: "line",
@@ -162,172 +257,153 @@
                     show: !1
                 }
             },
-            colors: ["#0db4d6", "#f1b44c"],
+            colors: ["#11c46e", "#0db4d6", "#fb4d53"],
             dataLabels: {
-                enabled: !0
+                enabled: !1
             },
             stroke: {
-                width: [3, 3],
-                curve: "straight"
+                width: [3, 4, 3],
+                curve: "straight",
+                dashArray: [0, 8, 5]
             },
             series: [{
-                name: "High - 2018",
-                data: [26, 24, 32, 36, 33, 31, 33]
+                name: "Session Duration",
+                data: [45, 52, 38, 24, 33, 26, 21, 20, 6, 8, 15, 10]
             }, {
-                name: "Low - 2018",
-                data: [14, 11, 16, 12, 17, 13, 12]
+                name: "Page Views",
+                data: [36, 42, 60, 42, 13, 18, 29, 37, 36, 51, 32, 35]
+            }, {
+                name: "Total Visits",
+                data: [89, 56, 74, 98, 72, 38, 64, 46, 84, 58, 46, 49]
             }],
             title: {
-                text: "Average High & Low Temperature",
+                text: "Page Statistics",
                 align: "left"
             },
-            grid: {
-                row: {
-                    colors: ["transparent", "transparent"],
-                    opacity: .2
-                },
-                borderColor: "#f1f1f1"
-            },
             markers: {
-                style: "inverted",
-                size: 6
+                size: 0,
+                hover: {
+                    sizeOffset: 6
+                }
             },
             xaxis: {
-                categories: ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul"],
-                title: {
-                    text: "Month"
-                }
+                categories: ["01 Jan", "02 Jan", "03 Jan", "04 Jan", "05 Jan", "06 Jan", "07 Jan", "08 Jan", "09 Jan", "10 Jan", "11 Jan", "12 Jan"]
             },
-            yaxis: {
-                title: {
-                    text: "Temperature"
-                },
-                min: 5,
-                max: 40
-            },
-            legend: {
-                position: "top",
-                horizontalAlign: "right",
-                floating: !0,
-                offsetY: -25,
-                offsetX: -5
-            },
-            responsive: [{
-                breakpoint: 600,
-                options: {
-                    chart: {
-                        toolbar: {
-                            show: !1
+            tooltip: {
+                y: [{
+                    title: {
+                        formatter: function (e) {
+                            return e + " (mins)"
                         }
-                    },
-                    legend: {
-                        show: !1
                     }
-                }
-            }]
+                }, {
+                    title: {
+                        formatter: function (e) {
+                            return e + " per session"
+                        }
+                    }
+                }, {
+                    title: {
+                        formatter: function (e) {
+                            return e
+                        }
+                    }
+                }]
+            },
+            grid: {
+                borderColor: "#f1f1f1"
+            }
         },
-            (chart = new ApexCharts(document.querySelector("#line_chart_datalabel"), options)).render()), $("#line_chart_dashed").length && (options = {
+            (chart = new ApexCharts(document.querySelector("#line_chart_dashed"), options)).render()), $("#spline_area").length && (options = {
                 chart: {
-                    height: 380,
-                    type: "line",
-                    zoom: {
-                        enabled: !1
-                    },
-                    toolbar: {
-                        show: !1
-                    }
+                    height: 350,
+                    type: "area"
                 },
-                colors: ["#11c46e", "#0db4d6", "#fb4d53"],
                 dataLabels: {
                     enabled: !1
                 },
                 stroke: {
-                    width: [3, 4, 3],
-                    curve: "straight",
-                    dashArray: [0, 8, 5]
+                    curve: "smooth",
+                    width: 3
                 },
                 series: [{
-                    name: "Session Duration",
-                    data: [45, 52, 38, 24, 33, 26, 21, 20, 6, 8, 15, 10]
+                    name: "series1",
+                    data: [34, 40, 28, 52, 42, 109, 100]
                 }, {
-                    name: "Page Views",
-                    data: [36, 42, 60, 42, 13, 18, 29, 37, 36, 51, 32, 35]
-                }, {
-                    name: "Total Visits",
-                    data: [89, 56, 74, 98, 72, 38, 64, 46, 84, 58, 46, 49]
+                    name: "series2",
+                    data: [32, 60, 34, 46, 34, 52, 41]
                 }],
-                title: {
-                    text: "Page Statistics",
-                    align: "left"
-                },
-                markers: {
-                    size: 0,
-                    hover: {
-                        sizeOffset: 6
-                    }
-                },
+                colors: ["#eff2f7", "#3d8ef8"],
                 xaxis: {
-                    categories: ["01 Jan", "02 Jan", "03 Jan", "04 Jan", "05 Jan", "06 Jan", "07 Jan", "08 Jan", "09 Jan", "10 Jan", "11 Jan", "12 Jan"]
-                },
-                tooltip: {
-                    y: [{
-                        title: {
-                            formatter: function (e) {
-                                return e + " (mins)"
-                            }
-                        }
-                    }, {
-                        title: {
-                            formatter: function (e) {
-                                return e + " per session"
-                            }
-                        }
-                    }, {
-                        title: {
-                            formatter: function (e) {
-                                return e
-                            }
-                        }
-                    }]
+                    type: "datetime",
+                    categories: ["2018-09-19T00:00:00", "2018-09-19T01:30:00", "2018-09-19T02:30:00", "2018-09-19T03:30:00", "2018-09-19T04:30:00", "2018-09-19T05:30:00", "2018-09-19T06:30:00"]
                 },
                 grid: {
                     borderColor: "#f1f1f1"
+                },
+                tooltip: {
+                    x: {
+                        format: "dd/MM/yy HH:mm"
+                    }
                 }
             },
-            (chart = new ApexCharts(document.querySelector("#line_chart_dashed"), options)).render()), $("#spline_area").length && (options = {
+                (chart = new ApexCharts(document.querySelector("#spline_area"), options)).render()), $("#column_chart").length && (options = {
                     chart: {
                         height: 350,
-                        type: "area"
+                        type: "bar",
+                        toolbar: {
+                            show: !1
+                        }
+                    },
+                    plotOptions: {
+                        bar: {
+                            horizontal: !1,
+                            columnWidth: "45%",
+                            endingShape: "rounded"
+                        }
                     },
                     dataLabels: {
                         enabled: !1
                     },
                     stroke: {
-                        curve: "smooth",
-                        width: 3
+                        show: !0,
+                        width: 2,
+                        colors: ["transparent"]
                     },
                     series: [{
-                        name: "series1",
-                        data: [34, 40, 28, 52, 42, 109, 100]
+                        name: "Net Profit",
+                        data: [46, 57, 59, 54, 62, 58, 64, 60, 66]
                     }, {
-                        name: "series2",
-                        data: [32, 60, 34, 46, 34, 52, 41]
+                        name: "Revenue",
+                        data: [74, 83, 102, 97, 86, 106, 93, 114, 94]
+                    }, {
+                        name: "Free Cash Flow",
+                        data: [37, 42, 38, 26, 47, 50, 54, 55, 43]
                     }],
-                    colors: ["#eff2f7", "#3d8ef8"],
+                    colors: ["#eff2f7", "#3d8ef8", "#11c46e"],
                     xaxis: {
-                        type: "datetime",
-                        categories: ["2018-09-19T00:00:00", "2018-09-19T01:30:00", "2018-09-19T02:30:00", "2018-09-19T03:30:00", "2018-09-19T04:30:00", "2018-09-19T05:30:00", "2018-09-19T06:30:00"]
+                        categories: ["Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct"]
+                    },
+                    yaxis: {
+                        title: {
+                            text: "$ (thousands)"
+                        }
                     },
                     grid: {
                         borderColor: "#f1f1f1"
                     },
+                    fill: {
+                        opacity: 1
+                    },
                     tooltip: {
-                        x: {
-                            format: "dd/MM/yy HH:mm"
+                        y: {
+                            formatter: function (e) {
+                                return "$ " + e + " thousands"
+                            }
                         }
                     }
                 },
-            (chart = new ApexCharts(document.querySelector("#spline_area"), options)).render()), $("#column_chart").length && (options = {
+                    (chart = new ApexCharts(document.querySelector("#column_chart"), options)).render()), $("#column_chart_datalabel").length && (options = {
                         chart: {
                             height: 350,
                             type: "bar",
@@ -337,53 +413,96 @@
                         },
                         plotOptions: {
                             bar: {
-                                horizontal: !1,
-                                columnWidth: "45%",
-                                endingShape: "rounded"
+                                dataLabels: {
+                                    position: "top"
+                                }
                             }
                         },
                         dataLabels: {
-                            enabled: !1
-                        },
-                        stroke: {
-                            show: !0,
-                            width: 2,
-                            colors: ["transparent"]
-                        },
-                        series: [{
-                            name: "Net Profit",
-                            data: [46, 57, 59, 54, 62, 58, 64, 60, 66]
-                        }, {
-                            name: "Revenue",
-                            data: [74, 83, 102, 97, 86, 106, 93, 114, 94]
-                        }, {
-                            name: "Free Cash Flow",
-                            data: [37, 42, 38, 26, 47, 50, 54, 55, 43]
-                        }],
-                        colors: ["#eff2f7", "#3d8ef8", "#11c46e"],
-                        xaxis: {
-                            categories: ["Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct"]
-                        },
-                        yaxis: {
-                            title: {
-                                text: "$ (thousands)"
+                            enabled: !0,
+                            formatter: function (e) {
+                                return e + "%"
+                            },
+                            offsetY: -20,
+                            style: {
+                                fontSize: "12px",
+                                colors: ["#304758"]
                             }
                         },
+                        series: [{
+                            name: "Inflation",
+                            data: [2.5, 3.2, 5, 10.1, 4.2, 3.8, 3, 2.4, 4, 1.2, 3.5, .8]
+                        }],
+                        colors: ["#0db4d6"],
                         grid: {
                             borderColor: "#f1f1f1"
                         },
-                        fill: {
-                            opacity: 1
-                        },
-                        tooltip: {
-                            y: {
-                                formatter: function (e) {
-                                    return "$ " + e + " thousands"
+                        xaxis: {
+                            categories: ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"],
+                            position: "top",
+                            labels: {
+                                offsetY: -18
+                            },
+                            axisBorder: {
+                                show: !1
+                            },
+                            axisTicks: {
+                                show: !1
+                            },
+                            crosshairs: {
+                                fill: {
+                                    type: "gradient",
+                                    gradient: {
+                                        colorFrom: "#D8E3F0",
+                                        colorTo: "#BED1E6",
+                                        stops: [0, 100],
+                                        opacityFrom: .4,
+                                        opacityTo: .5
+                                    }
                                 }
+                            },
+                            tooltip: {
+                                enabled: !0,
+                                offsetY: -35
+                            }
+                        },
+                        fill: {
+                            gradient: {
+                                shade: "light",
+                                type: "horizontal",
+                                shadeIntensity: .25,
+                                gradientToColors: void 0,
+                                inverseColors: !0,
+                                opacityFrom: 1,
+                                opacityTo: 1,
+                                stops: [50, 0, 100, 100]
+                            }
+                        },
+                        yaxis: {
+                            axisBorder: {
+                                show: !1
+                            },
+                            axisTicks: {
+                                show: !1
+                            },
+                            labels: {
+                                show: !1,
+                                formatter: function (e) {
+                                    return e + "%"
+                                }
+                            }
+                        },
+                        title: {
+                            text: "Monthly Inflation in Argentina, 2002",
+                            floating: !0,
+                            offsetY: 320,
+                            align: "center",
+                            style: {
+                                color: "#444"
                             }
                         }
                     },
-            (chart = new ApexCharts(document.querySelector("#column_chart"), options)).render()), $("#column_chart_datalabel").length && (options = {
+                        (chart = new ApexCharts(document.querySelector("#column_chart_datalabel"), options)).render()), $("#bar_chart").length && (options = {
                             chart: {
                                 height: 350,
                                 type: "bar",
@@ -393,282 +512,183 @@
                             },
                             plotOptions: {
                                 bar: {
-                                    dataLabels: {
-                                        position: "top"
-                                    }
+                                    horizontal: !0
                                 }
                             },
                             dataLabels: {
-                                enabled: !0,
-                                formatter: function (e) {
-                                    return e + "%"
-                                },
-                                offsetY: -20,
-                                style: {
-                                    fontSize: "12px",
-                                    colors: ["#304758"]
-                                }
+                                enabled: !1
                             },
                             series: [{
-                                name: "Inflation",
-                                data: [2.5, 3.2, 5, 10.1, 4.2, 3.8, 3, 2.4, 4, 1.2, 3.5, .8]
-                            }],
-                            colors: ["#0db4d6"],
-                            grid: {
-                                borderColor: "#f1f1f1"
-                            },
-                            xaxis: {
-                                categories: ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"],
-                                position: "top",
-                                labels: {
-                                    offsetY: -18
-                                },
-                                axisBorder: {
-                                    show: !1
-                                },
-                                axisTicks: {
-                                    show: !1
-                                },
-                                crosshairs: {
-                                    fill: {
-                                        type: "gradient",
-                                        gradient: {
-                                            colorFrom: "#D8E3F0",
-                                            colorTo: "#BED1E6",
-                                            stops: [0, 100],
-                                            opacityFrom: .4,
-                                            opacityTo: .5
-                                        }
-                                    }
-                                },
-                                tooltip: {
-                                    enabled: !0,
-                                    offsetY: -35
-                                }
-                            },
-                            fill: {
-                                gradient: {
-                                    shade: "light",
-                                    type: "horizontal",
-                                    shadeIntensity: .25,
-                                    gradientToColors: void 0,
-                                    inverseColors: !0,
-                                    opacityFrom: 1,
-                                    opacityTo: 1,
-                                    stops: [50, 0, 100, 100]
-                                }
-                            },
-                            yaxis: {
-                                axisBorder: {
-                                    show: !1
-                                },
-                                axisTicks: {
-                                    show: !1
-                                },
-                                labels: {
-                                    show: !1,
-                                    formatter: function (e) {
-                                        return e + "%"
-                                    }
-                                }
-                            },
-                            title: {
-                                text: "Monthly Inflation in Argentina, 2002",
-                                floating: !0,
-                                offsetY: 320,
-                                align: "center",
-                                style: {
-                                    color: "#444"
-                                }
-                            }
-                        },
-            (chart = new ApexCharts(document.querySelector("#column_chart_datalabel"), options)).render()), $("#bar_chart").length && (options = {
-                                chart: {
-                                    height: 350,
-                                    type: "bar",
-                                    toolbar: {
-                                        show: !1
-                                    }
-                                },
-                                plotOptions: {
-                                    bar: {
-                                        horizontal: !0
-                                    }
-                                },
-                                dataLabels: {
-                                    enabled: !1
-                                },
-                                series: [{
-                                    data: [380, 430, 450, 475, 550, 584, 780, 1100, 1220, 1365]
+                                data: @Html.Raw(ReservationByCatLabels),
+                                name: "Revenue",
                                 }],
-                                colors: ["#7c8a96"],
-                                grid: {
-                                    borderColor: "#f1f1f1"
-                                },
-                                xaxis: {
-                                    categories: ["South Korea", "Canada", "United Kingdom", "Netherlands", "Italy", "France", "Japan", "United States", "China", "Germany"]
-                                }
+    colors: ["#5A9FF9", "#11c46e", "#f1b44c", "#fb4d53", "#eff2f7"],
+        grid: {
+        borderColor: "#f1f1f1"
+    },
+    xaxis: {
+        categories: @Html.Raw(ReservationByCatSeries)
+    }
                             },
-            (chart = new ApexCharts(document.querySelector("#bar_chart"), options)).render()), $("#mixed_chart").length && (options = {
-                                    chart: {
-                                        height: 350,
-                                        type: "line",
-                                        stacked: !1,
-                                        toolbar: {
-                                            show: !1
-                                        }
+    (chart = new ApexCharts(document.querySelector("#bar_chart"), options)).render()), $("#mixed_chart").length && (options = {
+        chart: {
+            height: 350,
+            type: "line",
+            stacked: !1,
+            toolbar: {
+                show: !1
+            }
+        },
+        stroke: {
+            width: [0, 2, 4],
+            curve: "smooth"
+        },
+        plotOptions: {
+            bar: {
+                columnWidth: "50%"
+            }
+        },
+        colors: ["#11c46e", "#0db4d6", "#fb4d53"],
+        series: [{
+            name: "Team A",
+            type: "column",
+            data: [23, 11, 22, 27, 13, 22, 37, 21, 44, 22, 30]
+        }, {
+            name: "Team B",
+            type: "area",
+            data: [44, 55, 41, 67, 22, 43, 21, 41, 56, 27, 43]
+        }, {
+            name: "Team C",
+            type: "line",
+            data: [30, 25, 36, 30, 45, 35, 64, 52, 59, 36, 39]
+        }],
+        fill: {
+            opacity: [.85, .25, 1],
+            gradient: {
+                inverseColors: !1,
+                shade: "light",
+                type: "vertical",
+                opacityFrom: .85,
+                opacityTo: .55,
+                stops: [0, 100, 100, 100]
+            }
+        },
+        labels: ["01/01/2003", "02/01/2003", "03/01/2003", "04/01/2003", "05/01/2003", "06/01/2003", "07/01/2003", "08/01/2003", "09/01/2003", "10/01/2003", "11/01/2003"],
+        markers: {
+            size: 0
+        },
+        legend: {
+            offsetY: -10
+        },
+        xaxis: {
+            type: "datetime"
+        },
+        yaxis: {
+            title: {
+                text: "Points"
+            }
+        },
+        tooltip: {
+            shared: !0,
+            intersect: !1,
+            y: {
+                formatter: function (e) {
+                    return void 0 !== e ? e.toFixed(0) + " points" : e
+                }
+            }
+        },
+        grid: {
+            borderColor: "#f1f1f1"
+        }
+    },
+        (chart = new ApexCharts(document.querySelector("#mixed_chart"), options)).render()), $("#radial_chart").length && (options = {
+            chart: {
+                height: 370,
+                type: "radialBar"
+            },
+            plotOptions: {
+                radialBar: {
+                    dataLabels: {
+                        name: {
+                            fontSize: "22px"
+                        },
+                        value: {
+                            fontSize: "16px"
+                        },
+                        total: {
+                            show: !0,
+                            label: "Total",
+                            formatter: function (e) {
+                                return @ViewBag.BlogCount
+                            }
+                        }
+                    }
+                }
+            },
+            series: @Html.Raw(RadialLabel),
+    labels: @Html.Raw(RadialSeries),
+    colors: ["#3d8ef8", "#11c46e", "#f1b44c", "#fb4d53", "#1EFBC6", "#393280", "#58DFC0", "#017854", "#A32A3A", "#FED7BF", "#822ACC", "#589BC6", "#8F148F"]
                                     },
-                                    stroke: {
-                                        width: [0, 2, 4],
-                                        curve: "smooth"
-                                    },
-                                    plotOptions: {
-                                        bar: {
-                                            columnWidth: "50%"
-                                        }
-                                    },
-                                    colors: ["#11c46e", "#0db4d6", "#fb4d53"],
-                                    series: [{
-                                        name: "Team A",
-                                        type: "column",
-                                        data: [23, 11, 22, 27, 13, 22, 37, 21, 44, 22, 30]
-                                    }, {
-                                        name: "Team B",
-                                        type: "area",
-                                        data: [44, 55, 41, 67, 22, 43, 21, 41, 56, 27, 43]
-                                    }, {
-                                        name: "Team C",
-                                        type: "line",
-                                        data: [30, 25, 36, 30, 45, 35, 64, 52, 59, 36, 39]
-                                    }],
-                                    fill: {
-                                        opacity: [.85, .25, 1],
-                                        gradient: {
-                                            inverseColors: !1,
-                                            shade: "light",
-                                            type: "vertical",
-                                            opacityFrom: .85,
-                                            opacityTo: .55,
-                                            stops: [0, 100, 100, 100]
-                                        }
-                                    },
-                                    labels: ["01/01/2003", "02/01/2003", "03/01/2003", "04/01/2003", "05/01/2003", "06/01/2003", "07/01/2003", "08/01/2003", "09/01/2003", "10/01/2003", "11/01/2003"],
-                                    markers: {
-                                        size: 0
-                                    },
-                                    legend: {
-                                        offsetY: -10
-                                    },
-                                    xaxis: {
-                                        type: "datetime"
-                                    },
-                                    yaxis: {
-                                        title: {
-                                            text: "Points"
-                                        }
-                                    },
-                                    tooltip: {
-                                        shared: !0,
-                                        intersect: !1,
-                                        y: {
-                                            formatter: function (e) {
-                                                return void 0 !== e ? e.toFixed(0) + " points" : e
-                                            }
-                                        }
-                                    },
-                                    grid: {
-                                        borderColor: "#f1f1f1"
-                                    }
-                                },
-            (chart = new ApexCharts(document.querySelector("#mixed_chart"), options)).render()), $("#radial_chart").length && (options = {
-                                        chart: {
-                                            height: 370,
-                                            type: "radialBar"
-                                        },
-                                        plotOptions: {
-                                            radialBar: {
-                                                dataLabels: {
-                                                    name: {
-                                                        fontSize: "22px"
-                                                    },
-                                                    value: {
-                                                        fontSize: "16px"
-                                                    },
-                                                    total: {
-                                                        show: !0,
-                                                        label: "Total",
-                                                        formatter: function (e) {
-                                                            return @ViewBag.BlogCount
-                                                        }
-                                                    }
-                                                }
-                                            }
-                                        },
-                                        series: @Html.Raw(RadialLabel),
-                                        labels: @Html.Raw(RadialSeries),
-                                        colors: ["#3d8ef8", "#11c46e", "#f1b44c", "#fb4d53", "#1EFBC6", "#393280", "#58DFC0", "#017854", "#A32A3A", "#FED7BF", "#822ACC", "#589BC6", "#8F148F"]
-                                    },
-            (chart = new ApexCharts(document.querySelector("#radial_chart"), options)).render()), $("#pie_chart").length && (options = {
-                                            chart: {
-                                                height: 320,
-                                                type: "pie"
+    (chart = new ApexCharts(document.querySelector("#radial_chart"), options)).render()), $("#pie_chart").length && (options = {
+        chart: {
+            height: 320,
+            type: "pie"
+        },
+        series: [44, 55, 41, 17, 15],
+        labels: ["Series 1", "Series 2", "Series 3", "Series 4", "Series 5"],
+        colors: ["#3d8ef8", "#11c46e", "#f1b44c", "#fb4d53", "#eff2f7"],
+        legend: {
+            show: !0,
+            position: "bottom",
+            horizontalAlign: "center",
+            verticalAlign: "middle",
+            floating: !1,
+            fontSize: "14px",
+            offsetX: 0,
+            offsetY: -10
+        },
+        responsive: [{
+            breakpoint: 600,
+            options: {
+                chart: {
+                    height: 240
+                },
+                legend: {
+                    show: !1
+                }
+            }
+        }]
+    },
+        (chart = new ApexCharts(document.querySelector("#pie_chart"), options)).render()), $("#donut_chart").length && (options = {
+            chart: {
+                height: 320,
+                type: "donut"
+            },
+            series: @Html.Raw(BlogCategoryLabel),
+    labels: @Html.Raw(BlogCategorySeries),
+    colors: ["#3d8ef8", "#11c46e", "#0db4d6", "#fb4d53", "#8F148F", "#58DFC0", "#017854", "#A32A3A", "#FED7BF", "#822ACC", "#589BC6", "#EFF2F7"],
+        legend: {
+        show: !0,
+            position: "bottom",
+                horizontalAlign: "center",
+                    verticalAlign: "middle",
+                        floating: !1,
+                            fontSize: "14px",
+                                offsetX: 0,
+                                    offsetY: -10
+    },
+    responsive: [{
+        breakpoint: 600,
+        options: {
+            chart: {
+                height: 240
+            },
+            legend: {
+                show: !1
+            }
+        }
+    }]
                                             },
-                                            series: [44, 55, 41, 17, 15],
-                                            labels: ["Series 1", "Series 2", "Series 3", "Series 4", "Series 5"],
-                                            colors: ["#3d8ef8", "#11c46e", "#f1b44c", "#fb4d53", "#eff2f7"],
-                                            legend: {
-                                                show: !0,
-                                                position: "bottom",
-                                                horizontalAlign: "center",
-                                                verticalAlign: "middle",
-                                                floating: !1,
-                                                fontSize: "14px",
-                                                offsetX: 0,
-                                                offsetY: -10
-                                            },
-                                            responsive: [{
-                                                breakpoint: 600,
-                                                options: {
-                                                    chart: {
-                                                        height: 240
-                                                    },
-                                                    legend: {
-                                                        show: !1
-                                                    }
-                                                }
-                                            }]
-                                        },
-            (chart = new ApexCharts(document.querySelector("#pie_chart"), options)).render()), $("#donut_chart").length && (options = {
-                                                chart: {
-                                                    height: 320,
-                                                    type: "donut"
-                                                },
-                                                series: @Html.Raw(BlogCategoryLabel),
-                                                labels: @Html.Raw(BlogCategorySeries),
-                                                colors: ["#3d8ef8", "#11c46e", "#0db4d6", "#fb4d53", "#8F148F", "#58DFC0", "#017854", "#A32A3A", "#FED7BF", "#822ACC", "#589BC6", "#EFF2F7"],
-                                                legend: {
-                                                    show: !0,
-                                                    position: "bottom",
-                                                    horizontalAlign: "center",
-                                                    verticalAlign: "middle",
-                                                    floating: !1,
-                                                    fontSize: "14px",
-                                                    offsetX: 0,
-                                                    offsetY: -10
-                                                },
-                                                responsive: [{
-                                                    breakpoint: 600,
-                                                    options: {
-                                                        chart: {
-                                                            height: 240
-                                                        },
-                                                        legend: {
-                                                            show: !1
-                                                        }
-                                                    }
-                                                }]
-                                            },
-            (chart = new ApexCharts(document.querySelector("#donut_chart"), options)).render());
+    (chart = new ApexCharts(document.querySelector("#donut_chart"), options)).render());
     </script>
 }
-

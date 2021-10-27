@@ -9,5 +9,6 @@ namespace SunsetHotel.Areas.Manage.ViewModels
     {
         public List<BlogViewViewModel> radialChart { get; set; }
         public List<BlogCategoryViewModel> blogCategory{ get; set; }
+        public List<ReservationCategoryViewModel> reservationByCategory { get; set; }
     }
 }

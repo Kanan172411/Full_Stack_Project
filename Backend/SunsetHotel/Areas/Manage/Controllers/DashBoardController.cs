@@ -68,10 +68,31 @@ namespace SunsetHotel.Areas.Manage.Controllers
                     Series = item.Name
                 });
             }
+            List<ReservationCategoryViewModel> reservationCategoryViewModels = new List<ReservationCategoryViewModel>();
+            foreach (var item in _context.RoomCategories.Include(x=>x.Rooms).ThenInclude(x=>x.reservations))
+            {
+                int ReservationCont = 0;
+                foreach (var item1 in item.Rooms)
+                {
+                    foreach (var item2 in item1.reservations)
+                    {
+                        if (item2.Status == true && item2.CheckOut < DateTime.Now)
+                        {
+                            ReservationCont += item2.NightCount * item1.Price;
+                        }
+                    }
+                }
+                reservationCategoryViewModels.Add(new ReservationCategoryViewModel
+                {
+                    Series = item.Name,
+                    Labels = ReservationCont
+                });
+            }
             DashBoardViewModel dashBoardViewModel = new DashBoardViewModel()
             {
                 radialChart = radialChartViewModels,
-                blogCategory = blogCategoryViewModels 
+                blogCategory = blogCategoryViewModels,
+                reservationByCategory = reservationCategoryViewModels
             };
  
             return View(dashBoardViewModel);
