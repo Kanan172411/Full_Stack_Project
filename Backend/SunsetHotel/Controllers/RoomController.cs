@@ -28,7 +28,6 @@ namespace SunsetHotel.Controllers
             TempData["forSelect"] = 3;
 
             var query = _context.Rooms.Include(x => x.reservations).AsQueryable();
-            //IQueryable<Room> roomQuery = null;
             if (categoryId != null)
             {
                 query = query.Where(x => x.RoomCategoryId == categoryId);

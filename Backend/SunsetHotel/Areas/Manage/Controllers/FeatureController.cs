@@ -22,10 +22,6 @@ namespace SunsetHotel.Areas.Manage.Controllers
         {
             ViewBag.SelectedPage = page;
             ViewBag.TotalPage = Math.Ceiling(_context.Features.Count() / 6d);
-            if (page > ViewBag.TotalPage)
-            {
-                return RedirectToAction("error", "dashboard");
-            }
             List<Feature> features = _context.Features.Skip((page - 1) * 6).Take(6).ToList();
             return View(features);
         }

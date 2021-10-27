@@ -28,10 +28,6 @@ namespace SunsetHotel.Areas.Manage.Controllers
         {
             ViewBag.SelectedPage = page;
             ViewBag.TotalPage = Math.Ceiling(_context.Blogs.Count() / 6d);
-            if (page > ViewBag.TotalPage)
-            {
-                return RedirectToAction("error", "dashboard");
-            }
             List<Blog> blogs = _context.Blogs.Include(x=>x.Comments).Include(x=>x.BlogCategory).Skip((page - 1) * 6).Take(6).ToList();
             return View(blogs);
         }
@@ -81,6 +77,14 @@ namespace SunsetHotel.Areas.Manage.Controllers
             blog.BlogTags = new List<BlogTag>();
             if (blog.TagId != null)
             {
+                foreach (var item in blog.TagId)
+                {
+                    if (_context.Tags.All(x=>x.Id!=item))
+                    {
+                        ModelState.AddModelError("TagId","Tagları düzgün daxil edin");
+                        return View();
+                    }
+                }
                 foreach (var tagId in blog.TagId)
                 {
                     BlogTag blogTag = new BlogTag
@@ -117,6 +121,8 @@ namespace SunsetHotel.Areas.Manage.Controllers
             Blog existBlog = _context.Blogs.Include(x=>x.BlogCategory).Include(x=>x.BlogTags).ThenInclude(x=>x.Tag).FirstOrDefault(x => x.Id == blog.Id);
 
             if (existBlog == null) return RedirectToAction("error", "dashboard");
+            ViewBag.Categories = _context.BlogCategories.ToList();
+            ViewBag.Tags = _context.Tags.ToList();
             if (!_context.BlogCategories.Any(x => x.Id == blog.BlogCategoryId))
             {
                 ModelState.AddModelError("BlogCAtegoryId", "Cateqoriya mövcud deyil!");
@@ -135,6 +141,14 @@ namespace SunsetHotel.Areas.Manage.Controllers
 
             if (blog.TagId != null)
             {
+                foreach (var item in blog.TagId)
+                {
+                    if (_context.Tags.All(x => x.Id != item))
+                    {
+                        ModelState.AddModelError("TagId", "Tagları düzgün daxil edin");
+                        return View(existBlog);
+                    }
+                }
                 foreach (var tagId in blog.TagId)
                 {
                     BlogTag blogTag = existBlog.BlogTags.FirstOrDefault(x => x.TagId == tagId);

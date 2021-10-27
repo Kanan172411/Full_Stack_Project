@@ -22,10 +22,7 @@ namespace SunsetHotel.Areas.Manage.Controllers
         {
             ViewBag.SelectedPage = page;
             ViewBag.TotalPage = Math.Ceiling(_context.BlogCategories.Count() / 6d);
-            if (page > ViewBag.TotalPage)
-            {
-                return RedirectToAction("error", "dashboard");
-            }
+
             List<BlogCategory> blogCategories = _context.BlogCategories.Skip((page - 1) * 6).Take(6).ToList();
             return View(blogCategories);
         }

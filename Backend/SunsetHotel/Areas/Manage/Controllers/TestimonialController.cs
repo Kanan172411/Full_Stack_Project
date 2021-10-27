@@ -27,10 +27,7 @@ namespace SunsetHotel.Areas.Manage.Controllers
         {
             ViewBag.SelectedPage = page;
             ViewBag.TotalPage = Math.Ceiling(_context.Testimonials.Count() / 6d);
-            if (page> ViewBag.TotalPage)
-            {
-                return RedirectToAction("error", "dashboard");
-            }
+
             List<Testimonial> testimonials = _context.Testimonials.Skip((page - 1) * 6).Take(6).ToList();
             return View(testimonials);
         }

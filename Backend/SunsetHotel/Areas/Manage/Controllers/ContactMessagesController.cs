@@ -22,10 +22,6 @@ namespace SunsetHotel.Areas.Manage.Controllers
         {
             ViewBag.SelectedPage = page;
             ViewBag.TotalPage = Math.Ceiling(_context.ContactMessages.Count() / 10d);
-            if (page > ViewBag.TotalPage)
-            {
-                return RedirectToAction("error", "dashboard");
-            }
             List<ContactMessages> contactMessages = _context.ContactMessages.Skip((page - 1) * 10).Take(10).ToList();
             return View(contactMessages);
         }

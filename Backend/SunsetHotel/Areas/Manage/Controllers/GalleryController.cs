@@ -26,10 +26,6 @@ namespace SunsetHotel.Areas.Manage.Controllers
         {
             ViewBag.SelectedPage = page;
             ViewBag.TotalPage = Math.Ceiling(_context.Galleries.Count() / 8d);
-            if (page > ViewBag.TotalPage)
-            {
-                return RedirectToAction("error", "dashboard");
-            }
             List<Gallery> galleries = _context.Galleries.Skip((page - 1) * 8).Take(8).ToList();
             return View(galleries);
         }

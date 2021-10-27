@@ -33,10 +33,6 @@ namespace SunsetHotel.Areas.Manage.Controllers
         {
             ViewBag.SelectedPage = page;
             ViewBag.TotalPage = Math.Ceiling(_context.Rooms.Count() / 6d);
-            if (page > ViewBag.TotalPage)
-            {
-                return RedirectToAction("error", "dashboard");
-            }
             List<Room> rooms = _context.Rooms.Include(x=>x.reservations).Include(x=>x.Comments).Include(x => x.RoomImages).Include(x=>x.Categories).Skip((page - 1) * 6).Take(6).ToList();
             return View(rooms);
         }
@@ -107,6 +103,14 @@ namespace SunsetHotel.Areas.Manage.Controllers
             room.RoomFeatureRelations = new List<RoomFeatureRelation>();
             if (room.FeatureId != null)
             {
+                foreach (var item in room.FeatureId)
+                {
+                    if (_context.RoomFeatures.All(x=>x.Id!=item))
+                    {
+                        ModelState.AddModelError("FeatureId","Featureləri düzgün daxil edin");
+                        return View();
+                    }
+                }
                 foreach (var featureId in room.FeatureId)
                 {
                     RoomFeatureRelation roomFeature = new RoomFeatureRelation
@@ -170,9 +174,18 @@ namespace SunsetHotel.Areas.Manage.Controllers
 
             if (room.FeatureId != null)
             {
+                foreach (var item in room.FeatureId)
+                {
+                    if (_context.RoomFeatures.All(x => x.Id != item))
+                    {
+                        ModelState.AddModelError("FeatureId", "Featureləri düzgün daxil edin");
+                        return View(existRoom);
+                    }
+                }
                 existRoom.RoomFeatureRelations.RemoveAll(x => !room.FeatureId.Contains(x.RoomFeatureId));
                 foreach (var item in room.FeatureId)
                 {
+
                     RoomFeatureRelation roomFeature = existRoom.RoomFeatureRelations.FirstOrDefault(x => x.RoomFeatureId == item);
 
                     if (roomFeature == null)
@@ -307,7 +320,7 @@ namespace SunsetHotel.Areas.Manage.Controllers
         }
         public async Task<IActionResult> Accept(int id, string note)
         {
-            Reservation reservation = _context.Reservations.Include(x=>x.room).Include(x=>x.appUser).FirstOrDefault(x => x.Id == id);
+            Reservation reservation = _context.Reservations.Include(x => x.room).Include(x => x.appUser).FirstOrDefault(x => x.Id == id);
 
             if (reservation == null) return Json(new { status = 402 });
             if (reservation.Status != null) return Json(new { status = 402 });
@@ -321,15 +334,23 @@ namespace SunsetHotel.Areas.Manage.Controllers
             {
                 await _hubContext.Clients.Client(reservation.appUser.ConnectionId).SendAsync("OrderAccept");
             }
-
-            if (note==null)
+            if (note == null)
             {
-                _emailService.Send(reservation.appUser.Email, "Reservation accepted", "Room: " + reservation.room.Name);
+                _emailService.Send(reservation.appUser.Email, @"Reservation Accepted", "<br />" +
+                     "Room: " + reservation.room.Name + "<br />" +
+                     "Price: " + $"{reservation.room.Price * reservation.NightCount + reservation.NightCount * 5}" + "<br />" +
+                     "Check-in: " + reservation.CheckIn.ToString("dd-MM-yyyy") + "<br />" +
+                     "Check-out: " + reservation.CheckOut.ToString("dd-MM-yyyy"));
             }
             else
             {
-                _emailService.Send(reservation.appUser.Email, "Reservation accepted", "Room: " + reservation.room.Name + "/" + " Admin Note: " + note);
-            }
+                _emailService.Send(reservation.appUser.Email, @"Reservation Accepted", "<br />" +
+                     "Room: " + reservation.room.Name + "<br />" +
+                     "Price: " + $"{reservation.room.Price * reservation.NightCount + reservation.NightCount * 5}" + "<br />" +
+                     "Check-in: " + reservation.CheckIn.ToString("dd-MM-yyyy") + "<br />" +
+                     "Check-out: " + reservation.CheckOut.ToString("dd-MM-yyyy") + "<br/>"+
+                     "Admin note: "+ note);
+            }           
             return Json(new { status = 200 });
         }
         public async Task<IActionResult> Reject(int id, string note)
@@ -353,7 +374,11 @@ namespace SunsetHotel.Areas.Manage.Controllers
                 await _hubContext.Clients.Client(reservation.appUser.ConnectionId).SendAsync("OrderReject");
             }
             _context.SaveChanges();
-            _emailService.Send(reservation.appUser.Email, "Reservation rejected", "Room:   " + reservation.room.Name + " / " + " Admin Note:  " + note);
+            _emailService.Send(reservation.appUser.Email, @"Reservation Rejected", "<br />" +
+             "Room: " + reservation.room.Name + "<br />" +
+             "Check-in: " + reservation.CheckIn.ToString("dd-MM-yyyy") + "<br />" +
+             "Check-out: " + reservation.CheckOut.ToString("dd-MM-yyyy") + "<br/>" +
+             "Admin note: " + note);
             return Json(new { status = 200 });
         }
     }
