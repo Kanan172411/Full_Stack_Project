@@ -234,12 +234,17 @@ namespace SunsetHotel.Areas.Manage.Controllers
 
             return RedirectToAction("index");
         }
-        public IActionResult DeleteImage(int Id, string Name)
+        public IActionResult DeleteImage(int Id, string Name, int RoomId)
         {
-            RoomImage roomImage = _context.RoomImages.Where(x => x.Id == Id).FirstOrDefault();
-            if (roomImage==null)
+            Room room = _context.Rooms.Include(x=>x.RoomImages).Where(x => x.Id == RoomId).FirstOrDefault();
+            if (room==null)
             {
-                return Json(new { status = 404 });
+                return NotFound();
+            }
+            RoomImage roomImage = _context.RoomImages.Where(x => x.RoomId == RoomId && x.Id == Id).FirstOrDefault();
+            if (roomImage == null)
+            {
+                return NotFound();
             }
             var a = FileManager.Delete(_env.WebRootPath, "assets/img", Name);
             if (!a)

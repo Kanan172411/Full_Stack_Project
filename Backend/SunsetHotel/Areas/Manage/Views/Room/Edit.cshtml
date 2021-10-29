@@ -79,7 +79,7 @@
                                         <div class="card" style="margin-right: 20px;">
                                             <img class="card-img-top img-fluid" src="~/assets/img/@item.ImageName" alt="Card image cap">
                                             <div class="card-body">
-                                                <a href="" rel="@item.ImageName" referrerpolicy="@item.Id" class="btn btn-danger waves-effect waves-light item-delete">Delete</a>
+                                                <a href="" rel="@item.ImageName" referrerpolicy="@item.Id" ping="@item.RoomId" class="btn btn-danger waves-effect waves-light item-delete">Delete</a>
                                             </div>
                                             <input type="hidden" class="forId" value="@item.Id" />
                                             <input type="hidden" class="forName" value="@item.ImageName" />
@@ -108,6 +108,7 @@
             $(document).on("click", ".item-delete", function (e) {
                 let ID = $(this).attr("referrerpolicy");
                 let NAME = $(this).attr("rel");
+                let ROOMID = $(this).attr("ping");
                 let Variable = this;
                 e.preventDefault();
                 Swal.fire({
@@ -126,6 +127,7 @@
                             data: {
                                 ID: ID,
                                 NAME: NAME,
+                                ROOMID: ROOMID
                             },
                             success: function (data) {
                                 $(Variable).parent().parent().empty()
