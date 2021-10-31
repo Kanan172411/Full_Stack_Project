@@ -68,7 +68,13 @@ namespace SunsetHotel.Controllers
         [ValidateAntiForgeryToken]
         public IActionResult Subscribe(Subscriber subscriber)
         {
-            if (subscriber.Email.Length>49)
+            if (subscriber.Email == null)
+            {
+                TempData["Alert"] = "Email daxil edin";
+                TempData["Type"] = "danger";
+                return RedirectToAction("index");
+            }
+            if (subscriber.Email.Length > 49) 
             {
                 TempData["Alert"] = "Email uzunluğu maksimum 50 xarakterdir";
                 TempData["Type"] = "danger";

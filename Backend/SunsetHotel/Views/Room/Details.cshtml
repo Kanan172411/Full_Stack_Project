@@ -46,7 +46,7 @@
                     </div>
                     <a asp-action="reservation" asp-controller="room" asp-route-id="@Model.room.Id" class="btn">Book this room now</a>
                 </div> <!-- .room-detail__body -->
-                @if (ViewBag.Comment != null && Model.room.Comments.Count != 0) 
+                @if (ViewBag.Comment != null || Model.room.Comments.Count != 0) 
                 {
                     <div class="room__reviews">
                         @if (Model.room.Comments.Count!=0)

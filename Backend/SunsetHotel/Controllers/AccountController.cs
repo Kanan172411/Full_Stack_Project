@@ -73,6 +73,8 @@ namespace SunsetHotel.Controllers
 
             await _userManager.AddToRoleAsync(appUser, "Member");
             await _signInManager.SignInAsync(appUser, true);
+            TempData["Alert"] = "Successfully registered";
+            TempData["Type"] = "success";   
             return RedirectToAction("index", "home");
         }
 
@@ -155,7 +157,8 @@ namespace SunsetHotel.Controllers
             user.Country = updateVM.Country;
             user.PhoneNumber = updateVM.PhoneNumber;
             user.Address = updateVM.Address;
-
+            TempData["Alert"] = "Personal info successfully updated";
+            TempData["Type"] = "success";
             await _userManager.UpdateAsync(user);
             await _signInManager.SignInAsync(user, true);
 
@@ -183,7 +186,11 @@ namespace SunsetHotel.Controllers
                     ModelState.AddModelError("ConfirmPassowrd", "Password ve Confirm password eyni olmalidir!");
                     return View();
                 }
-
+                if (changePasswordVM.CurrentPassword == null)
+                {
+                    ModelState.AddModelError("CurrentPassword", "This field is required");
+                    return View();
+                }
                 var result = await _userManager.ChangePasswordAsync(user, changePasswordVM.CurrentPassword, changePasswordVM.Password);
 
                 if (!result.Succeeded)
@@ -196,6 +203,13 @@ namespace SunsetHotel.Controllers
                 }
 
             }
+            else
+            {
+                ModelState.AddModelError("", "All fields are required");
+                return View();
+            }
+            TempData["Alert"] = "Password successfully updated";
+            TempData["Type"] = "success";
             return RedirectToAction("index", "home");
         }
 

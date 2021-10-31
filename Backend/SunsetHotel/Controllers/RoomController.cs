@@ -304,7 +304,7 @@ namespace SunsetHotel.Controllers
             {
                 if (user.reservations.Where(y => y.RoomId == roomComment.RoomId).Any(x => x.CheckOut < DateTime.Now && x.Status == true))
                 {
-                    if (roomComment.Text.Length < 10 || roomComment.Text.Length > 300)
+                    if (roomComment.Text == null || roomComment.Text.Length < 10 || roomComment.Text.Length > 300)
                     {
                         TempData["Alert"] = "Commenti düzgün formatda daxil edin";
                         TempData["Type"] = "danger";

@@ -35,14 +35,7 @@ namespace SunsetHotel.Controllers
             }
             if (Tagid != null)
             {
-                var queryNew = queryBlogTag.Where(x => x.TagId == Tagid).ToList();
-                List<Blog> blogs1 = new List<Blog>();
-                foreach (var item in queryNew)
-                {
-                    blogs1.Add(_context.Blogs.Find(item.BlogId));
-                }
-                query = blogs1.AsQueryable();
-                ViewBag.tagId = Tagid;
+                query = query.Where(x => x.BlogTags.Any(y => y.TagId == Tagid));
             }
             if (search != null)
             {
@@ -101,7 +94,7 @@ namespace SunsetHotel.Controllers
             }
             else
             {
-                if (comment.Name.Length < 7 || comment.Email.Length < 6 || comment.Name.Length > 50 || comment.Email.Length > 60)
+                if (comment.Name == null || comment.Name.Length < 7 || comment.Email == null || comment.Email.Length < 6 || comment.Name.Length > 50 || comment.Email.Length > 60)
                 {
                     TempData["Alert"] = "Commenti düzgün formatda daxil edin";
                     TempData["Type"] = "danger";
@@ -110,7 +103,7 @@ namespace SunsetHotel.Controllers
                 blogComment.Name = comment.Name;
                 blogComment.Email = comment.Email;
             }
-            if (comment.Text.Length < 10 || comment.Text.Length > 300)
+            if (comment.Text == null || comment.Text.Length < 10 || comment.Text.Length > 300)
             {
                 TempData["Alert"] = "Commenti düzgün formatda daxil edin";
                 TempData["Type"] = "danger";
