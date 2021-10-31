@@ -91,9 +91,6 @@ namespace SunsetHotel.Areas.Manage.Controllers
 
             if (existTestimonial == null) return RedirectToAction("error", "dashboard");
 
-            existTestimonial.FullName = testimonial.FullName;
-            existTestimonial.Profession = testimonial.Profession;
-            existTestimonial.Desc = testimonial.Desc;
             if (testimonial.ImageFile != null)
             {
                 if (testimonial.ImageFile.ContentType != "image/jpeg" && testimonial.ImageFile.ContentType != "image/png")
@@ -120,9 +117,11 @@ namespace SunsetHotel.Areas.Manage.Controllers
                     }
                 }
 
-
                 existTestimonial.ImageName = newFileName;
             }
+            existTestimonial.FullName = testimonial.FullName;
+            existTestimonial.Profession = testimonial.Profession;
+            existTestimonial.Desc = testimonial.Desc;
             _context.SaveChanges();
 
             return RedirectToAction("index");

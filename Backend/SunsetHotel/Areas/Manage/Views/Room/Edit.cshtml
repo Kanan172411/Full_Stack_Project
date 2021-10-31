@@ -71,6 +71,12 @@
 
                         <div class="form-group">
 
+                            <input asp-for="Images" />
+                            <span class="text-danger" asp-validation-for="Images"></span>
+                        </div>
+
+                        <button style="margin-top: 20px; margin-bottom:20px" type="submit" class="btn btn-primary">Submit</button>
+                    </form>
                             <div class="row">
                                 @foreach (var item in Model.RoomImages)
                                 {
@@ -88,12 +94,6 @@
                                     </div><!-- end col -->
                                 }
                             </div>
-                            <input asp-for="Images" />
-                            <span class="text-danger" asp-validation-for="Images"></span>
-                        </div>
-
-                        <button style="margin-top: 20px;" type="submit" class="btn btn-primary">Submit</button>
-                    </form>
                 </div>
             </div>
         </div>

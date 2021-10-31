@@ -53,6 +53,26 @@ namespace SunsetHotel.Areas.Manage.Controllers
                 ModelState.AddModelError("BlogCategoryId", "Cateqoriya mövcud deyil!");
                 return View();
             }
+            blog.BlogTags = new List<BlogTag>();
+            if (blog.TagId != null)
+            {
+                foreach (var item in blog.TagId)
+                {
+                    if (_context.Tags.All(x => x.Id != item))
+                    {
+                        ModelState.AddModelError("TagId", "Tagları düzgün daxil edin");
+                        return View();
+                    }
+                }
+                foreach (var tagId in blog.TagId)
+                {
+                    BlogTag blogTag = new BlogTag
+                    {
+                        TagId = tagId
+                    };
+                    blog.BlogTags.Add(blogTag);
+                }
+            }
             if (blog.ImageFile != null)
             {
                 if (blog.ImageFile.ContentType != "image/jpeg" && blog.ImageFile.ContentType != "image/png")
@@ -73,26 +93,6 @@ namespace SunsetHotel.Areas.Manage.Controllers
             {
                 ModelState.AddModelError("ImageFile", "Image yuklemek mecburidir!");
                 return View();
-            }
-            blog.BlogTags = new List<BlogTag>();
-            if (blog.TagId != null)
-            {
-                foreach (var item in blog.TagId)
-                {
-                    if (_context.Tags.All(x=>x.Id!=item))
-                    {
-                        ModelState.AddModelError("TagId","Tagları düzgün daxil edin");
-                        return View();
-                    }
-                }
-                foreach (var tagId in blog.TagId)
-                {
-                    BlogTag blogTag = new BlogTag
-                    {
-                        TagId = tagId
-                    };
-                    blog.BlogTags.Add(blogTag);
-                }
             }
 
             _context.Blogs.Add(blog);
@@ -125,45 +125,10 @@ namespace SunsetHotel.Areas.Manage.Controllers
             ViewBag.Tags = _context.Tags.ToList();
             if (!_context.BlogCategories.Any(x => x.Id == blog.BlogCategoryId))
             {
-                ModelState.AddModelError("BlogCAtegoryId", "Cateqoriya mövcud deyil!");
+                ModelState.AddModelError("BlogCategoryId", "Cateqoriya mövcud deyil!");
                 return View(existBlog);
             }
 
-            existBlog.Name = blog.Name;
-            existBlog.BlogPostTitle = blog.BlogPostTitle;
-            existBlog.BlogCategoryId = blog.BlogCategoryId;
-            existBlog.Desc1 = blog.Desc1;
-            existBlog.DescHeader = blog.DescHeader;
-            existBlog.Desc2 = blog.Desc2;
-            existBlog.Createdat = blog.Createdat;
-
-            existBlog.BlogTags.RemoveAll(x => !blog.TagId.Contains(x.BlogId));
-
-            if (blog.TagId != null)
-            {
-                foreach (var item in blog.TagId)
-                {
-                    if (_context.Tags.All(x => x.Id != item))
-                    {
-                        ModelState.AddModelError("TagId", "Tagları düzgün daxil edin");
-                        return View(existBlog);
-                    }
-                }
-                foreach (var tagId in blog.TagId)
-                {
-                    BlogTag blogTag = existBlog.BlogTags.FirstOrDefault(x => x.TagId == tagId);
-
-                    if (blogTag == null)
-                    {
-                        blogTag = new BlogTag
-                        {
-                            BlogId = blog.Id,
-                            TagId = tagId
-                        };
-                        existBlog.BlogTags.Add(blogTag);
-                    }
-                }
-            }
             if (blog.ImageFile != null)
             {
                 if (blog.ImageFile.ContentType != "image/jpeg" && blog.ImageFile.ContentType != "image/png")
@@ -193,6 +158,41 @@ namespace SunsetHotel.Areas.Manage.Controllers
 
                 existBlog.ImageName = newFileName;
             }
+            existBlog.BlogTags.RemoveAll(x => !blog.TagId.Contains(x.BlogId));
+
+            if (blog.TagId != null)
+            {
+                foreach (var item in blog.TagId)
+                {
+                    if (_context.Tags.All(x => x.Id != item))
+                    {
+                        ModelState.AddModelError("TagId", "Tagları düzgün daxil edin");
+                        return View(existBlog);
+                    }
+                }
+                foreach (var tagId in blog.TagId)
+                {
+                    BlogTag blogTag = existBlog.BlogTags.FirstOrDefault(x => x.TagId == tagId);
+
+                    if (blogTag == null)
+                    {
+                        blogTag = new BlogTag
+                        {
+                            BlogId = blog.Id,
+                            TagId = tagId
+                        };
+                        existBlog.BlogTags.Add(blogTag);
+                    }
+                }
+            }
+            existBlog.Name = blog.Name;
+            existBlog.BlogPostTitle = blog.BlogPostTitle;
+            existBlog.BlogCategoryId = blog.BlogCategoryId;
+            existBlog.Desc1 = blog.Desc1;
+            existBlog.DescHeader = blog.DescHeader;
+            existBlog.Desc2 = blog.Desc2;
+            existBlog.Createdat = blog.Createdat;
+
             _context.SaveChanges();
 
             return RedirectToAction("index");

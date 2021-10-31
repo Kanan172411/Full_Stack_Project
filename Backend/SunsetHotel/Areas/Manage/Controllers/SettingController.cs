@@ -45,34 +45,6 @@ namespace SunsetHotel.Areas.Manage.Controllers
             Setting existData = _context.Settings.FirstOrDefault(x => x.Id == setting.Id);
 
             if (existData == null) return RedirectToAction("error", "dashboard");
-            existData.LogoPart1 = setting.LogoPart1;
-            existData.LogoPart2 = setting.LogoPart2;
-            existData.WelcomeContent = setting.WelcomeContent;
-            existData.AboutTitle = setting.AboutTitle;
-            existData.AboutDesc1 = setting.AboutDesc1;
-            existData.AboutDesc2 = setting.AboutDesc2;
-            existData.OurbestRoomsTitle = setting.OurbestRoomsTitle;
-            existData.OurGalleryTitle = setting.OurGalleryTitle;
-            existData.TestimonialsTitle = setting.TestimonialsTitle;
-            existData.Address = setting.Address;
-            existData.PhoneNumber1 = setting.PhoneNumber1;
-            existData.PhoneNumber2 = setting.PhoneNumber2;
-            existData.Email = setting.Email;
-            existData.AboutWelcomeContent = setting.AboutWelcomeContent;
-            existData.GuestsStay = setting.GuestsStay;
-            existData.RoomsCount = setting.RoomsCount;
-            existData.Awards = setting.Awards;
-            existData.MealServed = setting.MealServed;
-            existData.OurServicesTitle = setting.OurServicesTitle;
-            existData.AboutEndBannerText = setting.AboutEndBannerText;
-            existData.ByWho = setting.ByWho;
-            existData.RoomWelcomeContent = setting.RoomWelcomeContent;
-            existData.BlogWelcomeContent = setting.BlogWelcomeContent;
-            existData.ContactUsWelcomeContent = setting.ContactUsWelcomeContent;
-            existData.ReservationWelcomeContent = setting.ReservationWelcomeContent;
-            existData.ReservationTitle = setting.ReservationTitle;
-            existData.InfoTitle = setting.InfoTitle;
-            existData.AboutVideoIframe = setting.AboutVideoIframe;
             if (setting.AboutBannerImageFile != null)
             {
                 if (setting.AboutBannerImageFile.ContentType != "image/jpeg" && setting.AboutBannerImageFile.ContentType != "image/png")
@@ -102,6 +74,34 @@ namespace SunsetHotel.Areas.Manage.Controllers
 
                 existData.AboutBannerImage = newFileName;
             }
+            existData.LogoPart1 = setting.LogoPart1;
+            existData.LogoPart2 = setting.LogoPart2;
+            existData.WelcomeContent = setting.WelcomeContent;
+            existData.AboutTitle = setting.AboutTitle;
+            existData.AboutDesc1 = setting.AboutDesc1;
+            existData.AboutDesc2 = setting.AboutDesc2;
+            existData.OurbestRoomsTitle = setting.OurbestRoomsTitle;
+            existData.OurGalleryTitle = setting.OurGalleryTitle;
+            existData.TestimonialsTitle = setting.TestimonialsTitle;
+            existData.Address = setting.Address;
+            existData.PhoneNumber1 = setting.PhoneNumber1;
+            existData.PhoneNumber2 = setting.PhoneNumber2;
+            existData.Email = setting.Email;
+            existData.AboutWelcomeContent = setting.AboutWelcomeContent;
+            existData.GuestsStay = setting.GuestsStay;
+            existData.RoomsCount = setting.RoomsCount;
+            existData.Awards = setting.Awards;
+            existData.MealServed = setting.MealServed;
+            existData.OurServicesTitle = setting.OurServicesTitle;
+            existData.AboutEndBannerText = setting.AboutEndBannerText;
+            existData.ByWho = setting.ByWho;
+            existData.RoomWelcomeContent = setting.RoomWelcomeContent;
+            existData.BlogWelcomeContent = setting.BlogWelcomeContent;
+            existData.ContactUsWelcomeContent = setting.ContactUsWelcomeContent;
+            existData.ReservationWelcomeContent = setting.ReservationWelcomeContent;
+            existData.ReservationTitle = setting.ReservationTitle;
+            existData.InfoTitle = setting.InfoTitle;
+            existData.AboutVideoIframe = setting.AboutVideoIframe;
             _context.SaveChanges();
 
             return RedirectToAction("index");

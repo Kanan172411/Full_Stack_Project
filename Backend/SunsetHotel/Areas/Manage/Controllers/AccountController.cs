@@ -91,7 +91,11 @@ namespace SunsetHotel.Areas.Manage.Controllers
                     ModelState.AddModelError("ConfirmPassowrd", "Password ve Confirm password eyni olmalidir!");
                     return View();
                 }
-
+                if (updateVM.CurrentPassword == null)
+                {
+                    ModelState.AddModelError("CurrentPassword", "Passwordu dəyişmək üçün hal-hazırkı password daxil edilməlidir!");
+                    return View();
+                }
                 var result = await _userManager.ChangePasswordAsync(user, updateVM.CurrentPassword, updateVM.Password);
 
                 if (!result.Succeeded)

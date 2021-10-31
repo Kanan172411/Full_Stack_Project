@@ -304,6 +304,7 @@ namespace SunsetHotel.Areas.Manage.Controllers
             _context.SaveChanges();
             return Json(new { status = 200 });
         }
+        [Authorize(Roles = "SuperAdmin, Admin")]
         public IActionResult Reservation(int id, int page = 1)
         {
             Room room = _context.Rooms.Where(x => x.Id == id).FirstOrDefault();
@@ -318,6 +319,7 @@ namespace SunsetHotel.Areas.Manage.Controllers
             List<Reservation> reservations = _context.Reservations.Include(x=>x.appUser).Include(x=>x.room).Where(x => x.RoomId == room.Id).Skip((page - 1) * 8).Take(8).ToList();
             return View(reservations);
         }
+        [Authorize(Roles = "SuperAdmin, Admin")]
         public IActionResult ReservationDetail(int id)
         {
             Reservation reservation = _context.Reservations.Include(x=>x.appUser).Include(x=>x.room).Where(x => x.Id == id).FirstOrDefault();
@@ -328,6 +330,7 @@ namespace SunsetHotel.Areas.Manage.Controllers
             ViewBag.Id = reservation.RoomId;
             return View(reservation);
         }
+        [Authorize(Roles = "SuperAdmin, Admin")]
         public async Task<IActionResult> Accept(int id, string note)
         {
             Reservation reservation = _context.Reservations.Include(x => x.room).Include(x => x.appUser).FirstOrDefault(x => x.Id == id);
@@ -363,6 +366,7 @@ namespace SunsetHotel.Areas.Manage.Controllers
             }           
             return Json(new { status = 200 });
         }
+        [Authorize(Roles = "SuperAdmin, Admin")]
         public async Task<IActionResult> Reject(int id, string note)
         {
             Reservation reservation = _context.Reservations.Include(x => x.appUser).Include(x => x.room).FirstOrDefault(x => x.Id == id);

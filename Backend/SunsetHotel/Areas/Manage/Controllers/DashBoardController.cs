@@ -27,16 +27,19 @@ namespace SunsetHotel.Areas.Manage.Controllers
                 monthly += item.NightCount * item.room.Price;
             }
             ViewBag.monthly = monthly;
+
             int annual = 0;
             foreach (var item in _context.Reservations.Include(x => x.room).Where(x => x.Status == true && x.CheckIn >= DateTime.Now.AddYears(-1) && x.CheckOut <= DateTime.Now))
             {
                 annual += item.NightCount * item.room.Price;
             }
             ViewBag.Annual = annual;
+
             double allBooking = _context.Reservations.Count();
             double acceptedBooking = _context.Reservations.Where(x => x.Status == true).Count();
             ViewBag.AcceptedPercent = (int)acceptedBooking * 100 / (int)allBooking;
             ViewBag.Pending = _context.Reservations.Where(x => x.Status == null).Count();
+
             int BlogCount = 0;
             foreach (var item in _context.Blogs)
             {

@@ -144,11 +144,12 @@
                         if (data.status == 400) {
                             $("#note-error").text("Note is required!")
                         }
-                        else if (data.status == 402) {
+                        else if (data.status == 402)
+                        {
                             window.location.href = "/manage/dashboard/error"
                         }
                         else {
-                            window.location.href = `/manage/room/reservation/${ROOMID}`;
+                            location.reload();
                         }
                     });
             }

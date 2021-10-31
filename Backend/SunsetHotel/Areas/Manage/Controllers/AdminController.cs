@@ -62,6 +62,12 @@ namespace SunsetHotel.Areas.Manage.Controllers
                 ModelState.AddModelError("UserName", "UserName already taken!");
                 return View();
             }
+            var role = _context.Roles.Where(x => x.Name == createAdminVm.Role).FirstOrDefault();
+            if (role==null)
+            {
+                ModelState.AddModelError("Role", "Role not exist!");
+                return View();
+            }
             AppUser appUser = new AppUser
             {
                 UserName = createAdminVm.UserName,
@@ -120,7 +126,12 @@ namespace SunsetHotel.Areas.Manage.Controllers
                 return View(updateVM);
             }
 
-
+            var role = _context.Roles.Where(x => x.Name == updateVM.Role).FirstOrDefault();
+            if (role == null)
+            {
+                ModelState.AddModelError("Role", "Role not exist!");
+                return View(updateVM);
+            }
 
             if (!string.IsNullOrWhiteSpace(updateVM.Password))
             {
