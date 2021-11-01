@@ -79,7 +79,7 @@ namespace SunsetHotel.Controllers
             }
             RoomDetailsViewModel roomDetailsVm = new RoomDetailsViewModel
             {
-                similiarRooms = _context.Rooms.Where(x => x.RoomCategoryId == room.RoomCategoryId && x.Id != id).Include(x => x.RoomImages).ToList(),
+                similiarRooms = _context.Rooms.Where(x => x.RoomCategoryId == room.RoomCategoryId && x.Id != id).Include(x=>x.reservations).Include(x => x.RoomImages).OrderBy(x=>x.reservations.Count()).Take(2).ToList(),
                 setting = _context.Settings.FirstOrDefault(),
                 room = _context.Rooms
                 .Where(x => x.Id == id)

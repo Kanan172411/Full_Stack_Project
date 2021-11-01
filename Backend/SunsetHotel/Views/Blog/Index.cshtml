@@ -135,6 +135,22 @@
                     </div> <!-- .sidebar__item -->
                     
                     <div class="sidebar__item">
+                        <p class="subheading">Tags</p>
+                        <ul class="tags">
+                            @foreach (var item in Model.tags)
+                            {
+                                if (ViewBag.TagId==item.Id)
+                                {
+                                    <li><a asp-action="index" asp-controller="Blog" asp-route-Tagid="@item.Id" style="color: #DEAA86">#@item.Name</a></li>
+                                }
+                                else
+                                {
+                                    <li><a asp-action="index" asp-controller="Blog" asp-route-Tagid="@item.Id">#@item.Name</a></li>   
+                                }
+                            }
+                        </ul>
+                    </div> <!-- .sidebar__item -->
+                    <div class="sidebar__item">
                         <p class="subheading">Recent posts</p>
                         <ul class="recent__posts">
                             @foreach (var item in Model.recentPost)
@@ -160,22 +176,6 @@
 
                                     </a>
                                 </li>
-                            }
-                        </ul>
-                    </div> <!-- .sidebar__item -->
-                    <div class="sidebar__item">
-                        <p class="subheading">Tags</p>
-                        <ul class="tags">
-                            @foreach (var item in Model.tags)
-                            {
-                                if (ViewBag.TagId==item.Id)
-                                {
-                                    <li><a asp-action="index" asp-controller="Blog" asp-route-Tagid="@item.Id" style="color: #DEAA86">#@item.Name</a></li>
-                                }
-                                else
-                                {
-                                    <li><a asp-action="index" asp-controller="Blog" asp-route-Tagid="@item.Id">#@item.Name</a></li>   
-                                }
                             }
                         </ul>
                     </div> <!-- .sidebar__item -->

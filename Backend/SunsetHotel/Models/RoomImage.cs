@@ -9,7 +9,7 @@ namespace SunsetHotel.Models
     public class RoomImage
     {
         public int Id { get; set; }
-        [StringLength(maximumLength:70)]
+        [StringLength(maximumLength:300)]
         public string ImageName { get; set; }
         public int RoomId { get; set; }
         public Room Room { get; set; }

@@ -28,13 +28,13 @@ namespace SunsetHotel.Controllers
             HomeViewModel homeVM = new HomeViewModel
             {
                 setting = _context.Settings.FirstOrDefault(),
-                rooms1 = _context.Rooms.Include(x => x.RoomImages).Take(2).ToList(),
-                rooms2 = _context.Rooms.Include(x => x.RoomImages).Skip(2).Take(2).ToList(),
+                rooms1 = _context.Rooms.Include(x => x.RoomImages).Include(x=>x.reservations).OrderBy(x=>x.reservations.Count()).Take(2).ToList(),
+                rooms2 = _context.Rooms.Include(x => x.RoomImages).Include(x => x.reservations).OrderBy(x => x.reservations.Count()).Skip(2).Take(2).ToList(),
                 features = _context.Features.ToList(),
                 galleries = _context.Galleries.ToList(),
                 testimonials = _context.Testimonials.ToList(),
-                blogs1 = _context.Blogs.Take(3).ToList(),
-                blogs2 = _context.Blogs.Skip(3).Take(3).ToList(),
+                blogs1 = _context.Blogs.Include(x=>x.Comments).Take(3).ToList(),
+                blogs2 = _context.Blogs.Include(x => x.Comments).Skip(3).Take(3).ToList(),
             };
 
             return View(homeVM);
