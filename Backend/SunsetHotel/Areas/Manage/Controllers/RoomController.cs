@@ -192,6 +192,37 @@ namespace SunsetHotel.Areas.Manage.Controllers
                     }
                 }
             }
+            if (room.ImageIds != null)
+            {
+                foreach (var item in existRoom.RoomImages)
+                {
+                    if (!room.ImageIds.Contains(item.Id))
+                    {
+                        if (!string.IsNullOrWhiteSpace(item.ImageName))
+                        {
+                            FileManager.Delete(_env.WebRootPath, "assets/img", item.ImageName);
+                        }
+                    }
+                }
+                existRoom.RoomImages.RemoveAll(x => !room.ImageIds.Contains(x.Id));
+            }
+            else
+            {
+                List<RoomImage> roomImages = _context.RoomImages.Where(x => x.RoomId == room.Id).ToList();
+                foreach (var item in roomImages)
+                {
+                    if (!string.IsNullOrWhiteSpace(item.ImageName))
+                    {
+                        FileManager.Delete(_env.WebRootPath, "assets/img", item.ImageName);
+                    }
+                }
+                foreach (var item in roomImages)
+                {
+                    _context.Remove(item);
+                }
+                _context.SaveChanges();
+            }
+
             if (room.Images != null)
                 {
                  foreach (var item in room.Images)
@@ -233,27 +264,6 @@ namespace SunsetHotel.Areas.Manage.Controllers
             _context.SaveChanges();
 
             return RedirectToAction("index");
-        }
-        public IActionResult DeleteImage(int Id, string Name, int RoomId)
-        {
-            Room room = _context.Rooms.Include(x=>x.RoomImages).Where(x => x.Id == RoomId).FirstOrDefault();
-            if (room==null)
-            {
-                return NotFound();
-            }
-            RoomImage roomImage = _context.RoomImages.Where(x => x.RoomId == RoomId && x.Id == Id).FirstOrDefault();
-            if (roomImage == null)
-            {
-                return NotFound();
-            }
-            var a = FileManager.Delete(_env.WebRootPath, "assets/img", Name);
-            if (!a)
-            {
-                return NotFound();
-            }
-            _context.RoomImages.Remove(roomImage);
-            _context.SaveChanges();
-            return Json(new { status = 200 });
         }
 
         public IActionResult Delete(int id)
